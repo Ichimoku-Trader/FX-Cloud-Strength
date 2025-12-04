@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FX Cloud Strength</title>
+    <title>FX Cloud Strength - Ichimoku Trader</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -24,6 +24,7 @@
             margin: 0 auto;
         }
 
+        /* Top Bar */
         .top-bar {
             background: white;
             border-radius: 10px;
@@ -65,6 +66,7 @@
             color: #718096;
         }
 
+        /* Header */
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -82,6 +84,50 @@
             color: #4a5568;
         }
 
+        /* Tabs Navigation */
+        .tabs-nav {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            border: none;
+            background: #e2e8f0;
+            color: #4a5568;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            background: #cbd5e0;
+        }
+
+        .tab-button.active {
+            background: #3182ce;
+            color: white;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Intro Section */
         .intro-section {
             background: white;
             border-radius: 10px;
@@ -97,6 +143,7 @@
             font-size: 1.05em;
         }
 
+        /* Card */
         .card {
             background: white;
             border-radius: 10px;
@@ -113,6 +160,7 @@
             padding-bottom: 10px;
         }
 
+        /* Chart */
         .chart-container {
             position: relative;
             height: 400px;
@@ -140,14 +188,10 @@
             border-radius: 4px;
         }
 
-        .w1-color {
-            background: #3182ce;
-        }
+        .w1-color { background: #3182ce; }
+        .d1-color { background: #718096; }
 
-        .d1-color {
-            background: #718096;
-        }
-
+        /* Table */
         .table-container {
             overflow-x: auto;
         }
@@ -186,15 +230,43 @@
             font-weight: 700;
         }
 
+        /* Analysis Section */
         .analysis-section {
             line-height: 1.8;
             color: #333;
+            white-space: pre-wrap;
         }
 
-        .analysis-section p {
-            margin-bottom: 15px;
+        .analysis-section h2,
+        .analysis-section h3 {
+            color: #2d3748;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
 
+        .analysis-meta {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+
+        .error {
+            background: #fed7d7;
+            color: #742a2a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Links Section */
         .links-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -235,6 +307,7 @@
             font-size: 0.9em;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
@@ -260,6 +333,15 @@
             .logo-container {
                 justify-content: center;
             }
+
+            .tabs-nav {
+                justify-content: center;
+            }
+
+            .tab-button {
+                flex: 1;
+                min-width: 100px;
+            }
         }
     </style>
 </head>
@@ -272,246 +354,376 @@
             </div>
             <div class="contact-info">
                 <div class="name">Grzegorz Moskwa</div>
-                <div class="email">btrader.ext@gmail.com</div>
+                <div class="email">betrader.ext@gmail.com</div>
             </div>
         </div>
 
+        <!-- Header -->
         <div class="header">
             <h1>💹 FX Cloud Strength</h1>
             <div class="date" id="currentDate"></div>
         </div>
 
-        <!-- Introduction Section -->
-        <div class="intro-section">
-            <p>
-                <strong>🎯 Metodologia:</strong> Siła walut jest obliczana na podstawie zaawansowanych technik <strong>Ichimoku Kinko Hyo</strong>, 
-                uwzględniając pozycję ceny względem chmury Kumo, sygnały Tenkan-sen i Kijun-sen, oraz Chikou Span. 
-                Analiza obejmuje dwa kluczowe timeframe'y: <strong>Weekly (W1)</strong> dla długoterminowego trendu 
-                oraz <strong>Daily (D1)</strong> dla krótkoterminowej dynamiki rynku. System automatycznie przetwarza 
-                dane z 28 par walutowych, aby wyodrębnić względną siłę 8 głównych walut.
-            </p>
+        <!-- Tabs Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-button active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-button" onclick="switchTab('analysis')">📝 Krótka Analiza</button>
+            <button class="tab-button" onclick="switchTab('archive')">📚 Archiwum</button>
         </div>
 
-        <!-- Chart Card -->
-        <div class="card">
-            <h2>📊 Siła Walut - W1 vs D1</h2>
-            <div class="chart-container">
-                <canvas id="strengthChart"></canvas>
+        <!-- Tab 1: Dashboard -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Introduction Section -->
+            <div class="intro-section">
+                <p>
+                    <strong>🎯 Metodologia:</strong> Siła walut jest obliczana na podstawie zaawansowanych technik <strong>Ichimoku Kinko Hyo</strong>, 
+                    uwzględniając pozycję ceny względem chmury Kumo, sygnały Tenkan-sen i Kijun-sen, oraz Chikou Span. 
+                    Analiza obejmuje dwa kluczowe timeframe'y: <strong>Weekly (W1)</strong> dla długoterminowego trendu (4-12 tygodni)
+                    oraz <strong>Daily (D1)</strong> dla średnioterminowej dynamiki rynku (1-4 tygodnie). System automatycznie przetwarza 
+                    dane z 28 par walutowych, aby wyodrębnić względną siłę 8 głównych walut.
+                </p>
             </div>
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-color w1-color"></div>
-                    <span>Weekly (W1)</span>
+
+            <!-- Chart Card -->
+            <div class="card">
+                <h2>📊 Siła Walut - W1 vs D1</h2>
+                <div class="chart-container">
+                    <canvas id="strengthChart"></canvas>
                 </div>
-                <div class="legend-item">
-                    <div class="legend-color d1-color"></div>
-                    <span>Daily (D1)</span>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color w1-color"></div>
+                        <span>W1 (Weekly)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color d1-color"></div>
+                        <span>D1 (Daily)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Card -->
+            <div class="card">
+                <h2>📈 Ranking Walut</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pozycja</th>
+                                <th>Waluta</th>
+                                <th>W1 Score</th>
+                                <th>D1 Score</th>
+                                <th>Średnia</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="currencyTable">
+                            <tr><td colspan="6">Ładowanie danych...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="update-time" id="updateTime"></div>
+            </div>
+
+            <!-- Investment Ideas Links -->
+            <div class="card">
+                <h2>📚 Comiesięczna Analiza - Pomysły Inwestycyjne</h2>
+                <div class="links-section">
+                    <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="link-card">
+                        <h3>🗓️ Grudzień 2024</h3>
+                        <p>Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="link-card">
+                        <h3>🗓️ Listopad 2024</h3>
+                        <p>Podsumowanie listopada i najlepsze setupy tradingowe</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=Iuek65e1Too" class="link-card">
+                        <h3>🗓️ Październik 2024</h3>
+                        <p>Archiwalna analiza i wyniki z października</p>
+                    </a>
+                    <a href="archiwum.html" class="link-card">
+                        <h3>📖 Archiwum</h3>
+                        <p>Wszystkie wcześniejsze analizy i pomysły inwestycyjne</p>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Table Card -->
-        <div class="card">
-            <h2>📈 Ranking Walut</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pozycja</th>
-                            <th>Waluta</th>
-                            <th>W1 Score</th>
-                            <th>D1 Score</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="currencyTable">
-                        <!-- Data will be inserted here -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="update-time" id="updateTime"></div>
-        </div>
-
-        <!-- Analysis Card -->
-        <div class="card">
-            <h2>💡 Krótka Analiza</h2>
-            <div class="analysis-section" id="analysisContent">
-                <p><strong>Najsilniejsze waluty:</strong> CHF i EUR pokazują dominację zarówno na wykresie tygodniowym jak i dziennym, co sugeruje silny trend wzrostowy wspierany przez fundamenty.</p>
-                
-                <p><strong>Najsłabsze waluty:</strong> USD pozostaje pod presją, tracąc na wszystkich głównych timeframe'ach. JPY również wykazuje słabość, co może być sygnałem do strategii short.</p>
-                
-                <p><strong>Dywergencje:</strong> Zwróć uwagę na różnice między W1 a D1 - mogą one wskazywać na krótkoterminowe korekty w ramach długoterminowych trendów.</p>
-                
-                <p><strong>Rekomendacja:</strong> Rozważ pary z silną dywergencją siły (np. CHF/USD, EUR/JPY) jako potencjalne okazje tradingowe zgodnie z analizą Ichimoku.</p>
+        <!-- Tab 2: Krótka Analiza -->
+        <div id="analysis" class="tab-content">
+            <div class="card">
+                <h2>💡 Krótka Analiza AI</h2>
+                <div id="analysisContent" class="loading">
+                    Ładowanie analizy...
+                </div>
             </div>
         </div>
 
-        <!-- Investment Ideas Links -->
-        <div class="card">
-            <h2>📚 Comiesięczna Analiza - Pomysły Inwestycyjne</h2>
-            <div class="links-section">
-                <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="link-card">
-                    <h3>🗓️ Grudzień 2025</h3>
-                    <p>Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</p>
-                </a>
-                <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="link-card">
-                    <h3>🗓️ Listopad 2025</h3>
-                    <p>Podsumowanie listopada i najlepsze setupy tradingowe</p>
-                </a>
-                <a href="https://www.youtube.com/watch?v=Iuek65e1Too" class="link-card">
-                    <h3>🗓️ Październik 2025</h3>
-                    <p>Archiwalna analiza i wyniki z października</p>
-                </a>
-                <a href="archiwum.html" class="link-card">
-                    <h3>📖 Archiwum</h3>
-                    <p>Wszystkie wcześniejsze analizy i pomysły inwestycyjne</p>
-                </a>
+        <!-- Tab 3: Archive -->
+        <div id="archive" class="tab-content">
+            <div class="intro-section">
+                <h2 style="border: none; margin-bottom: 15px;">📚 Archiwum Analiz</h2>
+                <p style="text-align: center; margin: 20px 0;">
+                    Pełne archiwum historycznych analiz Currency Strength dostępne jest na dedykowanej stronie.
+                </p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="archiwum.html" class="link-card" style="display: inline-block; max-width: 400px;">
+                        <h3>📖 Przejdź do Archiwum</h3>
+                        <p>Wszystkie historyczne analizy i pomysły inwestycyjne</p>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Sample data - replace with your actual data from MT5/n8n
-        const currencyData = {
-            currencies: ['CHF', 'EUR', 'GBP', 'NZD', 'CAD', 'AUD', 'JPY', 'USD'],
-            w1Scores: [5, 5, 3, 3, -1, -3, -5, -7],
-            d1Scores: [4.5, 4.8, 2.8, 2.5, -0.8, -2.5, -4.2, -6.8]
-        };
+        let chart = null;
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active to clicked button
+            event.target.classList.add('active');
+
+            // Load analysis if analysis tab is opened
+            if (tabName === 'analysis') {
+                loadAnalysis();
+            }
+        }
 
         // Set current date
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('pl-PL', dateOptions);
 
-        // Create chart
-        const ctx = document.getElementById('strengthChart').getContext('2d');
-        const chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: currencyData.currencies,
-                datasets: [{
-                    label: 'W1',
-                    data: currencyData.w1Scores,
-                    backgroundColor: '#3182ce',
-                    borderColor: '#3182ce',
-                    borderWidth: 2,
-                    borderRadius: 5
-                }, {
-                    label: 'D1',
-                    data: currencyData.d1Scores,
-                    backgroundColor: '#718096',
-                    borderColor: '#718096',
-                    borderWidth: 2,
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#e0e0e0'
+        // Load currency data
+        async function loadCurrencyData() {
+            try {
+                const timestamp = new Date().getTime();
+                const response = await fetch(`currency_data.json?t=${timestamp}`);
+                
+                if (!response.ok) {
+                    throw new Error('Nie można załadować danych');
+                }
+                
+                const data = await response.json();
+                updateChart(data);
+                updateTable(data);
+                updateLastUpdate(data.lastUpdate);
+            } catch (error) {
+                console.error('Błąd ładowania danych:', error);
+                document.getElementById('currencyTable').innerHTML = 
+                    '<tr><td colspan="6" style="color: #e53e3e;">Błąd ładowania danych. Spróbuj odświeżyć stronę.</td></tr>';
+            }
+        }
+
+        // Load AI analysis
+        async function loadAnalysis() {
+            const contentDiv = document.getElementById('analysisContent');
+            contentDiv.className = 'loading';
+            contentDiv.innerHTML = 'Ładowanie analizy...';
+
+            try {
+                const timestamp = new Date().getTime();
+                const response = await fetch(`ai_analysis.json?t=${timestamp}`);
+                
+                if (!response.ok) {
+                    throw new Error('Nie można załadować analizy');
+                }
+                
+                const data = await response.json();
+                displayAnalysis(data);
+            } catch (error) {
+                console.error('Błąd ładowania analizy:', error);
+                contentDiv.className = 'error';
+                contentDiv.innerHTML = 'Błąd ładowania analizy. Analiza może nie być jeszcze dostępna lub wystąpił problem z połączeniem.';
+            }
+        }
+
+        // Display analysis
+        function displayAnalysis(data) {
+            const contentDiv = document.getElementById('analysisContent');
+            contentDiv.className = 'analysis-section';
+            
+            let html = data.analysis || 'Brak dostępnej analizy.';
+            
+            // Add metadata
+            if (data.timestamp || data.metadata) {
+                html += '<div class="analysis-meta">';
+                html += '<strong>Informacje o analizie:</strong><br>';
+                if (data.timestamp) {
+                    html += `Wygenerowano: ${new Date(data.timestamp).toLocaleString('pl-PL')}<br>`;
+                }
+                if (data.metadata) {
+                    if (data.metadata.dataDate) {
+                        html += `Dane z: ${data.metadata.dataDate}<br>`;
+                    }
+                    if (data.metadata.model) {
+                        html += `Model AI: ${data.metadata.model}<br>`;
+                    }
+                }
+                html += '</div>';
+            }
+            
+            contentDiv.innerHTML = html;
+        }
+
+        // Update chart
+        function updateChart(data) {
+            const ctx = document.getElementById('strengthChart').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.currencies,
+                    datasets: [
+                        {
+                            label: 'W1',
+                            data: data.w1Scores,
+                            backgroundColor: '#3182ce',
+                            borderColor: '#3182ce',
+                            borderWidth: 2,
+                            borderRadius: 5
                         },
-                        ticks: {
-                            font: {
-                                size: 12,
-                                weight: '600'
+                        {
+                            label: 'D1',
+                            data: data.d1Scores,
+                            backgroundColor: '#718096',
+                            borderColor: '#718096',
+                            borderWidth: 2,
+                            borderRadius: 5
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#e0e0e0'
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12,
+                                    weight: '600'
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
                             }
                         }
                     },
-                    x: {
-                        grid: {
+                    plugins: {
+                        legend: {
                             display: false
                         },
-                        ticks: {
-                            font: {
+                        tooltip: {
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            padding: 12,
+                            titleFont: {
                                 size: 14,
                                 weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 13
                             }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0,0,0,0.8)',
-                        padding: 12,
-                        titleFont: {
-                            size: 14,
-                            weight: 'bold'
-                        },
-                        bodyFont: {
-                            size: 13
                         }
                     }
                 }
-            }
-        });
+            });
+        }
 
-        // Populate table
-        const tableBody = document.getElementById('currencyTable');
-        const sortedData = currencyData.currencies.map((curr, idx) => ({
-            currency: curr,
-            w1: currencyData.w1Scores[idx],
-            d1: currencyData.d1Scores[idx],
-            avg: (currencyData.w1Scores[idx] + currencyData.d1Scores[idx]) / 2
-        })).sort((a, b) => b.avg - a.avg);
-
-        sortedData.forEach((item, idx) => {
-            const row = document.createElement('tr');
-            const status = item.avg > 1 ? 'Silna' : item.avg < -1 ? 'Słaba' : 'Neutralna';
-            const statusClass = item.avg > 1 ? 'strong' : item.avg < -1 ? 'weak' : '';
+        // Update table
+        function updateTable(data) {
+            const combined = data.currencies.map((currency, index) => ({
+                currency: currency,
+                w1: data.w1Scores[index],
+                d1: data.d1Scores[index],
+                avg: (data.w1Scores[index] + data.d1Scores[index]) / 2
+            }));
             
-            row.innerHTML = `
-                <td><strong>${idx + 1}</strong></td>
-                <td><strong>${item.currency}</strong></td>
-                <td>${item.w1.toFixed(1)}</td>
-                <td>${item.d1.toFixed(1)}</td>
-                <td class="${statusClass}">${status}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-
-        // Set update time
-        document.getElementById('updateTime').textContent = `Ostatnia aktualizacja: ${new Date().toLocaleString('pl-PL')}`;
-
-        // Function to update data (call this from your n8n webhook or API)
-        function updateDashboard(newData) {
-            // Update chart
-            chart.data.datasets[0].data = newData.w1Scores;
-            chart.data.datasets[1].data = newData.d1Scores;
-            chart.update();
-
-            // Update table
-            tableBody.innerHTML = '';
-            const newSortedData = newData.currencies.map((curr, idx) => ({
-                currency: curr,
-                w1: newData.w1Scores[idx],
-                d1: newData.d1Scores[idx],
-                avg: (newData.w1Scores[idx] + newData.d1Scores[idx]) / 2
-            })).sort((a, b) => b.avg - a.avg);
-
-            newSortedData.forEach((item, idx) => {
+            // Sort by average score
+            combined.sort((a, b) => b.avg - a.avg);
+            
+            const tbody = document.getElementById('currencyTable');
+            tbody.innerHTML = '';
+            
+            combined.forEach((item, index) => {
                 const row = document.createElement('tr');
-                const status = item.avg > 1 ? 'Silna' : item.avg < -1 ? 'Słaba' : 'Neutralna';
-                const statusClass = item.avg > 1 ? 'strong' : item.avg < -1 ? 'weak' : '';
+                
+                let statusClass = '';
+                let statusText = 'Neutralna';
+                
+                if (item.avg > 100) {
+                    statusClass = 'strong';
+                    statusText = 'Bardzo silna';
+                } else if (item.avg > 30) {
+                    statusClass = 'strong';
+                    statusText = 'Silna';
+                } else if (item.avg > -30) {
+                    statusClass = '';
+                    statusText = 'Neutralna';
+                } else if (item.avg > -100) {
+                    statusClass = 'weak';
+                    statusText = 'Słaba';
+                } else {
+                    statusClass = 'weak';
+                    statusText = 'Bardzo słaba';
+                }
                 
                 row.innerHTML = `
-                    <td><strong>${idx + 1}</strong></td>
+                    <td><strong>#${index + 1}</strong></td>
                     <td><strong>${item.currency}</strong></td>
-                    <td>${item.w1.toFixed(1)}</td>
-                    <td>${item.d1.toFixed(1)}</td>
-                    <td class="${statusClass}">${status}</td>
+                    <td>${item.w1}</td>
+                    <td>${item.d1}</td>
+                    <td><strong>${item.avg.toFixed(1)}</strong></td>
+                    <td class="${statusClass}">${statusText}</td>
                 `;
-                tableBody.appendChild(row);
+                
+                tbody.appendChild(row);
             });
-
-            // Update time
-            document.getElementById('updateTime').textContent = `Ostatnia aktualizacja: ${new Date().toLocaleString('pl-PL')}`;
         }
+
+        // Update last update time
+        function updateLastUpdate(timestamp) {
+            const lastUpdateElement = document.getElementById('updateTime');
+            if (timestamp) {
+                const date = new Date(timestamp);
+                lastUpdateElement.textContent = `Ostatnia aktualizacja: ${date.toLocaleString('pl-PL')}`;
+            } else {
+                lastUpdateElement.textContent = `Ostatnia aktualizacja: ${new Date().toLocaleString('pl-PL')}`;
+            }
+        }
+
+        // Load data on page load
+        window.addEventListener('load', () => {
+            loadCurrencyData();
+        });
     </script>
 </body>
 </html>
