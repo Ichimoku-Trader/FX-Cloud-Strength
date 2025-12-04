@@ -536,7 +536,8 @@
 
             try {
                 const timestamp = new Date().getTime();
-                const response = await fetch(`ai_analysis.json?t=${timestamp}`);
+                const response = await fetch(`FX-Cloud-Strength
+/ai_analysis.json?t=${timestamp}`);
                 
                 if (!response.ok) {
                     throw new Error('Nie można załadować analizy');
