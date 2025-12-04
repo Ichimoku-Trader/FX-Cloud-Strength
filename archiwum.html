@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archiwum Analiz - Ichimoku Trader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .top-bar {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-container img {
+            height: 50px;
+            width: auto;
+        }
+
+        .contact-info {
+            text-align: right;
+            color: #4a5568;
+        }
+
+        .contact-info .name {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #2d3748;
+            margin-bottom: 3px;
+        }
+
+        .contact-info .email {
+            font-size: 0.9em;
+            color: #718096;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #3182ce;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: #2c5282;
+        }
+
+        .header {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1em;
+        }
+
+        .year-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .year-section h2 {
+            color: #2d3748;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .analysis-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .analysis-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #f7fafc;
+            border-left: 4px solid #3182ce;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .analysis-item:hover {
+            background: #edf2f7;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.15);
+        }
+
+        .analysis-info {
+            flex: 1;
+        }
+
+        .analysis-date {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .analysis-description {
+            color: #718096;
+            font-size: 0.95em;
+        }
+
+        .analysis-link {
+            padding: 8px 16px;
+            background: #3182ce;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .analysis-link:hover {
+            background: #2c5282;
+        }
+
+        .video-icon::before {
+            content: "🎥 ";
+        }
+
+        .pdf-icon::before {
+            content: "📄 ";
+        }
+
+        .article-icon::before {
+            content: "📝 ";
+        }
+
+        .stats-box {
+            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stats-box h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .stats-box .number {
+            font-size: 3em;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .analysis-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .analysis-link {
+                align-self: stretch;
+                text-align: center;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+
+            .logo-container {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Bar with Logo and Contact -->
+        <div class="top-bar">
+            <div class="logo-container">
+                <img src="logo-1.png" alt="Ichimoku Trader Logo">
+            </div>
+            <div class="contact-info">
+                <div class="name">Grzegorz Moskwa</div>
+                <div class="email">betrader.ext@gmail.com</div>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">← Powrót do Dashboard</a>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>📚 Archiwum Analiz i Pomysłów Inwestycyjnych</h1>
+            <p>Wszystkie analizy Ichimoku i setupy tradingowe z poprzednich miesięcy</p>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-box">
+            <h3>Łączna liczba analiz</h3>
+            <div class="number" id="totalAnalyses">12</div>
+        </div>
+
+        <!-- 2025 Section -->
+        <div class="year-section">
+            <h2>📅 Rok 2025</h2>
+            <div class="analysis-list">
+                
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Grudzień 2025</div>
+                        <div class="analysis-description">Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Listopad 2025</div>
+                        <div class="analysis-description">Podsumowanie listopada i najlepsze setupy tradingowe</div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Październik 2025</div>
+                        <div class="analysis-description">Analiza Currency Strength i wyniki października</div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=Iuek65e1Too" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Wrzesień 2025</div>
+                        <div class="analysis-description">Analiza końca lata - setupy na jesień</div>
+                    </div>
+                    <a href="#" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Sierpień 2025</div>
+                        <div class="analysis-description">Letnia korekta - analiza możliwości tradingowych</div>
+                    </div>
+                    <a href="#" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Lipiec 2025</div>
+                        <div class="analysis-description">Połowa roku - podsumowanie H1 i prognozy H2</div>
+                    </div>
+                    <a href="#" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Czerwiec 2025</div>
+                        <div class="analysis-description">Analiza Q2 - Currency Strength w drugiej połowie roku</div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=pMSL7PxN1Ok" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 2024 Section -->
+        <div class="year-section">
+            <h2>📅 Rok 2024</h2>
+            <div class="analysis-list">
+                
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Grudzień 2024</div>
+                        <div class="analysis-description">Podsumowanie roku 2024 i prognozy na 2025</div>
+                    </div>
+                    <a href="#" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Listopad 2024</div>
+                        <div class="analysis-description">Analiza po wyborach w USA - wpływ na rynki Forex</div>
+                    </div>
+                    <a href="#" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date video-icon">Październik 2024</div>
+                        <div class="analysis-description">Jesienne setupy - najlepsze pary walutowe Q4</div>
+                    </div>
+                    <a href="#" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date article-icon">Wrzesień 2024</div>
+                        <div class="analysis-description">Strategia na koniec roku - Ichimoku W1/D1</div>
+                    </div>
+                    <a href="#" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+                <div class="analysis-item">
+                    <div class="analysis-info">
+                        <div class="analysis-date pdf-icon">Sierpień 2024</div>
+                        <div class="analysis-description">Raport: Currency Strength H2 2024</div>
+                    </div>
+                    <a href="#" class="analysis-link" target="_blank">Zobacz →</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Count total analyses
+        const totalItems = document.querySelectorAll('.analysis-item').length;
+        document.getElementById('totalAnalyses').textContent = totalItems;
+    </script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FX Cloud Strength</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .top-bar {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-container img {
+            height: 50px;
+            width: auto;
+        }
+
+        .contact-info {
+            text-align: right;
+            color: #4a5568;
+        }
+
+        .contact-info .name {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #2d3748;
+            margin-bottom: 3px;
+        }
+
+        .contact-info .email {
+            font-size: 0.9em;
+            color: #718096;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2d3748;
+            font-weight: 700;
+        }
+
+        .header .date {
+            font-size: 1.2em;
+            color: #4a5568;
+        }
+
+        .intro-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #3182ce;
+        }
+
+        .intro-section p {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 10px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .w1-color {
+            background: #3182ce;
+        }
+
+        .d1-color {
+            background: #718096;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #3182ce;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .strong {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .weak {
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        .analysis-section {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .analysis-section p {
+            margin-bottom: 15px;
+        }
+
+        .links-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .link-card {
+            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(49, 130, 206, 0.3);
+        }
+
+        .link-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .link-card p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .update-time {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+
+            .logo-container {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Bar with Logo and Contact -->
+        <div class="top-bar">
+            <div class="logo-container">
+                <img src="logo-1.png" alt="Ichimoku Trader Logo">
+            </div>
+            <div class="contact-info">
+                <div class="name">Grzegorz Moskwa</div>
+                <div class="email">betrader.ext@gmail.com</div>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1>💹 FX Cloud Strength</h1>
+            <div class="date" id="currentDate"></div>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="intro-section">
+            <p>
+                <strong>🎯 Metodologia:</strong> Siła walut jest obliczana na podstawie zaawansowanych technik <strong>Ichimoku Kinko Hyo</strong>, 
+                uwzględniając pozycję ceny względem chmury Kumo, sygnały Tenkan-sen i Kijun-sen, oraz Chikou Span. 
+                Analiza obejmuje dwa kluczowe timeframe'y: <strong>Weekly (W1)</strong> dla długoterminowego trendu 
+                oraz <strong>Daily (D1)</strong> dla krótkoterminowej dynamiki rynku. System automatycznie przetwarza 
+                dane z 28 par walutowych, aby wyodrębnić względną siłę 8 głównych walut.
+            </p>
+        </div>
+
+        <!-- Chart Card -->
+        <div class="card">
+            <h2>📊 Siła Walut - W1 vs D1</h2>
+            <div class="chart-container">
+                <canvas id="strengthChart"></canvas>
+            </div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color w1-color"></div>
+                    <span>Weekly (W1)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color d1-color"></div>
+                    <span>Daily (D1)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="card">
+            <h2>📈 Ranking Walut</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pozycja</th>
+                            <th>Waluta</th>
+                            <th>W1 Score</th>
+                            <th>D1 Score</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="currencyTable">
+                        <!-- Data will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="update-time" id="updateTime"></div>
+        </div>
+
+        <!-- Analysis Card -->
+        <div class="card">
+            <h2>💡 Krótka Analiza</h2>
+            <div class="analysis-section" id="analysisContent">
+                <p><strong>Najsilniejsze waluty:</strong> CHF i EUR pokazują dominację zarówno na wykresie tygodniowym jak i dziennym, co sugeruje silny trend wzrostowy wspierany przez fundamenty.</p>
+                
+                <p><strong>Najsłabsze waluty:</strong> USD pozostaje pod presją, tracąc na wszystkich głównych timeframe'ach. JPY również wykazuje słabość, co może być sygnałem do strategii short.</p>
+                
+                <p><strong>Dywergencje:</strong> Zwróć uwagę na różnice między W1 a D1 - mogą one wskazywać na krótkoterminowe korekty w ramach długoterminowych trendów.</p>
+                
+                <p><strong>Rekomendacja:</strong> Rozważ pary z silną dywergencją siły (np. CHF/USD, EUR/JPY) jako potencjalne okazje tradingowe zgodnie z analizą Ichimoku.</p>
+            </div>
+        </div>
+
+        <!-- Investment Ideas Links -->
+        <div class="card">
+            <h2>📚 Comiesięczna Analiza - Pomysły Inwestycyjne</h2>
+            <div class="links-section">
+                <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="link-card">
+                    <h3>🗓️ Grudzień 2025</h3>
+                    <p>Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</p>
+                </a>
+                <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="link-card">
+                    <h3>🗓️ Listopad 2025</h3>
+                    <p>Podsumowanie listopada i najlepsze setupy tradingowe</p>
+                </a>
+                <a href="https://www.youtube.com/watch?v=Iuek65e1Too" class="link-card">
+                    <h3>🗓️ Październik 2025</h3>
+                    <p>Archiwalna analiza i wyniki z października</p>
+                </a>
+                <a href="archiwum.html" class="link-card">
+                    <h3>📖 Archiwum</h3>
+                    <p>Wszystkie wcześniejsze analizy i pomysły inwestycyjne</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data - replace with your actual data from MT5/n8n
+        const currencyData = {
+            currencies: ['CHF', 'EUR', 'GBP', 'NZD', 'CAD', 'AUD', 'JPY', 'USD'],
+            w1Scores: [5, 5, 3, 3, -1, -3, -5, -7],
+            d1Scores: [4.5, 4.8, 2.8, 2.5, -0.8, -2.5, -4.2, -6.8]
+        };
+
+        // Set current date
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('pl-PL', dateOptions);
+
+        // Create chart
+        const ctx = document.getElementById('strengthChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: currencyData.currencies,
+                datasets: [{
+                    label: 'W1',
+                    data: currencyData.w1Scores,
+                    backgroundColor: '#3182ce',
+                    borderColor: '#3182ce',
+                    borderWidth: 2,
+                    borderRadius: 5
+                }, {
+                    label: 'D1',
+                    data: currencyData.d1Scores,
+                    backgroundColor: '#718096',
+                    borderColor: '#718096',
+                    borderWidth: 2,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#e0e0e0'
+                        },
+                        ticks: {
+                            font: {
+                                size: 12,
+                                weight: '600'
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        padding: 12,
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 13
+                        }
+                    }
+                }
+            }
+        });
+
+        // Populate table
+        const tableBody = document.getElementById('currencyTable');
+        const sortedData = currencyData.currencies.map((curr, idx) => ({
+            currency: curr,
+            w1: currencyData.w1Scores[idx],
+            d1: currencyData.d1Scores[idx],
+            avg: (currencyData.w1Scores[idx] + currencyData.d1Scores[idx]) / 2
+        })).sort((a, b) => b.avg - a.avg);
+
+        sortedData.forEach((item, idx) => {
+            const row = document.createElement('tr');
+            const status = item.avg > 1 ? 'Silna' : item.avg < -1 ? 'Słaba' : 'Neutralna';
+            const statusClass = item.avg > 1 ? 'strong' : item.avg < -1 ? 'weak' : '';
+            
+            row.innerHTML = `
+                <td><strong>${idx + 1}</strong></td>
+                <td><strong>${item.currency}</strong></td>
+                <td>${item.w1.toFixed(1)}</td>
+                <td>${item.d1.toFixed(1)}</td>
+                <td class="${statusClass}">${status}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        // Set update time
+        document.getElementById('updateTime').textContent = `Ostatnia aktualizacja: ${new Date().toLocaleString('pl-PL')}`;
+
+        // Function to update data (call this from your n8n webhook or API)
+        function updateDashboard(newData) {
+            // Update chart
+            chart.data.datasets[0].data = newData.w1Scores;
+            chart.data.datasets[1].data = newData.d1Scores;
+            chart.update();
+
+            // Update table
+            tableBody.innerHTML = '';
+            const newSortedData = newData.currencies.map((curr, idx) => ({
+                currency: curr,
+                w1: newData.w1Scores[idx],
+                d1: newData.d1Scores[idx],
+                avg: (newData.w1Scores[idx] + newData.d1Scores[idx]) / 2
+            })).sort((a, b) => b.avg - a.avg);
+
+            newSortedData.forEach((item, idx) => {
+                const row = document.createElement('tr');
+                const status = item.avg > 1 ? 'Silna' : item.avg < -1 ? 'Słaba' : 'Neutralna';
+                const statusClass = item.avg > 1 ? 'strong' : item.avg < -1 ? 'weak' : '';
+                
+                row.innerHTML = `
+                    <td><strong>${idx + 1}</strong></td>
+                    <td><strong>${item.currency}</strong></td>
+                    <td>${item.w1.toFixed(1)}</td>
+                    <td>${item.d1.toFixed(1)}</td>
+                    <td class="${statusClass}">${status}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Update time
+            document.getElementById('updateTime').textContent = `Ostatnia aktualizacja: ${new Date().toLocaleString('pl-PL')}`;
+        }
+    </script>
+</body>
+</html>
