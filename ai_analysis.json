@@ -1,14 +1,44 @@
 
-  {
-    "timestamp": "2025-12-04T23:10:32.554Z",
-    "analysis": "📊 **Market Overview**  \nObecna siła walut wskazuje na mieszany sentyment rynkowy, ale z lekkim przesunięciem w stronę ryzyka (risk-on). Waluty ryzykowne, takie jak AUD i GBP, dominują na wykresach tygodniowych i dziennych (silne średnie wartości), podczas gdy tradycyjne bezpieczne przystanie JPY i USD pozostają najsłabsze. CHF pokazuje dywergencję na osi czasu (silny W1, słaby D1), co może wskazywać na krótkoterminową korektę lub niepewność.\n\n⚠️ **Dywergencje (różnica W1 vs D1 > 50)**  \n- CHF: W1=200 vs D1=-229 (różnica 429) – silna dywergencja, możliwa korekta spadkowa w krótkim terminie lub duże napięcie na rynku CHF.  \n- NZD: W1=-124 vs D1=119 (różnica 243) – duża zmienność i potencjalna zmiana impulsu na bardziej pozytywny.  \n- GBP: W1=6 vs D1=138 (różnica 132) – tydzień na neutralnym poziomie, ale mocny impuls dzienny wskazuje na przyśpieszenie wzrostów.  \n- CHF oraz NZD powinny być obserwowane pod kątem możliwych ruchów korekcyjnych lub odwróceń.\n\n🎯 **Top Setups z rekomendacją**  \n\n1. **AUD/JPY (Confidence 9/10)**  \n- AUD najsilniejszy, JPY najsłabszy.  \n- Entry: Long AUD/JPY po obecnej cenie (np. obecny rynek lub minimalna korekta).  \n- Stop-loss: 100-120 pips poniżej entry, blisko lokalnego wsparcia.  \n- Target: 200-250 pips, skupiając się na kontynuacji trendu wzrostowego AUD i słabości JPY.\n\n2. **EUR/JPY (Confidence 8.5/10)**  \n- EUR silny, JPY najsłabszy.  \n- Entry: Long EUR/JPY, potwierdzenie korekty lub wybicia z konsolidacji.  \n- Stop-loss: ok. 90-110 pips poniżej entry.  \n- Target: 180-220 pips w górę.\n\n3. **GBP/USD (Confidence 8/10)**  \n- GBP stosunkowo silny, USD słaby.  \n- Entry: Long GBP/USD na potwierdzeniu wzrostowego momentum dziennego.  \n- Stop-loss: ok. 80-100 pips poniżej entry.  \n- Target: 150-200 pips.\n\n4. **CHF/NZD (Confidence 7/10)**  \n- CHF silny na interwale tygodniowym, ale słaby dziennie (dywergencja), NZD odwrotnie. Zakładając korektę CHF spadkową i odwrócenie NZD na wzrost.  \n- Entry: Krótkie CHF/NZD po potwierdzeniu słabości CHF dziennie i siły NZD.  \n- Stop-loss: 100 pips powyżej entry.  \n- Target: 150-200 pips.\n\n5. **EUR/CAD (Confidence 7/10)**  \n- EUR silny, CAD słaby.  \n- Entry: Long EUR/CAD po potwierdzeniu krótkoterminowej korekty.  \n- Stop-loss: 80-100 pips poniżej entry.  \n- Target: 150-180 pips.\n\n🔮 **Forward Outlook (2-4 tygodnie)**  \n- Wzrost apetytu na ryzyko (risk-on) będzie wspierał waluty surowcowe i ryzykowne (AUD, GBP, EUR).  \n- JPY i USD pozostaną słabe, zwłaszcza jeśli globalne dane makro będą sprzyjać ryzykownym aktywom.  \n- CHF ryzykuje korektę lub konsolidację po wyraźnej dywergencji, warto obserwować sygnały zmian w polityce SNB lub globalnej niepewności.  \n- Oczekuje się utrzymania trendów siły/słabości dla głównych par z możliwymi korektami w ramach dywergencji.\n\n💡 **Key Takeaways**  \n1. Rynek obecnie wspiera waluty ryzykowne (AUD, GBP, EUR) – risk-on.  \n2. Największe dywergencje w CHF i NZD sugerują ostrożność i możliwe korekty.  \n3. Najsilniejsze setupy to pary łączące najsilniejszą walutę (AUD, EUR, GBP) ze słabą (JPY, USD, CAD).  \n4. Pozycjonowanie powinno uwzględniać stop-lossy oscylujące wokół 80-120 pips dla ochrony przed krótkoterminową zmiennością.  \n5. W perspektywie 2-4 tygodni trend risk-on może się utrzymać, z możliwymi krótkoterminowymi korektami w parach z dywergencjami.",
-    "metadata": {
-      "dataDate": "2025-12-04T23:10:09.391Z",
-      "strongestCurrency": "AUD",
-      "weakestCurrency": "JPY",
-      "divergencesCount": 6,
-      "model": "claude-sonnet-4"
-    }
-  }
-
-
+{
+  
+  
+"timestamp": 
+"2025-12-05T08:26:17.762Z",
+  
+  
+"analysis": 
+"📊 **Market Overview**  \nObecny obraz rynku wskazuje na mieszane nastroje, lecz dominuje environment risk-on. Silne waluty to AUD, EUR i GBP – które często zyskują podczas pozytywnego sentymentu rynkowego. Natomiast najsłabsze JPY, USD i CAD wskazują na odpływ do walut bezpiecznych (USD/JPY) oraz surowcowych (CAD) co może świadczyć o umiarkowanym ryzyku i rotacji kapitału ku bardziej ryzykownym aktywom.\n\n⚠️ **Dywergencje W1 vs D1 (różnica >50)**  \n- CHF: W1=+200 vs D1=-209 (różnica 409!) – silna dywergencja, może oznaczać odwrócenie trendu lub korektę na D1.  \n- USD: W1=-14 vs D1=-148 (134 różnicy) – weekendowy sentyment neutralny, nagły spadek dzienny.  \n- NZD: W1=-112 vs D1=129 (241 różnicy) – potencjalny zwrot na D1, ale ciągła słabość na W1.  \n- GBP: W1=0 vs D1=149 (149 różnicy) – krótkoterminowe umocnienie przy neutralnym tygodniu.\n\n🎯 **Top Setups (Confidence 7-8/10)**  \n\n1. **AUD/JPY** (silna vs najsłabsza)  \n   - Entry: Long AUD/JPY przy obecnych poziomach (np. 92.xx)  \n   - Stop: poniżej lokalnego dołka, np. -100 pipsów od entry  \n   - Target: +200 pipsów (zasięg ruchu tygodniowego)  \n   - Logic: AUD najsilniejszy tygodniowo i dziennie; JPY najsłabszy – dobra okazja na trend wzrostowy.  \n   \n2. **EUR/USD** (silna vs słaba)  \n   - Entry: Long EUR/USD przy przebiciu lokalnego oporu na D1  \n   - Stop: -50 pipsów od wejścia  \n   - Target: +100-150 pipsów, zgodnie z trendem tygodniowym i dziennym  \n   - Logic: EUR silny na obu interwałach, USD słaby dziennie, umiarkowanie tygodniowo.\n\n3. **GBP/USD** (medium silny vs słaby)  \n   - Entry: Long GBP/USD po potwierdzeniu kontynuacji na D1  \n   - Stop: -50 pipsów  \n   - Target: +100-150 pipsów  \n   - Logic: GBP mocny dziennie, neutralny tygodniowo; USD słaby, możliwy wzrost.\n\n4. **CHF/JPY** (silny CHF tygodniowo vs najsłabszy JPY) – z uwzględnieniem dywergencji  \n   - Entry: Long CHF/JPY, ale zachować ostrożność ze względu na dywergencję CHF dzienną (negatywną)  \n   - Stop: -60 pipsów  \n   - Target: +120 pipsów  \n   - Logic: Słabość JPY oraz tygodniowa siła CHF, ale ryzyko korekty dziennej.\n\n🔮 **Forward Outlook (2-4 tygodnie)**  \n- Kontynuacja wzrostowego sentymentu do AUD i EUR możliwa, zwłaszcza jeśli dane makro i risk appetite się utrzymają.  \n- JPY i USD mogą kontynuować słabość, ale USD może odbić się na fali niepewności globalnej.  \n- Wysoka zmienność na CHF wskazuje na możliwe korekty, dlatego handel CHF wymaga ostrożności i ścisłego zarządzania ryzykiem.  \n- GBP może zyskać przy dalszym pozytywnym rozwoju brexitu i danych makro.\n\n💡 **Key Takeaways**  \n1. Environment risk-on z silnymi walutami: AUD, EUR, GBP.  \n2. Wyraźne dywergencje CHF i NZD wskazują na potencjalne punkty zwrotne krótkoterminowe.  \n3. Najlepsze pary do tradingu: AUD/JPY, EUR/USD, GBP/USD – silna vs słaba logika.  \n4. Konieczne ścisłe zarządzanie ryzykiem na parach z dużymi dywergencjami (CHF/JPY).  \n5. Outlook pozytywny dla walut ryzykownych, ostrożny dla USD i JPY.  \n\nChętnie pomogę w dalszej analizie setupów lub parametrach wejścia.",
+  
+  
+"metadata": 
+{
+  
+  
+  
+"dataDate": 
+"2025-12-05T08:26:04.197Z",
+  
+  
+  
+"strongestCurrency": 
+"AUD",
+  
+  
+  
+"weakestCurrency": 
+"JPY",
+  
+  
+  
+"divergencesCount": 
+7,
+  
+  
+  
+"model": 
+"claude-sonnet-4"
+  
+  
+}
+  
+}
