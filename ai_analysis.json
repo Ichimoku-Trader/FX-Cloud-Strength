@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-12-06T22:27:50.264Z",
-  "analysis": "📊 Market Overview  \nObecne dane pokazują wyraźną przewagę walut ryzykownych (risk-on), takich jak AUD (W1=222, D1=252), CAD (W1=16, D1=116) oraz EUR (W1=156, D1=11). Z kolei japoński jen (JPY) i amerykański dolar (USD) pozostają najsłabsze, co sugeruje niskie zainteresowanie bezpiecznymi przystaniami (risk-off). Pomimo tego, CHF ma dywergencję i mieszane sygnały (W1=148, D1=-225), co może wskazywać na pewne napięcia w sentymencie.\n\n🎯 Top Setups (confidence 8/10)  \n1. AUD/JPY – Skrajnie silne AUD vs najsłabszy JPY. Silny potencjał kontynuacji trendu wzrostowego AUD i słabość JPY, klasyczna para risk-on vs risk-off.  \n2. EUR/USD – EUR bardzo silny na tygodniu, USD bardzo słaby na D1 (różnica -119), okazja na długą pozycję EURUSD.  \n3. CAD/CHF – CAD umiarkowanie silny, CHF z dużą dywergencją słabości na D1, warto obserwować szanse na ruch w stronę CAD.\n\n⚠️ Dywergencje  \n- CHF: W1=148 vs D1=-225 (różnica 373) – silna dywergencja, sugerująca możliwe zmiany sentymentu w krótkim terminie lub okres konsolidacji.  \n- GBP: W1=-32 vs D1=124 (różnica 156) – GBP mocno różni się na różnych interwałach, możliwe rozbieżności w oczekiwaniach rynkowych.  \n- USD: W1=-26 vs D1=-145 (różnica 119) – wyraźna słabość dzienna w stosunku do tygodniowej, możliwy short-term trend.\n\n🔮 Outlook (2-4 tygodnie)  \nW średnim terminie spodziewana jest kontynuacja siły AUD i EUR przy dalszym osłabieniu JPY i USD. Dywergencje CHF i GBP mogą dać okazję do korekt lub przełamań w tych walutach, co wymaga uważnej obserwacji. Parze AUD/JPY oraz EUR/USD należy przyglądać się pod kątem kontynuacji trendu. Ryzyko związane z niepewnością CHF powinno być monitorowane jako potencjalny czynnik zmienności.\n\n💡 Key Takeaways  \n1. Rynek obecnie sprzyja walutom ryzykownym (AUD, EUR, CAD) przy jednoczesnym słabości jenów i dolara.  \n2. Wyraźne dywergencje na CHF i GBP mogą wskazywać na możliwe korekty lub zmiany trendu krótkoterminowego.  \n3. AUD/JPY i EUR/USD są kluczowymi parami do obserwacji w nadchodzących tygodniach.  \n4. Ostrożność wobec CHF – silna dywergencja wymaga monitorowania sygnałów potwierdzających dalszy kierunek.  \n5. USD pozostaje pod presją, co może dalej wspierać pary bazujące na dolarze jako walucie przeciwstawnej.\n\nJeśli chcesz, mogę pomóc dobrać strategie wejścia lub zlecenia stop-loss dla proponowanych setupów.",
+  "timestamp": "2025-12-06T23:51:50.215Z",
+  "analysis": "Proszę o udostępnienie danych dotyczących siły walut (średnia W1 + D1) – wtedy będę mógł przeprowadzić analizę zgodnie z zadaniem.",
   "metadata": {
-    "dataDate": "2025-12-06T22:27:50.263Z",
-    "strongestCurrency": "N/A",
-    "weakestCurrency": "N/A",
-    "divergencesCount": 0,
+    "dataDate": "2025-12-06T23:51:45.919Z",
+    "strongestCurrency": "AUD",
+    "weakestCurrency": "JPY",
+    "divergencesCount": 7,
     "model": "claude-sonnet-4"
   }
 }
