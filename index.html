@@ -413,6 +413,113 @@
             margin-top: 8px;
         }
 
+        /* History Archive Styles */
+        .history-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .history-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .history-date {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #3182ce;
+        }
+
+        .history-number {
+            background: #3182ce;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .currency-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .currency-section {
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .strongest-section {
+            background: linear-gradient(135deg, #10b98115, #34d39915);
+            border-left: 4px solid #10b981;
+        }
+
+        .weakest-section {
+            background: linear-gradient(135deg, #ef444415, #dc262615);
+            border-left: 4px solid #ef4444;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .currency-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .currency-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .currency-scores {
+            display: flex;
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+
+        .score {
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #f5f5f5;
+            font-weight: 500;
+        }
+
+        .score.positive {
+            color: #10b981;
+            background: #10b98115;
+        }
+
+        .score.negative {
+            color: #ef4444;
+            background: #ef444415;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
@@ -466,6 +573,10 @@
             .logo-container img {
                 height: 60px;
             }
+
+            .currency-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -484,7 +595,7 @@
 
         <!-- Header -->
         <div class="header">
-            <h1> FX Cloud Strength</h1>
+            <h1>📊 FX Cloud Strength</h1>
             <div class="date" id="currentDate"></div>
         </div>
 
@@ -500,33 +611,32 @@
         <div class="tabs-nav">
             <button class="tab-button active" onclick="switchTab('dashboard')">📊 Dashboard</button>
             <button class="tab-button" onclick="switchTab('analysis')">📝 Krótka Analiza</button>
-            <button class="tab-button" onclick="switchTab('archive')">📚 Archiwum</button>
+            <button class="tab-button" onclick="switchTab('ideas')">💡 Pomysły Inwestycyjne</button>
+            <button class="tab-button" onclick="switchTab('history')">📁 Archiwum Siły Walut</button>
         </div>
 
         <!-- Tab 1: Dashboard -->
         <div id="dashboard" class="tab-content active">
             <!-- Introduction Section -->
             <div class="intro-section">
-              <p>
-  <strong>Metodologia:</strong> Analiza siły walut opiera się na zaawansowanych zasadach 
-  <em>Ichimoku Kinko Hyo</em>, uwzględniając pełny kontekst trendu oraz synchronizację 
-  między interwałami czasowymi. Ocena rynku obejmuje przede wszystkim:
-</p>
+                <p>
+                    <strong>Metodologia:</strong> Analiza siły walut opiera się na zaawansowanych zasadach 
+                    <em>Ichimoku Kinko Hyo</em>, uwzględniając pełny kontekst trendu oraz synchronizację 
+                    między interwałami czasowymi. Ocena rynku obejmuje przede wszystkim:
+                </p>
 
+                <p>
+                    System uwzględnia jednocześnie dwa kluczowe interwały czasowe:
+                    <strong>Weekly (W1)</strong> jako ramę długoterminową obejmującą 4–12 tygodni trendu oraz 
+                    <strong>Daily (D1)</strong> jako perspektywę średnioterminową (1–4 tygodnie). 
+                    Zintegrowane podejście pozwala na precyzyjne określenie kierunku rynku oraz jakości trendu.
+                </p>
 
-<p>
-  System uwzględnia jednocześnie dwa kluczowe interwały czasowe:
-  <strong>Weekly (W1)</strong> jako ramę długoterminową obejmującą 4–12 tygodni trendu oraz 
-  <strong>Daily (D1)</strong> jako perspektywę średnioterminową (1–4 tygodnie). 
-  Zintegrowane podejście pozwala na precyzyjne określenie kierunku rynku oraz jakości trendu.
-</p>
-
-<p>
-  Algorytm automatycznie analizuje dane z <strong>28 par walutowych</strong>, 
-  wyodrębniając względną siłę <strong>8 głównych walut</strong>, co umożliwia klarowne 
-  zestawienie liderów i słabszych walut w aktualnym środowisku rynkowym.
-</p>
-
+                <p>
+                    Algorytm automatycznie analizuje dane z <strong>28 par walutowych</strong>, 
+                    wyodrębniając względną siłę <strong>8 głównych walut</strong>, co umożliwia klarowne 
+                    zestawienie liderów i słabszych walut w aktualnym środowisku rynkowym.
+                </p>
             </div>
 
             <!-- Chart Card -->
@@ -629,19 +739,26 @@
             </div>
         </div>
 
-        <!-- Tab 3: Archive -->
-        <div id="archive" class="tab-content">
+        <!-- Tab 3: Pomysły Inwestycyjne -->
+        <div id="ideas" class="tab-content">
             <div class="intro-section">
-                <h2 style="border: none; margin-bottom: 15px;">📚 Archiwum Analiz</h2>
+                <h2 style="border: none; margin-bottom: 15px;">💡 Pomysły Inwestycyjne</h2>
                 <p style="text-align: center; margin: 20px 0;">
-                    Pełne archiwum historycznych analiz Currency Strength dostępne jest na dedykowanej stronie.
+                    Pełne archiwum comiesięcznych pomysłów inwestycyjnych i analiz wideo dostępne jest na dedykowanej stronie.
                 </p>
                 <div style="text-align: center; margin-top: 30px;">
                     <a href="archiwum.html" class="link-card" style="display: inline-block; max-width: 400px;">
-                        <h3>📖 Przejdź do Archiwum</h3>
-                        <p>Wszystkie historyczne analizy i pomysły inwestycyjne</p>
+                        <h3>📖 Przejdź do Archiwum Pomysłów</h3>
+                        <p>Wszystkie comiesięczne analizy wideo i pomysły inwestycyjne</p>
                     </a>
                 </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Archiwum Siły Walut -->
+        <div id="history" class="tab-content">
+            <div id="history-content" class="loading">
+                Ładowanie archiwum...
             </div>
         </div>
     </div>
@@ -667,9 +784,11 @@
             // Add active to clicked button
             event.target.classList.add('active');
 
-            // Load analysis if analysis tab is opened
+            // Load content based on tab
             if (tabName === 'analysis') {
                 loadAnalysis();
+            } else if (tabName === 'history') {
+                loadHistoricalData();
             }
         }
 
@@ -747,6 +866,109 @@
             }
             
             contentDiv.innerHTML = html;
+        }
+
+        // Load historical data
+        async function loadHistoricalData() {
+            const contentDiv = document.getElementById('history-content');
+            contentDiv.className = 'loading';
+            contentDiv.innerHTML = 'Ładowanie archiwum...';
+
+            try {
+                const timestamp = new Date().getTime();
+                const response = await fetch(`historical_data.json?t=${timestamp}`);
+                
+                if (!response.ok) {
+                    throw new Error('Nie można załadować danych historycznych');
+                }
+                
+                const data = await response.json();
+                displayHistory(data.history);
+            } catch (error) {
+                console.error('Błąd ładowania archiwum:', error);
+                contentDiv.className = 'error';
+                contentDiv.innerHTML = 'Błąd ładowania archiwum. Dane mogą nie być jeszcze dostępne.';
+            }
+        }
+
+        // Display historical data
+        function displayHistory(history) {
+            const container = document.getElementById('history-content');
+            
+            if (!history || history.length === 0) {
+                container.innerHTML = '<div class="card"><p style="text-align: center; color: #718096;">Brak danych w archiwum</p></div>';
+                return;
+            }
+            
+            let html = '';
+            
+            history.forEach((record, index) => {
+                const date = new Date(record.timestamp);
+                const formattedDate = date.toLocaleString('pl-PL', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                html += `
+                    <div class="history-card">
+                        <div class="history-header">
+                            <div class="history-date">📅 ${formattedDate}</div>
+                            <div class="history-number">#${record.recordNumber}</div>
+                        </div>
+                        
+                        <div class="currency-grid">
+                            <div class="currency-section strongest-section">
+                                <div class="section-title">
+                                    🟢 Najsilniejsze Waluty
+                                </div>
+                                ${record.strongest.map((curr, i) => `
+                                    <div class="currency-item">
+                                        <div class="currency-name">${i + 1}. ${curr.currency}</div>
+                                        <div class="currency-scores">
+                                            <span class="score ${curr.w1 > 0 ? 'positive' : 'negative'}">
+                                                W1: ${curr.w1 > 0 ? '+' : ''}${curr.w1.toFixed(0)}
+                                            </span>
+                                            <span class="score ${curr.d1 > 0 ? 'positive' : 'negative'}">
+                                                D1: ${curr.d1 > 0 ? '+' : ''}${curr.d1.toFixed(0)}
+                                            </span>
+                                            <span class="score">
+                                                Avg: ${curr.avg.toFixed(1)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            
+                            <div class="currency-section weakest-section">
+                                <div class="section-title">
+                                    🔴 Najsłabsze Waluty
+                                </div>
+                                ${record.weakest.map((curr, i) => `
+                                    <div class="currency-item">
+                                        <div class="currency-name">${i + 1}. ${curr.currency}</div>
+                                        <div class="currency-scores">
+                                            <span class="score ${curr.w1 > 0 ? 'positive' : 'negative'}">
+                                                W1: ${curr.w1 > 0 ? '+' : ''}${curr.w1.toFixed(0)}
+                                            </span>
+                                            <span class="score ${curr.d1 > 0 ? 'positive' : 'negative'}">
+                                                D1: ${curr.d1 > 0 ? '+' : ''}${curr.d1.toFixed(0)}
+                                            </span>
+                                            <span class="score">
+                                                Avg: ${curr.avg.toFixed(1)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
         }
 
         // Update chart
