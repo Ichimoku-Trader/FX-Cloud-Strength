@@ -12,50 +12,51 @@
             box-sizing: border-box;
         }
 
-      body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f5f7fa;
-    min-height: 100vh;
-    padding: 20px;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
 
         /* Header */
-       .header {
-    text-align: center;
-    color: #2d3748;
-    margin-bottom: 30px;
-}
+        .header {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 30px;
+        }
 
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header .subtitle {
             font-size: 1.1rem;
-            opacity: 0.9;
+            color: #4a5568;
         }
 
         .back-button {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: white;
+            color: #2d3748;
             padding: 10px 20px;
             border-radius: 8px;
             text-decoration: none;
             margin-bottom: 20px;
             transition: all 0.3s;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .back-button:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: #edf2f7;
             transform: translateX(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         /* Chart Card */
@@ -64,14 +65,14 @@
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .chart-card h2 {
             color: #2d3748;
             margin-bottom: 20px;
             font-size: 1.8rem;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid #3182ce;
             padding-bottom: 10px;
         }
 
@@ -107,7 +108,7 @@
         }
 
         .legend-item.active {
-            border-color: #667eea;
+            border-color: #3182ce;
             background: #eef2ff;
         }
 
@@ -128,7 +129,7 @@
             background: white;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             overflow-x: auto;
         }
 
@@ -136,7 +137,7 @@
             color: #2d3748;
             margin-bottom: 20px;
             font-size: 1.8rem;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid #3182ce;
             padding-bottom: 10px;
         }
 
@@ -155,7 +156,7 @@
         }
 
         .data-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #3182ce;
             color: white;
             padding: 15px 10px;
             text-align: center;
@@ -226,12 +227,12 @@
         }
 
         .score-w1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #3182ce;
             color: white;
         }
 
         .score-d1 {
-            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            background: #718096;
             color: white;
         }
 
@@ -253,7 +254,7 @@
         .loading {
             text-align: center;
             padding: 60px 20px;
-            color: white;
+            color: #4a5568;
             font-size: 1.2rem;
         }
 
@@ -263,8 +264,8 @@
             width: 40px;
             height: 40px;
             margin-left: 10px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
+            border: 4px solid #e2e8f0;
+            border-top-color: #3182ce;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -294,14 +295,14 @@
             background: white;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             text-align: center;
         }
 
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
-            color: #667eea;
+            color: #3182ce;
             margin-bottom: 5px;
         }
 
@@ -396,7 +397,7 @@
             'EUR': '#ef4444',
             'USD': '#f59e0b',
             'GBP': '#10b981',
-            'JPY': '#f59e0b',
+            'JPY': '#eab308',
             'CHF': '#3b82f6',
             'CAD': '#8b5cf6',
             'AUD': '#ec4899',
@@ -542,38 +543,24 @@
                         }
                     },
                     scales: {
-    y: {
-        grid: {
-            color: 'rgba(0, 0, 0, 0.05)'
-        },
-        ticks: {
-            color: '#000000',
-            font: {
-                size: 12,
-                weight: '600'
-            }
-        }
-    },
-    x: {
-        grid: {
-            display: false
-        },
-        ticks: {
-            color: '#000000',
-            font: {
-                size: 11,
-                weight: '600'
-            },
-            maxRotation: 45,
-            minRotation: 45
-        }
-    }
-}
+                        y: {
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                color: '#000000',
+                                font: {
+                                    size: 12,
+                                    weight: '600'
+                                }
+                            }
+                        },
                         x: {
                             grid: {
                                 display: false
                             },
                             ticks: {
+                                color: '#000000',
                                 font: {
                                     size: 11,
                                     weight: '600'
@@ -659,9 +646,6 @@
                     const currencyData = record.allCurrencies.find(c => c.currency === currency);
                     
                     if (currencyData) {
-                        const w1Class = currencyData.w1 > 0 ? 'positive' : 'negative';
-                        const d1Class = currencyData.d1 > 0 ? 'positive' : 'negative';
-                        
                         tableHTML += `
                             <td>
                                 <div class="score-cell">
