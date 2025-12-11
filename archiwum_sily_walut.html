@@ -251,14 +251,6 @@
             font-weight: 600;
         }
 
-        .positive {
-            color: #10b981;
-        }
-
-        .negative {
-            color: #ef4444;
-        }
-
         /* Loading */
         .loading {
             text-align: center;
@@ -284,12 +276,18 @@
         }
 
         .error {
-            background: #fee;
-            color: #c33;
+            background: #fed7d7;
+            color: #742a2a;
             padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
             text-align: center;
+        }
+
+        .error-details {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
         /* Stats Cards */
@@ -401,7 +399,7 @@
         let chart = null;
         let historicalData = null;
 
-        // Currency colors - consistent with chart
+        // Currency colors
         const CURRENCY_COLORS = {
             'EUR': '#ef4444',
             'USD': '#f59e0b',
@@ -420,21 +418,51 @@
                 const response = await fetch(`historical_data.json?t=${timestamp}`);
                 
                 if (!response.ok) {
-                    throw new Error('Nie można załadować danych');
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
                 
                 const data = await response.json();
+                
+                // Validate data
+                if (!data || !data.history) {
+                    throw new Error('Invalid data format');
+                }
+                
+                if (data.history.length === 0) {
+                    throw new Error('No historical data available yet');
+                }
+                
                 historicalData = data;
                 
                 displayStats(data);
                 displayChart(data);
                 displayTable(data);
+                
+                console.log('Data loaded successfully:', data.totalRecords, 'records');
+                
             } catch (error) {
-                console.error('Błąd ładowania danych:', error);
+                console.error('Error loading data:', error);
+                
+                let errorMessage = 'Błąd ładowania danych archiwum. ';
+                let errorDetails = '';
+                
+                if (error.message.includes('HTTP 404')) {
+                    errorMessage = 'Plik historical_data.json nie istnieje na GitHubie. ';
+                    errorDetails = 'Uruchom workflow n8n aby utworzyć plik lub stwórz go ręcznie.';
+                } else if (error.message.includes('No historical data')) {
+                    errorMessage = 'Plik historical_data.json jest pusty. ';
+                    errorDetails = 'Uruchom workflow n8n aby wypełnić dane (Execute workflow).';
+                } else if (error.message.includes('Invalid data')) {
+                    errorMessage = 'Nieprawidłowy format danych. ';
+                    errorDetails = 'Sprawdź zawartość pliku historical_data.json na GitHubie.';
+                } else {
+                    errorDetails = error.message;
+                }
+                
                 document.getElementById('chartContent').innerHTML = 
-                    '<div class="error">Błąd ładowania danych archiwum. Spróbuj odświeżyć stronę.</div>';
+                    `<div class="error">${errorMessage}<div class="error-details">${errorDetails}</div></div>`;
                 document.getElementById('tableContent').innerHTML = 
-                    '<div class="error">Błąd ładowania danych tabeli.</div>';
+                    `<div class="error">${errorMessage}<div class="error-details">${errorDetails}</div></div>`;
             }
         }
 
@@ -442,21 +470,17 @@
         function displayStats(data) {
             if (!data.history || data.history.length === 0) return;
 
-            // Total records
             document.getElementById('totalRecords').textContent = data.totalRecords;
 
-            // Strongest currency (from latest record)
             const latest = data.history[0];
             if (latest && latest.strongest && latest.strongest[0]) {
                 document.getElementById('strongestCurrency').textContent = latest.strongest[0].currency;
             }
 
-            // Weakest currency
             if (latest && latest.weakest && latest.weakest[0]) {
                 document.getElementById('weakestCurrency').textContent = latest.weakest[0].currency;
             }
 
-            // Last update
             if (latest && latest.timestamp) {
                 const date = new Date(latest.timestamp);
                 const hours = date.getHours().toString().padStart(2, '0');
@@ -473,16 +497,13 @@
                 return;
             }
 
-            // Prepare data for chart
             const labels = data.history.map(record => {
                 const date = new Date(record.timestamp);
                 return date.toLocaleDateString('pl-PL', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
             }).reverse();
 
-            // Get all currencies from first record
             const currencies = data.history[0].allCurrencies.map(c => c.currency);
 
-            // Create datasets for each currency
             const datasets = currencies.map(currency => {
                 const currencyData = data.history.map(record => {
                     const currencyRecord = record.allCurrencies.find(c => c.currency === currency);
@@ -504,7 +525,6 @@
                 };
             });
 
-            // Create chart HTML
             const chartHTML = `
                 <div class="chart-container">
                     <canvas id="strengthChart"></canvas>
@@ -514,7 +534,6 @@
             
             document.getElementById('chartContent').innerHTML = chartHTML;
 
-            // Initialize chart
             const ctx = document.getElementById('strengthChart').getContext('2d');
             
             chart = new Chart(ctx, {
@@ -582,7 +601,6 @@
                 }
             });
 
-            // Create custom legend
             createCustomLegend(currencies);
         }
 
@@ -606,7 +624,6 @@
                 item.appendChild(color);
                 item.appendChild(name);
                 
-                // Toggle visibility on click
                 item.addEventListener('click', function() {
                     const datasetIndex = parseInt(this.dataset.index);
                     const meta = chart.getDatasetMeta(datasetIndex);
@@ -628,14 +645,11 @@
                 return;
             }
 
-            // Get currencies from first record
             const currencies = data.history[0].allCurrencies.map(c => c.currency);
 
-            // Create table header
             let tableHTML = '<table class="data-table"><thead><tr>';
             tableHTML += '<th>Waluta</th>';
             
-            // Add date headers (reverse to show newest first)
             data.history.slice().reverse().forEach(record => {
                 const date = new Date(record.timestamp);
                 const dateStr = date.toLocaleDateString('pl-PL', { day: 'numeric', month: 'short' });
@@ -645,12 +659,10 @@
             
             tableHTML += '</tr></thead><tbody>';
 
-            // Add rows for each currency
             currencies.forEach(currency => {
                 tableHTML += '<tr>';
                 tableHTML += `<td class="currency-cell">${currency}</td>`;
                 
-                // Add data for each date (reverse to match headers)
                 data.history.slice().reverse().forEach(record => {
                     const currencyData = record.allCurrencies.find(c => c.currency === currency);
                     
