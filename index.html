@@ -13,7 +13,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FX Cloud Strength - Ichimoku Trader</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="data:,">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
     <style>
         * {
             margin: 0;
@@ -1013,4 +1014,18 @@
                 const date = new Date(timestamp);
                 lastUpdateElement.textContent = `Ostatnia aktualizacja: ${date.toLocaleString('pl-PL')}`;
             } else {
-                lastUpdateElement.textContent = `Ostatnia akt
+                lastUpdateElement.textContent = `Ostatnia aktualizacja: niedostępna`;
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            // Load currency data immediately
+            loadCurrencyData();
+            
+            // Set active tab
+            switchTab('dashboard');
+        });
+    </script>
+</body>
+</html>
