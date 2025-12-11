@@ -1,5209 +1,819 @@
-<!
-DOCTYPE
- 
-html
->
-
-<
-html
- 
-lang
-=
-"
-pl
-"
->
-
-<
-head
->
-
+<!DOCTYPE html>
+<html lang="pl">
+<head>
 <!-- Google tag (gtag.js) -->
-
-<
-script
- 
-async
- 
-src
-=
-"
-https://www.googletagmanager.com/gtag/js?id=G-K9P11SYEW2
-"
->
-</
-script
->
-
-<
-script
->
-
-  
-window
-.
-dataLayer
- 
-=
- 
-window
-.
-dataLayer
- 
-||
- 
-[
-]
-;
-
-  
-function
- 
-gtag
-(
-)
-{
-dataLayer
-.
-push
-(
-arguments
-)
-;
-}
-
-  
-gtag
-(
-'js'
-,
- 
-new
- 
-Date
-(
-)
-)
-;
-
-  
-gtag
-(
-'config'
-,
- 
-'G-K9P11SYEW2'
-)
-;
-
-</
-script
->
-
-    
-<
-meta
- 
-charset
-=
-"
-UTF-8
-"
->
-
-    
-<
-meta
- 
-name
-=
-"
-viewport
-"
- 
-content
-=
-"
-width=device-width, initial-scale=1.0
-"
->
-
-    
-<
-title
->
-FX Cloud Strength - Ichimoku Trader
-</
-title
->
-
-    
-<
-script
- 
-src
-=
-"
-https://cdn.jsdelivr.net/npm/chart.js
-"
->
-</
-script
->
-
-    
-<
-style
->
-
-        
-*
- 
-{
-
-            
-margin
-:
- 
-0
-;
-
-            
-padding
-:
- 
-0
-;
-
-            
-box-sizing
-:
- border-box
-;
-
-        
-}
-
-        
-body
- 
-{
-
-            
-font-family
-:
- 
-'Segoe UI'
-,
- Tahoma
-,
- Geneva
-,
- Verdana
-,
- sans-serif
-;
-
-            
-background
-:
- 
-#f5f7fa
-;
-
-            
-padding
-:
- 
-20
-px
-;
-
-            
-min-height
-:
- 
-100
-vh
-;
-
-        
-}
-
-        
-.container
- 
-{
-
-            
-max-width
-:
- 
-1200
-px
-;
-
-            
-margin
-:
- 
-0
- auto
-;
-
-        
-}
-
-        
-/* Top Bar */
-
-        
-.top-bar
- 
-{
-
-            
-background
-:
- 
-white
-;
-
-            
-border-radius
-:
- 
-10
-px
-;
-
-            
-padding
-:
- 
-15
-px
- 
-30
-px
-;
-
-            
-margin-bottom
-:
- 
-20
-px
-;
-
-            
-box-shadow
-:
- 
-0
- 
-2
-px
- 
-10
-px
- 
-rgba
-(
-0
-,
-0
-,
-0
-,
-0.05
-)
-;
-
-            
-display
-:
- flex
-;
-
-            
-justify-content
-:
- space-between
-;
-
-            
-align-items
-:
- center
-;
-
-            
-flex-wrap
-:
- wrap
-;
-
-            
-gap
-:
- 
-15
-px
-;
-
-        
-}
-
-        
-.logo-container
- 
-{
-
-            
-display
-:
- flex
-;
-
-            
-align-items
-:
- center
-;
-
-            
-gap
-:
- 
-20
-px
-;
-
-        
-}
-
-        
-.logo-container
- img
- 
-{
-
-            
-height
-:
- 
-80
-px
-;
-
-            
-width
-:
- auto
-;
-
-        
-}
-
-        
-.contact-info
- 
-{
-
-            
-text-align
-:
- right
-;
-
-            
-color
-:
- 
-#4a5568
-;
-
-        
-}
-
-        
-.contact-info
- 
-.name
- 
-{
-
-            
-font-weight
-:
- 
-700
-;
-
-            
-font-size
-:
- 
-1.1
-em
-;
-
-            
-color
-:
- 
-#2d3748
-;
-
-            
-margin-bottom
-:
- 
-3
-px
-;
-
-        
-}
-
-        
-.contact-info
- 
-.email
- 
-{
-
-            
-font-size
-:
- 
-0.9
-em
-;
-
-            
-color
-:
- 
-#718096
-;
-
-        
-}
-
-        
-/* Header */
-
-        
-.header
- 
-{
-
-            
-text-align
-:
- center
-;
-
-            
-margin-bottom
-:
- 
-30
-px
-;
-
-        
-}
-
-        
-.header
- h1
- 
-{
-
-            
-font-size
-:
- 
-2.5
-em
-;
-
-            
-margin-bottom
-:
- 
-10
-px
-;
-
-            
-color
-:
- 
-#2d3748
-;
-
-            
-font-weight
-:
- 
-700
-;
-
-        
-}
-
-        
-.header
- 
-.date
- 
-{
-
-            
-font-size
-:
- 
-1.2
-em
-;
-
-            
-color
-:
- 
-#4a5568
-;
-
-        
-}
-
-        
-/* Disclaimer */
-
-        
-.disclaimer
- 
-{
-
-            
-background
-:
- 
-linear-gradient
-(
-135
-deg
-,
- 
-#fef3c7
- 
-0
-%
-,
- 
-#fde68a
- 
-100
-%
-)
-;
-
-            
-border-radius
-:
- 
-10
-px
-;
-
-            
-padding
-:
- 
-20
-px
- 
-25
-px
-;
-
-            
-margin-bottom
-:
- 
-20
-px
-;
-
-            
-box-shadow
-:
- 
-0
- 
-2
-px
- 
-10
-px
- 
-rgba
-(
-0
-,
-0
-,
-0
-,
-0.08
-)
-;
-
-            
-border-left
-:
- 
-5
-px
- solid 
-#f59e0b
-;
-
-            
-display
-:
- flex
-;
-
-            
-align-items
-:
- flex-start
-;
-
-            
-gap
-:
- 
-15
-px
-;
-
-        
-}
-
-        
-.disclaimer-icon
- 
-{
-
-            
-font-size
-:
- 
-28
-px
-;
-
-            
-flex-shrink
-:
- 
-0
-;
-
-            
-line-height
-:
- 
-1
-;
-
-        
-}
-
-        
-.disclaimer-text
- 
-{
-
-            
-color
-:
- 
-#78350f
-;
-
-            
-line-height
-:
- 
-1.7
-;
-
-            
-font-size
-:
- 
-0.95
-em
-;
-
-            
-font-weight
-:
- 
-500
-;
-
-        
-}
-
-        
-.disclaimer-text
- strong
- 
-{
-
-            
-color
-:
- 
-#92400e
-;
-
-            
-font-weight
-:
- 
-700
-;
-
-        
-}
-
-        
-/* Tabs Navigation */
-
-        
-.tabs-nav
- 
-{
-
-            
-background
-:
- 
-white
-;
-
-            
-border-radius
-:
- 
-10
-px
-;
-
-            
-padding
-:
- 
-15
-px
- 
-20
-px
-;
-
-            
-margin-bottom
-:
- 
-20
-px
-;
-
-            
-box-shadow
-:
- 
-0
- 
-2
-px
- 
-10
-px
- 
-rgba
-(
-0
-,
-0
-,
-0
-,
-0.05
-)
-;
-
-            
-display
-:
- flex
-;
-
-            
-gap
-:
- 
-10
-px
-;
-
-            
-flex-wrap
-:
- wrap
-;
-
-            
-justify-content
-:
- center
-;
-
-        
-}
-
-        
-.tab-button
- 
-{
-
-            
-padding
-:
- 
-12
-px
- 
-24
-px
-;
-
-            
-border
-:
- none
-;
-
-            
-background
-:
- 
-#e2e8f0
-;
-
-            
-color
-:
- 
-#4a5568
-;
-
-            
-border-radius
-:
- 
-8
-px
-;
-
-            
-cursor
-:
- pointer
-;
-
-            
-font-size
-:
- 
-16
-px
-;
-
-            
-font-weight
-:
- 
-500
-;
-
-            
-transition
-:
- all 
-0.3
-s
- ease
-;
-
-        
-}
-
-        
-.tab-button
-:hover
- 
-{
-
-            
-background
-:
- 
-#cbd5e0
-;
-
-        
-}
-
-        
-.tab-button
-.active
- 
-{
-
-            
-background
-:
- 
-#3182ce
-;
-
-            
-color
-:
- 
-white
-;
-
-        
-}
-
-        
-/* Tab Content */
-
-        
-.tab-content
- 
-{
-
-            
-display
-:
- none
-;
-
-        
-}
-
-        
-.tab-content
-.active
- 
-{
-
-            
-display
-:
- block
-;
-
-        
-}
-
-        
-/* Intro Section */
-
-        
-.intro-section
- 
-{
-
-            
-background
-:
- 
-white
-;
-
-            
-border-radius
-:
- 
-10
-px
-;
-
-            
-padding
-:
- 
-25
-px
-;
-
-            
-margin-bottom
-:
- 
-20
-px
-;
-
-            
-box-shadow
-:
- 
-0
- 
-2
-px
- 
-10
-px
- 
-rgba
-(
-0
-,
-0
-,
-0
-,
-0.05
-)
-;
-
-            
-border-left
-:
- 
-4
-px
- solid 
-#3182ce
-;
-
-        
-}
-
-        
-.intro-section
- p
- 
-{
-
-            
-color
-:
- 
-#4a5568
-;
-
-            
-line-height
-:
- 
-1.8
-;
-
-            
-font-size
-:
- 
-1.05
-em
-;
-
-        
-}
-
-        
-/* Card */
-
-        
-.card
- 
-{
-
-            
-background
-:
- 
-white
-;
-
-            
-border-radius
-:
- 
-10
-px
-;
-
-            
-padding
-:
- 
-25
-px
-;
-
-            
-margin-bottom
-:
- 
-20
-px
-;
-
-            
-box-shadow
-:
- 
-0
- 
-2
-px
- 
-10
-px
- 
-rgba
-(
-0
-,
-0
-,
-0
-,
-0.05
-)
-;
-
-        
-}
-
-        
-.card
- h2
- 
-{
-
-            
-color
-:
- 
-#2d3748
-;
-
-            
-margin-bottom
-:
- 
-20
-px
-;
-
-            
-font-size
-:
- 
-1.8
-em
-;
-
-            
-border-bottom
-:
- 
-3
-px
- solid 
-#3182ce
-;
-
-            
-padding-bottom
-:
- 
-10
-px
-;
-
-        
-}
-
-        
-/* Chart */
-
-        
-.chart-container
- 
-{
-
-            
-position
-:
- relative
-;
-
-            
-height
-:
- 
-400
-px
-;
-
-            
-margin-bottom
-:
- 
-20
-px
-;
-
-        
-}
-
-        
-.legend
- 
-{
-
-            
-display
-:
- flex
-;
-
-            
-justify-content
-:
- center
-;
-
-            
-gap
-:
- 
-30
-px
-;
-
-            
-margin-top
-:
- 
-15
-px
-;
-
-            
-flex-wrap
-:
- wrap
-;
-
-        
-}
-
-        
-.legend-item
- 
-{
-
-            
-display
-:
- flex
-;
-
-            
-align-items
-:
- center
-;
-
-            
-gap
-:
- 
-10
-px
-;
-
-            
-font-weight
-:
- 
-600
-;
-
-        
-}
-
-        
-.legend-color
- 
-{
-
-            
-width
-:
- 
-30
-px
-;
-
-            
-height
-:
- 
-20
-px
-;
-
-            
-border-radius
-:
- 
-4
-px
-;
-
-        
-}
-
-        
-.w1-color
- 
-{
- 
-background
-:
- 
-#3182ce
-;
- 
-}
-
-        
-.d1-color
- 
-{
- 
-background
-:
- 
-#718096
-;
- 
-}
-
-        
-/* Table */
-
-        
-.table-container
- 
-{
-
-            
-overflow-x
-:
- auto
-;
-
-        
-}
-
-        
-table
- 
-{
-
-            
-width
-:
- 
-100
-%
-;
-
-            
-border-collapse
-:
- collapse
-;
-
-            
-margin-top
-:
- 
-20
-px
-;
-
-        
-}
-
-        
-th
-,
- td
- 
-{
-
-            
-padding
-:
- 
-12
-px
-;
-
-            
-text-align
-:
- center
-;
-
-            
-border-bottom
-:
- 
-1
-px
- solid 
-#e0e0e0
-;
-
-        
-}
-
-        
-th
- 
-{
-
-            
-background
-:
- 
-#3182ce
-;
-
-            
-color
-:
- 
-white
-;
-
-            
-font-weight
-:
- 
-600
-;
-
-            
-text-transform
-:
- uppercase
-;
-
-            
-font-size
-:
- 
-0.9
-em
-;
-
-        
-}
-
-        
-tr
-:hover
- 
-{
-
-            
-background
-:
- 
-#f5f5f5
-;
-
-        
-}
-
-        
-.strong
- 
-{
-
-            
-color
-:
- 
-#10b981
-;
-
-            
-font-weight
-:
- 
-700
-;
-
-        
-}
-
-        
-.weak
- 
-{
-
-            
-color
-:
- 
-#ef4444
-;
-
-            
-font-weight
-:
- 
-700
-;
-
-        
-}
-
-        
-/* Analysis Section */
-
-        
-.analysis-section
- 
-{
-
-            
-line-height
-:
- 
-1.8
-;
-
-            
-color
-:
- 
-#333
-;
-
-            
-white-space
-:
- pre-wrap
-;
-
-        
-}
-
-        
-.analysis-section
- h2
-,
-
-        
-.analysis-section
- h3
- 
-{
-
-            
-color
-:
- 
-#2d3748
-;
-
-            
-margin-top
-:
- 
-20
-px
-;
-
-            
-margin-bottom
-:
- 
-10
-px
-;
-
-        
-}
-
-        
-.analysis-meta
- 
-{
-
-            
-margin-top
-:
- 
-20
-px
-;
-
-            
-padding-top
-:
- 
-20
-px
-;
-
-            
-border-top
-:
- 
-1
-px
- solid 
-#e2e8f0
-;
-
-            
-color
-:
- 
-#718096
-;
-
-            
-font-size
-:
- 
-14
-px
-;
-
-        
-}
-
-        
-.loading
- 
-{
-
-            
-text-align
-:
- center
-;
-
-            
-padding
-:
- 
-40
-px
-;
-
-            
-color
-:
- 
-#718096
-;
-
-        
-}
-
-        
-.error
- 
-{
-
-            
-background
-:
- 
-#fed7d7
-;
-
-            
-color
-:
- 
-#742a2a
-;
-
-            
-padding
-:
- 
-20
-px
-;
-
-            
-border-radius
-:
- 
-8
-px
-;
-
-            
-margin
-:
- 
-20
-px
- 
-0
-;
-
-        
-}
-
-        
-/* Links Section */
-
-        
-.links-section
- 
-{
-
-            
-display
-:
- grid
-;
-
-            
-grid-template-columns
-:
- 
-repeat
-(
-auto-fit
-,
- 
-minmax
-(
-250
-px
-,
- 
-1
-fr
-)
-)
-;
-
-            
-gap
-:
- 
-15
-px
-;
-
-            
-margin-top
-:
- 
-20
-px
-;
-
-        
-}
-
-        
-.link-card
- 
-{
-
-            
-background
-:
- 
-linear-gradient
-(
-135
-deg
-,
- 
-#3182ce
- 
-0
-%
-,
- 
-#2c5282
- 
-100
-%
-)
-;
-
-            
-color
-:
- 
-white
-;
-
-            
-padding
-:
- 
-20
-px
-;
-
-            
-border-radius
-:
- 
-10
-px
-;
-
-            
-text-decoration
-:
- none
-;
-
-            
-transition
-:
- transform 
-0.3
-s
- ease
-,
- box-shadow 
-0.3
-s
- ease
-;
-
-            
-display
-:
- block
-;
-
-        
-}
-
-        
-.link-card
-:hover
- 
-{
-
-            
-transform
-:
- 
-translateY
-(
--5
-px
-)
-;
-
-            
-box-shadow
-:
- 
-0
- 
-10
-px
- 
-25
-px
- 
-rgba
-(
-49
-,
- 
-130
-,
- 
-206
-,
- 
-0.3
-)
-;
-
-        
-}
-
-        
-.link-card
- h3
- 
-{
-
-            
-margin-bottom
-:
- 
-10
-px
-;
-
-            
-font-size
-:
- 
-1.2
-em
-;
-
-        
-}
-
-        
-.link-card
- p
- 
-{
-
-            
-font-size
-:
- 
-0.9
-em
-;
-
-            
-opacity
-:
- 
-0.9
-;
-
-        
-}
-
-        
-.update-time
- 
-{
-
-            
-text-align
-:
- center
-;
-
-            
-color
-:
- 
-#666
-;
-
-            
-font-style
-:
- italic
-;
-
-            
-margin-top
-:
- 
-10
-px
-;
-
-            
-font-size
-:
- 
-0.9
-em
-;
-
-        
-}
-
-        
-/* Sponsors Section */
-
-        
-.sponsors-section
- 
-{
-
-            
-margin-top
-:
- 
-40
-px
-;
-
-        
-}
-
-        
-.sponsors-grid
- 
-{
-
-            
-display
-:
- grid
-;
-
-            
-grid-template-columns
-:
- 
-repeat
-(
-auto-fit
-,
- 
-minmax
-(
-300
-px
-,
- 
-1
-fr
-)
-)
-;
-
-            
-gap
-:
- 
-25
-px
-;
-
-            
-margin-top
-:
- 
-20
-px
-;
-
-        
-}
-
-        
-.sponsor-card
- 
-{
-
-            
-background
-:
- 
-white
-;
-
-            
-border-radius
-:
- 
-12
-px
-;
-
-            
-overflow
-:
- hidden
-;
-
-            
-box-shadow
-:
- 
-0
- 
-4
-px
- 
-15
-px
- 
-rgba
-(
-0
-,
-0
-,
-0
-,
-0.1
-)
-;
-
-            
-transition
-:
- transform 
-0.3
-s
- ease
-,
- box-shadow 
-0.3
-s
- ease
-;
-
-            
-display
-:
- block
-;
-
-            
-text-decoration
-:
- none
-;
-
-        
-}
-
-        
-.sponsor-card
-:hover
- 
-{
-
-            
-transform
-:
- 
-translateY
-(
--8
-px
-)
-;
-
-            
-box-shadow
-:
- 
-0
- 
-8
-px
- 
-25
-px
- 
-rgba
-(
-0
-,
-0
-,
-0
-,
-0.15
-)
-;
-
-        
-}
-
-        
-.sponsor-banner
- 
-{
-
-            
-width
-:
- 
-100
-%
-;
-
-            
-height
-:
- auto
-;
-
-            
-display
-:
- block
-;
-
-        
-}
-
-        
-.sponsor-info
- 
-{
-
-            
-padding
-:
- 
-15
-px
- 
-20
-px
-;
-
-            
-background
-:
- 
-#f8fafc
-;
-
-            
-border-top
-:
- 
-3
-px
- solid 
-#3182ce
-;
-
-        
-}
-
-        
-.sponsor-label
- 
-{
-
-            
-font-size
-:
- 
-0.85
-em
-;
-
-            
-color
-:
- 
-#718096
-;
-
-            
-text-transform
-:
- uppercase
-;
-
-            
-font-weight
-:
- 
-600
-;
-
-            
-letter-spacing
-:
- 
-0.5
-px
-;
-
-            
-margin-bottom
-:
- 
-5
-px
-;
-
-        
-}
-
-        
-.sponsor-title
- 
-{
-
-            
-font-size
-:
- 
-1.1
-em
-;
-
-            
-color
-:
- 
-#2d3748
-;
-
-            
-font-weight
-:
- 
-700
-;
-
-            
-margin
-:
- 
-0
-;
-
-        
-}
-
-        
-.weekly-update-badge
- 
-{
-
-            
-display
-:
- inline-block
-;
-
-            
-background
-:
- 
-#10b981
-;
-
-            
-color
-:
- 
-white
-;
-
-            
-padding
-:
- 
-4
-px
- 
-10
-px
-;
-
-            
-border-radius
-:
- 
-12
-px
-;
-
-            
-font-size
-:
- 
-0.75
-em
-;
-
-            
-font-weight
-:
- 
-600
-;
-
-            
-margin-top
-:
- 
-8
-px
-;
-
-        
-}
-
-        
-/* History Archive Styles */
-
-        
-.history-card
- 
-{
-
-            
-background
-:
- 
-white
-;
-
-            
-border-radius
-:
- 
-12
-px
-;
-
-            
-padding
-:
- 
-20
-px
-;
-
-            
-margin-bottom
-:
- 
-20
-px
-;
-
-            
-box-shadow
-:
- 
-0
- 
-4
-px
- 
-6
-px
- 
-rgba
-(
-0
-,
- 
-0
-,
- 
-0
-,
- 
-0.1
-)
-;
-
-            
-transition
-:
- transform 
-0.3
-s
-;
-
-        
-}
-
-        
-.history-card
-:hover
- 
-{
-
-            
-transform
-:
- 
-translateY
-(
--2
-px
-)
-;
-
-            
-box-shadow
-:
- 
-0
- 
-6
-px
- 
-12
-px
- 
-rgba
-(
-0
-,
- 
-0
-,
- 
-0
-,
- 
-0.15
-)
-;
-
-        
-}
-
-        
-.history-header
- 
-{
-
-            
-display
-:
- flex
-;
-
-            
-justify-content
-:
- space-between
-;
-
-            
-align-items
-:
- center
-;
-
-            
-border-bottom
-:
- 
-2
-px
- solid 
-#f0f0f0
-;
-
-            
-padding-bottom
-:
- 
-15
-px
-;
-
-            
-margin-bottom
-:
- 
-15
-px
-;
-
-        
-}
-
-        
-.history-date
- 
-{
-
-            
-font-size
-:
- 
-1.1
-rem
-;
-
-            
-font-weight
-:
- 
-600
-;
-
-            
-color
-:
- 
-#3182ce
-;
-
-        
-}
-
-        
-.history-number
- 
-{
-
-            
-background
-:
- 
-#3182ce
-;
-
-            
-color
-:
- 
-white
-;
-
-            
-padding
-:
- 
-4
-px
- 
-12
-px
-;
-
-            
-border-radius
-:
- 
-20
-px
-;
-
-            
-font-size
-:
- 
-0.9
-rem
-;
-
-        
-}
-
-        
-.currency-grid
- 
-{
-
-            
-display
-:
- grid
-;
-
-            
-grid-template-columns
-:
- 
-1
-fr
- 
-1
-fr
-;
-
-            
-gap
-:
- 
-20
-px
-;
-
-        
-}
-
-        
-.currency-section
- 
-{
-
-            
-padding
-:
- 
-15
-px
-;
-
-            
-border-radius
-:
- 
-8
-px
-;
-
-        
-}
-
-        
-.strongest-section
- 
-{
-
-            
-background
-:
- 
-linear-gradient
-(
-135
-deg
-,
- 
-#10b98115
-,
- 
-#34d39915
-)
-;
-
-            
-border-left
-:
- 
-4
-px
- solid 
-#10b981
-;
-
-        
-}
-
-        
-.weakest-section
- 
-{
-
-            
-background
-:
- 
-linear-gradient
-(
-135
-deg
-,
- 
-#ef444415
-,
- 
-#dc262615
-)
-;
-
-            
-border-left
-:
- 
-4
-px
- solid 
-#ef4444
-;
-
-        
-}
-
-        
-.section-title
- 
-{
-
-            
-font-size
-:
- 
-1.1
-rem
-;
-
-            
-font-weight
-:
- 
-600
-;
-
-            
-margin-bottom
-:
- 
-12
-px
-;
-
-            
-display
-:
- flex
-;
-
-            
-align-items
-:
- center
-;
-
-            
-gap
-:
- 
-8
-px
-;
-
-        
-}
-
-        
-.currency-item
- 
-{
-
-            
-display
-:
- flex
-;
-
-            
-justify-content
-:
- space-between
-;
-
-            
-align-items
-:
- center
-;
-
-            
-padding
-:
- 
-10
-px
-;
-
-            
-margin-bottom
-:
- 
-8
-px
-;
-
-            
-background
-:
- 
-white
-;
-
-            
-border-radius
-:
- 
-6
-px
-;
-
-            
-box-shadow
-:
- 
-0
- 
-2
-px
- 
-4
-px
- 
-rgba
-(
-0
-,
- 
-0
-,
- 
-0
-,
- 
-0.05
-)
-;
-
-        
-}
-
-        
-.currency-name
- 
-{
-
-            
-font-weight
-:
- 
-600
-;
-
-            
-font-size
-:
- 
-1
-rem
-;
-
-        
-}
-
-        
-.currency-scores
- 
-{
-
-            
-display
-:
- flex
-;
-
-            
-gap
-:
- 
-12
-px
-;
-
-            
-font-size
-:
- 
-0.9
-rem
-;
-
-        
-}
-
-        
-.score
- 
-{
-
-            
-padding
-:
- 
-4
-px
- 
-8
-px
-;
-
-            
-border-radius
-:
- 
-4
-px
-;
-
-            
-background
-:
- 
-#f5f5f5
-;
-
-            
-font-weight
-:
- 
-500
-;
-
-        
-}
-
-        
-.score
-.positive
- 
-{
-
-            
-color
-:
- 
-#10b981
-;
-
-            
-background
-:
- 
-#10b98115
-;
-
-        
-}
-
-        
-.score
-.negative
- 
-{
-
-            
-color
-:
- 
-#ef4444
-;
-
-            
-background
-:
- 
-#ef444415
-;
-
-        
-}
-
-        
-/* Responsive */
-
-        
-@media
- 
-(
-max-width
-:
- 
-768
-px
-)
- 
-{
-
-            
-.header
- h1
- 
-{
-
-                
-font-size
-:
- 
-1.8
-em
-;
-
-            
-}
-
-            
-.chart-container
- 
-{
-
-                
-height
-:
- 
-300
-px
-;
-
-            
-}
-
-            
-.card
- 
-{
-
-                
-padding
-:
- 
-15
-px
-;
-
-            
-}
-
-            
-.top-bar
- 
-{
-
-                
-flex-direction
-:
- column
-;
-
-                
-text-align
-:
- center
-;
-
-            
-}
-
-            
-.contact-info
- 
-{
-
-                
-text-align
-:
- center
-;
-
-            
-}
-
-            
-.logo-container
- 
-{
-
-                
-justify-content
-:
- center
-;
-
-            
-}
-
-            
-.tabs-nav
- 
-{
-
-                
-justify-content
-:
- center
-;
-
-            
-}
-
-            
-.tab-button
- 
-{
-
-                
-flex
-:
- 
-1
-;
-
-                
-min-width
-:
- 
-100
-px
-;
-
-            
-}
-
-            
-.disclaimer
- 
-{
-
-                
-flex-direction
-:
- column
-;
-
-                
-text-align
-:
- center
-;
-
-                
-gap
-:
- 
-10
-px
-;
-
-            
-}
-
-            
-.disclaimer-icon
- 
-{
-
-                
-font-size
-:
- 
-24
-px
-;
-
-            
-}
-
-            
-.sponsors-grid
- 
-{
-
-                
-grid-template-columns
-:
- 
-1
-fr
-;
-
-            
-}
-
-            
-.logo-container
- img
- 
-{
-
-                
-height
-:
- 
-60
-px
-;
-
-            
-}
-
-            
-.currency-grid
- 
-{
-
-                
-grid-template-columns
-:
- 
-1
-fr
-;
-
-            
-}
-
-        
-}
-
-    
-</
-style
->
-
-</
-head
->
-
-<
-body
->
-
-    
-<
-div
- 
-class
-=
-"
-container
-"
->
-
-        
-<!-- Top Bar with Logo and Contact -->
-
-        
-<
-div
- 
-class
-=
-"
-top-bar
-"
->
-
-            
-<
-div
- 
-class
-=
-"
-logo-container
-"
->
-
-                
-<
-img
- 
-src
-=
-"
-logo-1.png
-"
- 
-alt
-=
-"
-Ichimoku Trader Logo
-"
->
-
-            
-</
-div
->
-
-            
-<
-div
- 
-class
-=
-"
-contact-info
-"
->
-
-                
-<
-div
- 
-class
-=
-"
-name
-"
->
-Grzegorz Moskwa
-</
-div
->
-
-                
-<
-div
- 
-class
-=
-"
-email
-"
->
-<
-a
- 
-href
-=
-"
-/cdn-cgi/l/email-protection
-"
- 
-class
-=
-"
-__cf_email__
-"
- 
-data-cfemail
-=
-"
-63011711020706114d061b1723040e020a0f4d000c0e
-"
->
-[email
-&#160;
-protected]
-</
-a
->
-</
-div
->
-
-            
-</
-div
->
-
-        
-</
-div
->
-
-        
-<!-- Header -->
-
-        
-<
-div
- 
-class
-=
-"
-header
-"
->
-
-            
-<
-h1
->
-📊 FX Cloud Strength
-</
-h1
->
-
-            
-<
-div
- 
-class
-=
-"
-date
-"
- 
-id
-=
-"
-currentDate
-"
->
-</
-div
->
-
-        
-</
-div
->
-
-        
-<!-- Disclaimer -->
-
-        
-<
-div
- 
-class
-=
-"
-disclaimer
-"
->
-
-            
-<
-div
- 
-class
-=
-"
-disclaimer-icon
-"
->
-⚠️
-</
-div
->
-
-            
-<
-div
- 
-class
-=
-"
-disclaimer-text
-"
->
-
-                
-<
-strong
->
-Disclaimer:
-</
-strong
->
- Niniejszy materiał ma charakter wyłącznie edukacyjny i nie stanowi rekomendacji inwestycyjnej ani porady finansowej. Wszystkie decyzje handlowe podejmujesz na własną odpowiedzialność.
-            
-</
-div
->
-
-        
-</
-div
->
-
-        
-<!-- Tabs Navigation -->
-
-        
-<
-div
- 
-class
-=
-"
-tabs-nav
-"
->
-
-            
-<
-button
- 
-class
-=
-"
-tab-button active
-"
- 
-onclick
-=
-"
-switchTab
-(
-'dashboard'
-)
-"
->
-📊 Dashboard
-</
-button
->
-
-            
-<
-button
- 
-class
-=
-"
-tab-button
-"
- 
-onclick
-=
-"
-switchTab
-(
-'analysis'
-)
-"
->
-📝 Krótka Analiza
-</
-button
->
-
-            
-<
-button
- 
-class
-=
-"
-tab-button
-"
- 
-onclick
-=
-"
-switchTab
-(
-'ideas'
-)
-"
->
-💡 Pomysły Inwestycyjne
-</
-button
->
-
-            
-<
-button
- 
-class
-=
-"
-tab-button
-"
- 
-onclick
-=
-"
-switchTab
-(
-'history'
-)
-"
->
-📁 Archiwum Siły Walut
-</
-button
->
-
-        
-</
-div
->
-
-        
-<!-- Tab 1: Dashboard -->
-
-        
-<
-div
- 
-id
-=
-"
-dashboard
-"
- 
-class
-=
-"
-tab-content active
-"
->
-
-            
-<!-- Introduction Section -->
-
-            
-<
-div
- 
-class
-=
-"
-intro-section
-"
->
-
-                
-<
-p
->
-
-                    
-<
-strong
->
-Metodologia:
-</
-strong
->
- Analiza siły walut opiera się na zaawansowanych zasadach 
-                    
-<
-em
->
-Ichimoku Kinko Hyo
-</
-em
->
-, uwzględniając pełny kontekst trendu oraz synchronizację 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K9P11SYEW2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-K9P11SYEW2');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FX Cloud Strength - Ichimoku Trader</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-container img {
+            height: 80px;
+            width: auto;
+        }
+
+        .contact-info {
+            text-align: right;
+            color: #4a5568;
+        }
+
+        .contact-info .name {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #2d3748;
+            margin-bottom: 3px;
+        }
+
+        .contact-info .email {
+            font-size: 0.9em;
+            color: #718096;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2d3748;
+            font-weight: 700;
+        }
+
+        .header .date {
+            font-size: 1.2em;
+            color: #4a5568;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 5px solid #f59e0b;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .disclaimer-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .disclaimer-text {
+            color: #78350f;
+            line-height: 1.7;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .disclaimer-text strong {
+            color: #92400e;
+            font-weight: 700;
+        }
+
+        /* Tabs Navigation */
+        .tabs-nav {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            border: none;
+            background: #e2e8f0;
+            color: #4a5568;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            background: #cbd5e0;
+        }
+
+        .tab-button.active {
+            background: #3182ce;
+            color: white;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Intro Section */
+        .intro-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #3182ce;
+        }
+
+        .intro-section p {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        /* Card */
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 10px;
+        }
+
+        /* Chart */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .w1-color { background: #3182ce; }
+        .d1-color { background: #718096; }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #3182ce;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .strong {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .weak {
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        /* Analysis Section */
+        .analysis-section {
+            line-height: 1.8;
+            color: #333;
+            white-space: pre-wrap;
+        }
+
+        .analysis-section h2,
+        .analysis-section h3 {
+            color: #2d3748;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .analysis-meta {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+
+        .error {
+            background: #fed7d7;
+            color: #742a2a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Links Section */
+        .links-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .link-card {
+            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(49, 130, 206, 0.3);
+        }
+
+        .link-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .link-card p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .update-time {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        /* Sponsors Section */
+        .sponsors-section {
+            margin-top: 40px;
+        }
+
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .sponsor-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+            text-decoration: none;
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .sponsor-banner {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .sponsor-info {
+            padding: 15px 20px;
+            background: #f8fafc;
+            border-top: 3px solid #3182ce;
+        }
+
+        .sponsor-label {
+            font-size: 0.85em;
+            color: #718096;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .sponsor-title {
+            font-size: 1.1em;
+            color: #2d3748;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .weekly-update-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* History Archive Styles */
+        .history-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .history-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .history-date {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #3182ce;
+        }
+
+        .history-number {
+            background: #3182ce;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .currency-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .currency-section {
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .strongest-section {
+            background: linear-gradient(135deg, #10b98115, #34d39915);
+            border-left: 4px solid #10b981;
+        }
+
+        .weakest-section {
+            background: linear-gradient(135deg, #ef444415, #dc262615);
+            border-left: 4px solid #ef4444;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .currency-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .currency-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .currency-scores {
+            display: flex;
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+
+        .score {
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #f5f5f5;
+            font-weight: 500;
+        }
+
+        .score.positive {
+            color: #10b981;
+            background: #10b98115;
+        }
+
+        .score.negative {
+            color: #ef4444;
+            background: #ef444415;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+
+            .logo-container {
+                justify-content: center;
+            }
+
+            .tabs-nav {
+                justify-content: center;
+            }
+
+            .tab-button {
+                flex: 1;
+                min-width: 100px;
+            }
+
+            .disclaimer {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .disclaimer-icon {
+                font-size: 24px;
+            }
+
+            .sponsors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-container img {
+                height: 60px;
+            }
+
+            .currency-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Bar with Logo and Contact -->
+        <div class="top-bar">
+            <div class="logo-container">
+                <img src="logo-1.png" alt="Ichimoku Trader Logo">
+            </div>
+            <div class="contact-info">
+                <div class="name">Grzegorz Moskwa</div>
+                <div class="email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="63011711020706114d061b1723040e020a0f4d000c0e">[email&#160;protected]</a></div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 FX Cloud Strength</h1>
+            <div class="date" id="currentDate"></div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+            <div class="disclaimer-icon">⚠️</div>
+            <div class="disclaimer-text">
+                <strong>Disclaimer:</strong> Niniejszy materiał ma charakter wyłącznie edukacyjny i nie stanowi rekomendacji inwestycyjnej ani porady finansowej. Wszystkie decyzje handlowe podejmujesz na własną odpowiedzialność.
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-button active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-button" onclick="switchTab('analysis')">📝 Krótka Analiza</button>
+            <button class="tab-button" onclick="switchTab('ideas')">💡 Pomysły Inwestycyjne</button>
+            <button class="tab-button" onclick="switchTab('history')">📁 Archiwum Siły Walut</button>
+        </div>
+
+        <!-- Tab 1: Dashboard -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Introduction Section -->
+            <div class="intro-section">
+                <p>
+                    <strong>Metodologia:</strong> Analiza siły walut opiera się na zaawansowanych zasadach 
+                    <em>Ichimoku Kinko Hyo</em>, uwzględniając pełny kontekst trendu oraz synchronizację 
                     między interwałami czasowymi. Ocena rynku obejmuje przede wszystkim:
-                
-</
-p
->
+                </p>
 
-                
-<
-p
->
-
+                <p>
                     System uwzględnia jednocześnie dwa kluczowe interwały czasowe:
-                    
-<
-strong
->
-Weekly (W1)
-</
-strong
->
- jako ramę długoterminową obejmującą 4–12 tygodni trendu oraz 
-                    
-<
-strong
->
-Daily (D1)
-</
-strong
->
- jako perspektywę średnioterminową (1–4 tygodnie). 
+                    <strong>Weekly (W1)</strong> jako ramę długoterminową obejmującą 4–12 tygodni trendu oraz 
+                    <strong>Daily (D1)</strong> jako perspektywę średnioterminową (1–4 tygodnie). 
                     Zintegrowane podejście pozwala na precyzyjne określenie kierunku rynku oraz jakości trendu.
-                
-</
-p
->
+                </p>
 
-                
-<
-p
->
-
-                    Algorytm automatycznie analizuje dane z 
-<
-strong
->
-28 par walutowych
-</
-strong
->
-, 
-                    wyodrębniając względną siłę 
-<
-strong
->
-8 głównych walut
-</
-strong
->
-, co umożliwia klarowne 
+                <p>
+                    Algorytm automatycznie analizuje dane z <strong>28 par walutowych</strong>, 
+                    wyodrębniając względną siłę <strong>8 głównych walut</strong>, co umożliwia klarowne 
                     zestawienie liderów i słabszych walut w aktualnym środowisku rynkowym.
-                
-</
-p
->
-
-            
-</
-div
->
-
-            
-<!-- Chart Card -->
-
-            
-<
-div
- 
-class
-=
-"
-card
-"
->
-
-                
-<
-h2
->
-📊 Siła Walut - W1 vs D1
-</
-h2
->
-
-                
-<
-div
- 
-class
-=
-"
-chart-container
-"
->
-
-                    
-<
-canvas
- 
-id
-=
-"
-strengthChart
-"
->
-</
-canvas
->
-
-                
-</
-div
->
-
-                
-<
-div
- 
-class
-=
-"
-legend
-"
->
-
-                    
-<
-div
- 
-class
-=
-"
-legend-item
-"
->
-
-                        
-<
-div
- 
-class
-=
-"
-legend-color w1-color
-"
->
-</
-div
->
-
-                        
-<
-span
->
-W1 (Weekly)
-</
-span
->
-
-                    
-</
-div
->
-
-                    
-<
-div
- 
-class
-=
-"
-legend-item
-"
->
-
-                        
-<
-div
- 
-class
-=
-"
-legend-color d1-color
-"
->
-</
-div
->
-
-                        
-<
-span
->
-D1 (Daily)
-</
-span
->
-
-                    
-</
-div
->
-
-                
-</
-div
->
-
-            
-</
-div
->
-
-            
-<!-- Table Card -->
-
-            
-<
-div
- 
-class
-=
-"
-card
-"
->
-
-                
-<
-h2
->
-📈 Ranking Walut
-</
-h2
->
-
-                
-<
-div
- 
-class
-=
-"
-table-container
-"
->
-
-                    
-<
-table
->
-
-                        
-<
-thead
->
-
-                            
-<
-tr
->
-
-                                
-<
-th
->
-Pozycja
-</
-th
->
-
-                                
-<
-th
->
-Waluta
-</
-th
->
-
-                                
-<
-th
->
-W1 Score
-</
-th
->
-
-                                
-<
-th
->
-D1 Score
-</
-th
->
-
-                                
-<
-th
->
-Średnia
-</
-th
->
-
-                                
-<
-th
->
-Status
-</
-th
->
-
-                            
-</
-tr
->
-
-                        
-</
-thead
->
-
-                        
-<
-tbody
- 
-id
-=
-"
-currencyTable
-"
->
-
-                            
-<
-tr
->
-<
-td
- 
-colspan
-=
-"
-6
-"
->
-Ładowanie danych...
-</
-td
->
-</
-tr
->
-
-                        
-</
-tbody
->
-
-                    
-</
-table
->
-
-                
-</
-div
->
-
-                
-<
-div
- 
-class
-=
-"
-update-time
-"
- 
-id
-=
-"
-updateTime
-"
->
-</
-div
->
-
-            
-</
-div
->
-
-            
-<!-- Investment Ideas Links -->
-
-            
-<
-div
- 
-class
-=
-"
-card
-"
->
-
-                
-<
-h2
->
-📚 Comiesięczna Analiza - Pomysły Inwestycyjne
-</
-h2
->
-
-                
-<
-div
- 
-class
-=
-"
-links-section
-"
->
-
-                    
-<
-a
- 
-href
-=
-"
-https://www.youtube.com/watch?v=0EoygC3YC2s
-"
- 
-class
-=
-"
-link-card
-"
->
-
-                        
-<
-h3
->
-🗓️ Grudzień 2025
-</
-h3
->
-
-                        
-<
-p
->
-Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc
-</
-p
->
-
-                    
-</
-a
->
-
-                    
-<
-a
- 
-href
-=
-"
-https://www.youtube.com/watch?v=0EoygC3YC2s
-"
- 
-class
-=
-"
-link-card
-"
->
-
-                        
-<
-h3
->
-🗓️ Listopad 2025
-</
-h3
->
-
-                        
-<
-p
->
-Podsumowanie listopada i najlepsze setupy tradingowe
-</
-p
->
-
-                    
-</
-a
->
-
-                    
-<
-a
- 
-href
-=
-"
-https://www.youtube.com/watch?v=Iuek65e1Too
-"
- 
-class
-=
-"
-link-card
-"
->
-
-                        
-<
-h3
->
-🗓️ Październik 2025
-</
-h3
->
-
-                        
-<
-p
->
-Archiwalna analiza i wyniki z października
-</
-p
->
-
-                    
-</
-a
->
-
-                    
-<
-a
- 
-href
-=
-"
-archiwum.html
-"
- 
-class
-=
-"
-link-card
-"
->
-
-                        
-<
-h3
->
-📖 Archiwum
-</
-h3
->
-
-                        
-<
-p
->
-Wszystkie wcześniejsze analizy i pomysły inwestycyjne
-</
-p
->
-
-                    
-</
-a
->
-
-                
-</
-div
->
-
-            
-</
-div
->
-
-            
-<!-- Sponsors Section -->
-
-            
-<
-div
- 
-class
-=
-"
-card sponsors-section
-"
->
-
-                
-<
-h2
->
-🤝 Partnerzy & Polecane Analizy
-</
-h2
->
-
-                
-<
-div
- 
-class
-=
-"
-sponsors-grid
-"
->
-
-                    
-<!-- Sponsor 1: XTB -->
-
-                    
-<
-a
- 
-href
-=
-"
-https://geolink.xtb.com/Q6vFj
-"
- 
-target
-=
-"
-_blank
-"
- 
-rel
-=
-"
-noopener
-"
- 
-class
-=
-"
-sponsor-card
-"
->
-
-                        
-<
-img
- 
-src
-=
-"
-xtb_banner.png
-"
- 
-alt
-=
-"
-XTB - Prognozy Rynkowe 2026
-"
- 
-class
-=
-"
-sponsor-banner
-"
->
-
-                        
-<
-div
- 
-class
-=
-"
-sponsor-info
-"
->
-
-                            
-<
-div
- 
-class
-=
-"
-sponsor-label
-"
->
-🎯 Partner Główny
-</
-div
->
-
-                            
-<
-h3
- 
-class
-=
-"
-sponsor-title
-"
->
-XTB - Prognozy Rynkowe 2026
-</
-h3
->
-
-                        
-</
-div
->
-
-                    
-</
-a
->
-
-                    
-<!-- Sponsor 2: Weekly Analysis -->
-
-                    
-<
-a
- 
-href
-=
-"
-https://link-pso.xtb.com/pso/4Be1f
-"
- 
-target
-=
-"
-_blank
-"
- 
-rel
-=
-"
-noopener
-"
- 
-class
-=
-"
-sponsor-card
-"
->
-
-                        
-<
-img
- 
-src
-=
-"
-weekly_banner.png
-"
- 
-alt
-=
-"
-Co Przyniesie Tydzień?
-"
- 
-class
-=
-"
-sponsor-banner
-"
->
-
-                        
-<
-div
- 
-class
-=
-"
-sponsor-info
-"
->
-
-                            
-<
-div
- 
-class
-=
-"
-sponsor-label
-"
->
-📊 Analiza Tygodniowa
-</
-div
->
-
-                            
-<
-h3
- 
-class
-=
-"
-sponsor-title
-"
->
-Co Przyniesie Tydzień?
-</
-h3
->
-
-                            
-<
-span
- 
-class
-=
-"
-weekly-update-badge
-"
->
-🔄 Aktualizacja Co Tydzień
-</
-span
->
-
-                        
-</
-div
->
-
-                    
-</
-a
->
-
-                
-</
-div
->
-
-            
-</
-div
->
-
-        
-</
-div
->
-
-        
-<!-- Tab 2: Krótka Analiza -->
-
-        
-<
-div
- 
-id
-=
-"
-analysis
-"
- 
-class
-=
-"
-tab-content
-"
->
-
-            
-<
-div
- 
-class
-=
-"
-card
-"
->
-
-                
-<
-h2
->
-💡 Krótka Analiza AI
-</
-h2
->
-
-                
-<
-div
- 
-id
-=
-"
-analysisContent
-"
- 
-class
-=
-"
-loading
-"
->
-
+                </p>
+            </div>
+
+            <!-- Chart Card -->
+            <div class="card">
+                <h2>📊 Siła Walut - W1 vs D1</h2>
+                <div class="chart-container">
+                    <canvas id="strengthChart"></canvas>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color w1-color"></div>
+                        <span>W1 (Weekly)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color d1-color"></div>
+                        <span>D1 (Daily)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Card -->
+            <div class="card">
+                <h2>📈 Ranking Walut</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pozycja</th>
+                                <th>Waluta</th>
+                                <th>W1 Score</th>
+                                <th>D1 Score</th>
+                                <th>Średnia</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="currencyTable">
+                            <tr><td colspan="6">Ładowanie danych...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="update-time" id="updateTime"></div>
+            </div>
+
+            <!-- Investment Ideas Links -->
+            <div class="card">
+                <h2>📚 Comiesięczna Analiza - Pomysły Inwestycyjne</h2>
+                <div class="links-section">
+                    <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="link-card">
+                        <h3>🗓️ Grudzień 2025</h3>
+                        <p>Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="link-card">
+                        <h3>🗓️ Listopad 2025</h3>
+                        <p>Podsumowanie listopada i najlepsze setupy tradingowe</p>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=Iuek65e1Too" class="link-card">
+                        <h3>🗓️ Październik 2025</h3>
+                        <p>Archiwalna analiza i wyniki z października</p>
+                    </a>
+                    <a href="archiwum.html" class="link-card">
+                        <h3>📖 Archiwum</h3>
+                        <p>Wszystkie wcześniejsze analizy i pomysły inwestycyjne</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sponsors Section -->
+            <div class="card sponsors-section">
+                <h2>🤝 Partnerzy & Polecane Analizy</h2>
+                <div class="sponsors-grid">
+                    <!-- Sponsor 1: XTB -->
+                    <a href="https://geolink.xtb.com/Q6vFj" target="_blank" rel="noopener" class="sponsor-card">
+                        <img src="xtb_banner.png" alt="XTB - Prognozy Rynkowe 2026" class="sponsor-banner">
+                        <div class="sponsor-info">
+                            <div class="sponsor-label">🎯 Partner Główny</div>
+                            <h3 class="sponsor-title">XTB - Prognozy Rynkowe 2026</h3>
+                        </div>
+                    </a>
+
+                    <!-- Sponsor 2: Weekly Analysis -->
+                    <a href="https://link-pso.xtb.com/pso/4Be1f" target="_blank" rel="noopener" class="sponsor-card">
+                        <img src="weekly_banner.png" alt="Co Przyniesie Tydzień?" class="sponsor-banner">
+                        <div class="sponsor-info">
+                            <div class="sponsor-label">📊 Analiza Tygodniowa</div>
+                            <h3 class="sponsor-title">Co Przyniesie Tydzień?</h3>
+                            <span class="weekly-update-badge">🔄 Aktualizacja Co Tydzień</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Krótka Analiza -->
+        <div id="analysis" class="tab-content">
+            <div class="card">
+                <h2>💡 Krótka Analiza AI</h2>
+                <div id="analysisContent" class="loading">
                     Ładowanie analizy...
-                
-</
-div
->
+                </div>
+            </div>
+        </div>
 
-            
-</
-div
->
-
-        
-</
-div
->
-
-        
-<!-- Tab 3: Pomysły Inwestycyjne -->
-
-        
-<
-div
- 
-id
-=
-"
-ideas
-"
- 
-class
-=
-"
-tab-content
-"
->
-
-            
-<
-div
- 
-class
-=
-"
-intro-section
-"
->
-
-                
-<
-h2
- 
-style
-=
-"
-border
-:
- none
-;
- 
-margin-bottom
-:
- 
-15
-px
-;
-"
->
-💡 Pomysły Inwestycyjne
-</
-h2
->
-
-                
-<
-p
- 
-style
-=
-"
-text-align
-:
- center
-;
- 
-margin
-:
- 
-20
-px
- 
-0
-;
-"
->
-
+        <!-- Tab 3: Pomysły Inwestycyjne -->
+        <div id="ideas" class="tab-content">
+            <div class="intro-section">
+                <h2 style="border: none; margin-bottom: 15px;">💡 Pomysły Inwestycyjne</h2>
+                <p style="text-align: center; margin: 20px 0;">
                     Pełne archiwum comiesięcznych pomysłów inwestycyjnych i analiz wideo dostępne jest na dedykowanej stronie.
-                
-</
-p
->
+                </p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="archiwum.html" class="link-card" style="display: inline-block; max-width: 400px;">
+                        <h3>📖 Przejdź do Archiwum Pomysłów</h3>
+                        <p>Wszystkie comiesięczne analizy wideo i pomysły inwestycyjne</p>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-                
-<
-div
- 
-style
-=
-"
-text-align
-:
- center
-;
- 
-margin-top
-:
- 
-30
-px
-;
-"
->
-
-                    
-<
-a
- 
-href
-=
-"
-archiwum.html
-"
- 
-class
-=
-"
-link-card
-"
- 
-style
-=
-"
-display
-:
- inline-block
-;
- 
-max-width
-:
- 
-400
-px
-;
-"
->
-
-                        
-<
-h3
->
-📖 Przejdź do Archiwum Pomysłów
-</
-h3
->
-
-                        
-<
-p
->
-Wszystkie comiesięczne analizy wideo i pomysły inwestycyjne
-</
-p
->
-
-                    
-</
-a
->
-
-                
-</
-div
->
-
-            
-</
-div
->
-
-        
-</
-div
->
-
-        
-<!-- Tab 4: Archiwum Siły Walut -->
-
-        
-<
-div
- 
-id
-=
-"
-history
-"
- 
-class
-=
-"
-tab-content
-"
->
-
-            
-<
-div
- 
-class
-=
-"
-intro-section
-"
->
-
-                
-<
-h2
- 
-style
-=
-"
-border
-:
- none
-;
- 
-margin-bottom
-:
- 
-20
-px
-;
-"
->
-📈 Archiwum Siły Walut
-</
-h2
->
-
-                
-<
-p
- 
-style
-=
-"
-text-align
-:
- center
-;
- 
-color
-:
- 
-#4a5568
-;
- 
-margin
-:
- 
-20
-px
- 
-0
-;
- 
-font-size
-:
- 
-1.1
-rem
-;
-"
->
-
+        <!-- Tab 4: Archiwum Siły Walut -->
+        <div id="history" class="tab-content">
+            <div class="intro-section">
+                <h2 style="border: none; margin-bottom: 20px;">📈 Archiwum Siły Walut</h2>
+                <p style="text-align: center; color: #4a5568; margin: 20px 0; font-size: 1.1rem;">
                     Pełna historia Currency Strength z wykresem liniowym i szczegółowymi danymi dostępna na dedykowanej stronie.
-                
-</
-p
->
+                </p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="archiwum_sily_walut.html" class="link-card" style="display: inline-block; max-width: 500px;">
+                        <h3>📊 Otwórz Archiwum z Wykresem</h3>
+                        <p>Interaktywny wykres liniowy + szczegółowa tabela historyczna (W1 i D1)</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                
-<
-div
- 
-style
-=
-"
-text-align
-:
- center
-;
- 
-margin-top
-:
- 
-30
-px
-;
-"
->
-
-                    
-<
-a
- 
-href
-=
-"
-archiwum_sily_walut.html
-"
- 
-class
-=
-"
-link-card
-"
- 
-style
-=
-"
-display
-:
- inline-block
-;
- 
-max-width
-:
- 
-500
-px
-;
-"
->
-
-                        
-<
-h3
->
-📊 Otwórz Archiwum z Wykresem
-</
-h3
->
-
-                        
-<
-p
->
-Interaktywny wykres liniowy + szczegółowa tabela historyczna (W1 i D1)
-</
-p
->
-
-                    
-</
-a
->
-
-                
-</
-div
->
-
-            
-</
-div
->
-
-        
-</
-div
->
-
-    
-</
-div
->
-
-    
-<
-script
- 
-data-cfasync
-=
-"
-false
-"
- 
-src
-=
-"
-/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js
-"
->
-</
-script
->
-<
-script
->
-
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         let chart = null;
+
         // Tab switching
         function switchTab(tabName) {
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
+            
             // Remove active from all buttons
             document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.classList.remove('active');
             });
+            
             // Show selected tab
             document.getElementById(tabName).classList.add('active');
+            
             // Add active to clicked button
             event.target.classList.add('active');
+
             // Load content based on tab
             if (tabName === 'analysis') {
                 loadAnalysis();
             }
             // history tab now redirects to separate page
         }
+
         // Set current date
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('pl-PL', dateOptions);
+
         // Load currency data
         async function loadCurrencyData() {
             try {
                 const timestamp = new Date().getTime();
                 const response = await fetch(`currency_data.json?t=${timestamp}`);
+                
                 if (!response.ok) {
                     throw new Error('Nie można załadować danych');
                 }
+                
                 const data = await response.json();
                 updateChart(data);
                 updateTable(data);
@@ -5211,50 +821,24 @@ script
             } catch (error) {
                 console.error('Błąd ładowania danych:', error);
                 document.getElementById('currencyTable').innerHTML = 
-                    '
-<
-tr
->
-<
-td
- 
-colspan
-=
-"
-6
-"
- 
-style
-=
-"
-color
-:
- 
-#e53e3e
-;
-"
->
-Błąd ładowania danych. Spróbuj odświeżyć stronę.
-</
-td
->
-</
-tr
->
-';
+                    '<tr><td colspan="6" style="color: #e53e3e;">Błąd ładowania danych. Spróbuj odświeżyć stronę.</td></tr>';
             }
         }
+
         // Load AI analysis
         async function loadAnalysis() {
             const contentDiv = document.getElementById('analysisContent');
             contentDiv.className = 'loading';
             contentDiv.innerHTML = 'Ładowanie analizy...';
+
             try {
                 const timestamp = new Date().getTime();
                 const response = await fetch(`ai_analysis.json?t=${timestamp}`);
+                
                 if (!response.ok) {
                     throw new Error('Nie można załadować analizy');
                 }
+                
                 const data = await response.json();
                 displayAnalysis(data);
             } catch (error) {
@@ -5263,73 +847,43 @@ tr
                 contentDiv.innerHTML = 'Błąd ładowania analizy. Analiza może nie być jeszcze dostępna lub wystąpił problem z połączeniem.';
             }
         }
+
         // Display analysis
         function displayAnalysis(data) {
             const contentDiv = document.getElementById('analysisContent');
             contentDiv.className = 'analysis-section';
+            
             let html = data.analysis || 'Brak dostępnej analizy.';
+            
             // Add metadata
             if (data.timestamp || data.metadata) {
-                html += '
-<
-div
- 
-class
-=
-"
-analysis-meta
-"
->
-';
-                html += '
-<
-strong
->
-Informacje o analizie:
-</
-strong
->
-<
-br
->
-';
+                html += '<div class="analysis-meta">';
+                html += '<strong>Informacje o analizie:</strong><br>';
                 if (data.timestamp) {
-                    html += `Wygenerowano: ${new Date(data.timestamp).toLocaleString('pl-PL')}
-<
-br
->
-`;
+                    html += `Wygenerowano: ${new Date(data.timestamp).toLocaleString('pl-PL')}<br>`;
                 }
                 if (data.metadata) {
                     if (data.metadata.dataDate) {
-                        html += `Dane z: ${data.metadata.dataDate}
-<
-br
->
-`;
+                        html += `Dane z: ${data.metadata.dataDate}<br>`;
                     }
                     if (data.metadata.model) {
-                        html += `Model AI: ${data.metadata.model}
-<
-br
->
-`;
+                        html += `Model AI: ${data.metadata.model}<br>`;
                     }
                 }
-                html += '
-</
-div
->
-';
+                html += '</div>';
             }
+            
             contentDiv.innerHTML = html;
         }
+
         // Update chart
         function updateChart(data) {
             const ctx = document.getElementById('strengthChart').getContext('2d');
+            
             if (chart) {
                 chart.destroy();
             }
+            
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -5400,6 +954,7 @@ div
                 }
             });
         }
+
         // Update table
         function updateTable(data) {
             const combined = data.currencies.map((currency, index) => ({
@@ -5408,14 +963,19 @@ div
                 d1: data.d1Scores[index],
                 avg: (data.w1Scores[index] + data.d1Scores[index]) / 2
             }));
+            
             // Sort by average score
             combined.sort((a, b) => b.avg - a.avg);
+            
             const tbody = document.getElementById('currencyTable');
             tbody.innerHTML = '';
+            
             combined.forEach((item, index) => {
                 const row = document.createElement('tr');
+                
                 let statusClass = '';
                 let statusText = 'Neutralna';
+                
                 if (item.avg > 100) {
                     statusClass = 'strong';
                     statusText = 'Bardzo silna';
@@ -5432,89 +992,20 @@ div
                     statusClass = 'weak';
                     statusText = 'Bardzo słaba';
                 }
+                
                 row.innerHTML = `
-                    
-<
-td
->
-<
-strong
->
-#${index + 1}
-</
-strong
->
-</
-td
->
-
-                    
-<
-td
->
-<
-strong
->
-${item.currency}
-</
-strong
->
-</
-td
->
-
-                    
-<
-td
->
-${item.w1}
-</
-td
->
-
-                    
-<
-td
->
-${item.d1}
-</
-td
->
-
-                    
-<
-td
->
-<
-strong
->
-${item.avg.toFixed(1)}
-</
-strong
->
-</
-td
->
-
-                    
-<
-td
- 
-class
-=
-"
-${statusClass}
-"
->
-${statusText}
-</
-td
->
-
+                    <td><strong>#${index + 1}</strong></td>
+                    <td><strong>${item.currency}</strong></td>
+                    <td>${item.w1}</td>
+                    <td>${item.d1}</td>
+                    <td><strong>${item.avg.toFixed(1)}</strong></td>
+                    <td class="${statusClass}">${statusText}</td>
                 `;
+                
                 tbody.appendChild(row);
             });
         }
+
         // Update last update time
         function updateLastUpdate(timestamp) {
             const lastUpdateElement = document.getElementById('updateTime');
