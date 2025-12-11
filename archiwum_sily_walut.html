@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K9P11SYEW2"></script>
 <script>
@@ -10,7 +9,6 @@
   gtag('js', new Date());
   gtag('config', 'G-K9P11SYEW2');
 </script>
-    <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archiwum Siły Walut - FX Cloud Strength</title>
@@ -687,13 +685,14 @@
         // Load data on page load
         window.addEventListener('load', () => {
             loadHistoricalData();
+            
+            // Force stop any pending requests after load
+            setTimeout(() => {
+                if (document.readyState === 'complete') {
+                    window.stop();
+                }
+            }, 100);
         });
     </script>
-    <script>
-// Force stop loading spinner
-window.addEventListener('load', function() {
-    document.readyState = 'complete';
-});
-</script>
 </body>
 </html>
