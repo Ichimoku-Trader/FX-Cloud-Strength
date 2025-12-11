@@ -589,7 +589,7 @@
             </div>
             <div class="contact-info">
                 <div class="name">Grzegorz Moskwa</div>
-                <div class="email">btrader.ext@gmail.com</div>
+                <div class="email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="63011711020706114d061b1723040e020a0f4d000c0e">[email&#160;protected]</a></div>
             </div>
         </div>
 
@@ -757,13 +757,22 @@
 
         <!-- Tab 4: Archiwum Siły Walut -->
         <div id="history" class="tab-content">
-            <div id="history-content" class="loading">
-                Ładowanie archiwum...
+            <div class="intro-section">
+                <h2 style="border: none; margin-bottom: 20px;">📈 Archiwum Siły Walut</h2>
+                <p style="text-align: center; color: #4a5568; margin: 20px 0; font-size: 1.1rem;">
+                    Pełna historia Currency Strength z wykresem liniowym i szczegółowymi danymi dostępna na dedykowanej stronie.
+                </p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="archiwum_sily_walut.html" class="link-card" style="display: inline-block; max-width: 500px;">
+                        <h3>📊 Otwórz Archiwum z Wykresem</h3>
+                        <p>Interaktywny wykres liniowy + szczegółowa tabela historyczna (W1 i D1)</p>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         let chart = null;
 
         // Tab switching
@@ -787,9 +796,8 @@
             // Load content based on tab
             if (tabName === 'analysis') {
                 loadAnalysis();
-            } else if (tabName === 'history') {
-                loadHistoricalData();
             }
+            // history tab now redirects to separate page
         }
 
         // Set current date
@@ -866,109 +874,6 @@
             }
             
             contentDiv.innerHTML = html;
-        }
-
-        // Load historical data
-        async function loadHistoricalData() {
-            const contentDiv = document.getElementById('history-content');
-            contentDiv.className = 'loading';
-            contentDiv.innerHTML = 'Ładowanie archiwum...';
-
-            try {
-                const timestamp = new Date().getTime();
-                const response = await fetch(`historical_data.json?t=${timestamp}`);
-                
-                if (!response.ok) {
-                    throw new Error('Nie można załadować danych historycznych');
-                }
-                
-                const data = await response.json();
-                displayHistory(data.history);
-            } catch (error) {
-                console.error('Błąd ładowania archiwum:', error);
-                contentDiv.className = 'error';
-                contentDiv.innerHTML = 'Błąd ładowania archiwum. Dane mogą nie być jeszcze dostępne.';
-            }
-        }
-
-        // Display historical data
-        function displayHistory(history) {
-            const container = document.getElementById('history-content');
-            
-            if (!history || history.length === 0) {
-                container.innerHTML = '<div class="card"><p style="text-align: center; color: #718096;">Brak danych w archiwum</p></div>';
-                return;
-            }
-            
-            let html = '';
-            
-            history.forEach((record, index) => {
-                const date = new Date(record.timestamp);
-                const formattedDate = date.toLocaleString('pl-PL', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-                
-                html += `
-                    <div class="history-card">
-                        <div class="history-header">
-                            <div class="history-date">📅 ${formattedDate}</div>
-                            <div class="history-number">#${record.recordNumber}</div>
-                        </div>
-                        
-                        <div class="currency-grid">
-                            <div class="currency-section strongest-section">
-                                <div class="section-title">
-                                    🟢 Najsilniejsze Waluty
-                                </div>
-                                ${record.strongest.map((curr, i) => `
-                                    <div class="currency-item">
-                                        <div class="currency-name">${i + 1}. ${curr.currency}</div>
-                                        <div class="currency-scores">
-                                            <span class="score ${curr.w1 > 0 ? 'positive' : 'negative'}">
-                                                W1: ${curr.w1 > 0 ? '+' : ''}${curr.w1.toFixed(0)}
-                                            </span>
-                                            <span class="score ${curr.d1 > 0 ? 'positive' : 'negative'}">
-                                                D1: ${curr.d1 > 0 ? '+' : ''}${curr.d1.toFixed(0)}
-                                            </span>
-                                            <span class="score">
-                                                Avg: ${curr.avg.toFixed(1)}
-                                            </span>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                            
-                            <div class="currency-section weakest-section">
-                                <div class="section-title">
-                                    🔴 Najsłabsze Waluty
-                                </div>
-                                ${record.weakest.map((curr, i) => `
-                                    <div class="currency-item">
-                                        <div class="currency-name">${i + 1}. ${curr.currency}</div>
-                                        <div class="currency-scores">
-                                            <span class="score ${curr.w1 > 0 ? 'positive' : 'negative'}">
-                                                W1: ${curr.w1 > 0 ? '+' : ''}${curr.w1.toFixed(0)}
-                                            </span>
-                                            <span class="score ${curr.d1 > 0 ? 'positive' : 'negative'}">
-                                                D1: ${curr.d1 > 0 ? '+' : ''}${curr.d1.toFixed(0)}
-                                            </span>
-                                            <span class="score">
-                                                Avg: ${curr.avg.toFixed(1)}
-                                            </span>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
         }
 
         // Update chart
@@ -1108,14 +1013,4 @@
                 const date = new Date(timestamp);
                 lastUpdateElement.textContent = `Ostatnia aktualizacja: ${date.toLocaleString('pl-PL')}`;
             } else {
-                lastUpdateElement.textContent = `Ostatnia aktualizacja: ${new Date().toLocaleString('pl-PL')}`;
-            }
-        }
-
-        // Load data on page load
-        window.addEventListener('load', () => {
-            loadCurrencyData();
-        });
-    </script>
-</body>
-</html>
+                lastUpdateElement.textContent = `Ostatnia akt
