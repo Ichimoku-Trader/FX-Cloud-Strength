@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K9P11SYEW2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-K9P11SYEW2');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archiwum Siły Walut - FX Cloud Strength</title>
-    <link rel="icon" href="data:,">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             margin: 0;
@@ -23,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -36,36 +27,36 @@
         /* Header */
         .header {
             text-align: center;
-            color: #2d3748;
+            color: white;
             margin-bottom: 30px;
         }
 
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header .subtitle {
             font-size: 1.1rem;
-            color: #4a5568;
+            opacity: 0.9;
         }
 
         .back-button {
             display: inline-block;
-            background: white;
-            color: #2d3748;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
             padding: 10px 20px;
             border-radius: 8px;
             text-decoration: none;
             margin-bottom: 20px;
             transition: all 0.3s;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
         }
 
         .back-button:hover {
-            background: #edf2f7;
+            background: rgba(255, 255, 255, 0.3);
             transform: translateX(-5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         /* Chart Card */
@@ -74,14 +65,14 @@
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         .chart-card h2 {
             color: #2d3748;
             margin-bottom: 20px;
             font-size: 1.8rem;
-            border-bottom: 3px solid #3182ce;
+            border-bottom: 3px solid #667eea;
             padding-bottom: 10px;
         }
 
@@ -117,7 +108,7 @@
         }
 
         .legend-item.active {
-            border-color: #3182ce;
+            border-color: #667eea;
             background: #eef2ff;
         }
 
@@ -138,7 +129,7 @@
             background: white;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             overflow-x: auto;
         }
 
@@ -146,7 +137,7 @@
             color: #2d3748;
             margin-bottom: 20px;
             font-size: 1.8rem;
-            border-bottom: 3px solid #3182ce;
+            border-bottom: 3px solid #667eea;
             padding-bottom: 10px;
         }
 
@@ -165,7 +156,7 @@
         }
 
         .data-table th {
-            background: #3182ce;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 15px 10px;
             text-align: center;
@@ -236,12 +227,12 @@
         }
 
         .score-w1 {
-            background: #3182ce;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
 
         .score-d1 {
-            background: #718096;
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
             color: white;
         }
 
@@ -251,11 +242,19 @@
             font-weight: 600;
         }
 
+        .positive {
+            color: #10b981;
+        }
+
+        .negative {
+            color: #ef4444;
+        }
+
         /* Loading */
         .loading {
             text-align: center;
             padding: 60px 20px;
-            color: #4a5568;
+            color: white;
             font-size: 1.2rem;
         }
 
@@ -265,8 +264,8 @@
             width: 40px;
             height: 40px;
             margin-left: 10px;
-            border: 4px solid #e2e8f0;
-            border-top-color: #3182ce;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -276,18 +275,12 @@
         }
 
         .error {
-            background: #fed7d7;
-            color: #742a2a;
+            background: #fee;
+            color: #c33;
             padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
             text-align: center;
-        }
-
-        .error-details {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            opacity: 0.8;
         }
 
         /* Stats Cards */
@@ -302,14 +295,14 @@
             background: white;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
-            color: #3182ce;
+            color: #667eea;
             margin-bottom: 5px;
         }
 
@@ -399,12 +392,12 @@
         let chart = null;
         let historicalData = null;
 
-        // Currency colors
+        // Currency colors - consistent with chart
         const CURRENCY_COLORS = {
             'EUR': '#ef4444',
             'USD': '#f59e0b',
             'GBP': '#10b981',
-            'JPY': '#eab308',
+            'JPY': '#f59e0b',
             'CHF': '#3b82f6',
             'CAD': '#8b5cf6',
             'AUD': '#ec4899',
@@ -418,51 +411,21 @@
                 const response = await fetch(`historical_data.json?t=${timestamp}`);
                 
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    throw new Error('Nie można załadować danych');
                 }
                 
                 const data = await response.json();
-                
-                // Validate data
-                if (!data || !data.history) {
-                    throw new Error('Invalid data format');
-                }
-                
-                if (data.history.length === 0) {
-                    throw new Error('No historical data available yet');
-                }
-                
                 historicalData = data;
                 
                 displayStats(data);
                 displayChart(data);
                 displayTable(data);
-                
-                console.log('Data loaded successfully:', data.totalRecords, 'records');
-                
             } catch (error) {
-                console.error('Error loading data:', error);
-                
-                let errorMessage = 'Błąd ładowania danych archiwum. ';
-                let errorDetails = '';
-                
-                if (error.message.includes('HTTP 404')) {
-                    errorMessage = 'Plik historical_data.json nie istnieje na GitHubie. ';
-                    errorDetails = 'Uruchom workflow n8n aby utworzyć plik lub stwórz go ręcznie.';
-                } else if (error.message.includes('No historical data')) {
-                    errorMessage = 'Plik historical_data.json jest pusty. ';
-                    errorDetails = 'Uruchom workflow n8n aby wypełnić dane (Execute workflow).';
-                } else if (error.message.includes('Invalid data')) {
-                    errorMessage = 'Nieprawidłowy format danych. ';
-                    errorDetails = 'Sprawdź zawartość pliku historical_data.json na GitHubie.';
-                } else {
-                    errorDetails = error.message;
-                }
-                
+                console.error('Błąd ładowania danych:', error);
                 document.getElementById('chartContent').innerHTML = 
-                    `<div class="error">${errorMessage}<div class="error-details">${errorDetails}</div></div>`;
+                    '<div class="error">Błąd ładowania danych archiwum. Spróbuj odświeżyć stronę.</div>';
                 document.getElementById('tableContent').innerHTML = 
-                    `<div class="error">${errorMessage}<div class="error-details">${errorDetails}</div></div>`;
+                    '<div class="error">Błąd ładowania danych tabeli.</div>';
             }
         }
 
@@ -470,17 +433,21 @@
         function displayStats(data) {
             if (!data.history || data.history.length === 0) return;
 
+            // Total records
             document.getElementById('totalRecords').textContent = data.totalRecords;
 
+            // Strongest currency (from latest record)
             const latest = data.history[0];
             if (latest && latest.strongest && latest.strongest[0]) {
                 document.getElementById('strongestCurrency').textContent = latest.strongest[0].currency;
             }
 
+            // Weakest currency
             if (latest && latest.weakest && latest.weakest[0]) {
                 document.getElementById('weakestCurrency').textContent = latest.weakest[0].currency;
             }
 
+            // Last update
             if (latest && latest.timestamp) {
                 const date = new Date(latest.timestamp);
                 const hours = date.getHours().toString().padStart(2, '0');
@@ -497,13 +464,16 @@
                 return;
             }
 
+            // Prepare data for chart
             const labels = data.history.map(record => {
                 const date = new Date(record.timestamp);
                 return date.toLocaleDateString('pl-PL', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
             }).reverse();
 
+            // Get all currencies from first record
             const currencies = data.history[0].allCurrencies.map(c => c.currency);
 
+            // Create datasets for each currency
             const datasets = currencies.map(currency => {
                 const currencyData = data.history.map(record => {
                     const currencyRecord = record.allCurrencies.find(c => c.currency === currency);
@@ -525,6 +495,7 @@
                 };
             });
 
+            // Create chart HTML
             const chartHTML = `
                 <div class="chart-container">
                     <canvas id="strengthChart"></canvas>
@@ -534,6 +505,7 @@
             
             document.getElementById('chartContent').innerHTML = chartHTML;
 
+            // Initialize chart
             const ctx = document.getElementById('strengthChart').getContext('2d');
             
             chart = new Chart(ctx, {
@@ -576,7 +548,6 @@
                                 color: 'rgba(0, 0, 0, 0.05)'
                             },
                             ticks: {
-                                color: '#000000',
                                 font: {
                                     size: 12,
                                     weight: '600'
@@ -588,7 +559,6 @@
                                 display: false
                             },
                             ticks: {
-                                color: '#000000',
                                 font: {
                                     size: 11,
                                     weight: '600'
@@ -601,6 +571,7 @@
                 }
             });
 
+            // Create custom legend
             createCustomLegend(currencies);
         }
 
@@ -624,6 +595,7 @@
                 item.appendChild(color);
                 item.appendChild(name);
                 
+                // Toggle visibility on click
                 item.addEventListener('click', function() {
                     const datasetIndex = parseInt(this.dataset.index);
                     const meta = chart.getDatasetMeta(datasetIndex);
@@ -645,11 +617,14 @@
                 return;
             }
 
+            // Get currencies from first record
             const currencies = data.history[0].allCurrencies.map(c => c.currency);
 
+            // Create table header
             let tableHTML = '<table class="data-table"><thead><tr>';
             tableHTML += '<th>Waluta</th>';
             
+            // Add date headers (reverse to show newest first)
             data.history.slice().reverse().forEach(record => {
                 const date = new Date(record.timestamp);
                 const dateStr = date.toLocaleDateString('pl-PL', { day: 'numeric', month: 'short' });
@@ -659,14 +634,19 @@
             
             tableHTML += '</tr></thead><tbody>';
 
+            // Add rows for each currency
             currencies.forEach(currency => {
                 tableHTML += '<tr>';
                 tableHTML += `<td class="currency-cell">${currency}</td>`;
                 
+                // Add data for each date (reverse to match headers)
                 data.history.slice().reverse().forEach(record => {
                     const currencyData = record.allCurrencies.find(c => c.currency === currency);
                     
                     if (currencyData) {
+                        const w1Class = currencyData.w1 > 0 ? 'positive' : 'negative';
+                        const d1Class = currencyData.d1 > 0 ? 'positive' : 'negative';
+                        
                         tableHTML += `
                             <td>
                                 <div class="score-cell">
