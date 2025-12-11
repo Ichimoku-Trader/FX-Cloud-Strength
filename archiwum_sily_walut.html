@@ -689,5 +689,11 @@
             loadHistoricalData();
         });
     </script>
+    <script>
+// Force stop loading spinner
+window.addEventListener('load', function() {
+    document.readyState = 'complete';
+});
+</script>
 </body>
 </html>
