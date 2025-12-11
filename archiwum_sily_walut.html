@@ -685,13 +685,6 @@
         // Load data on page load
         window.addEventListener('load', () => {
             loadHistoricalData();
-            
-            // Force stop any pending requests after load
-            setTimeout(() => {
-                if (document.readyState === 'complete') {
-                    window.stop();
-                }
-            }, 100);
         });
     </script>
 </body>
