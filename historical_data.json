@@ -1,8 +1,196 @@
 {
   "history": [
     {
-      "timestamp": "2025-12-22 04:01:00",
+      "timestamp": "2025-12-23 04:01:00",
       "recordNumber": 1,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 246,
+          "d1": 46,
+          "avg": 146
+        },
+        {
+          "currency": "GBP",
+          "w1": 41,
+          "d1": 159,
+          "avg": 100
+        },
+        {
+          "currency": "CHF",
+          "w1": 157,
+          "d1": -7,
+          "avg": 75
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "JPY",
+          "w1": -360,
+          "d1": -288,
+          "avg": -324
+        },
+        {
+          "currency": "USD",
+          "w1": -79,
+          "d1": -130,
+          "avg": -104.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -116,
+          "d1": 99,
+          "avg": -8.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 246,
+          "d1": 46,
+          "avg": 146
+        },
+        {
+          "currency": "GBP",
+          "w1": 41,
+          "d1": 159,
+          "avg": 100
+        },
+        {
+          "currency": "CHF",
+          "w1": 157,
+          "d1": -7,
+          "avg": 75
+        },
+        {
+          "currency": "CAD",
+          "w1": -6,
+          "d1": 127,
+          "avg": 60.5
+        },
+        {
+          "currency": "EUR",
+          "w1": 117,
+          "d1": -6,
+          "avg": 55.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -116,
+          "d1": 99,
+          "avg": -8.5
+        },
+        {
+          "currency": "USD",
+          "w1": -79,
+          "d1": -130,
+          "avg": -104.5
+        },
+        {
+          "currency": "JPY",
+          "w1": -360,
+          "d1": -288,
+          "avg": -324
+        }
+      ]
+    },
+    {
+      "timestamp": "2025-12-22 14:33:00",
+      "recordNumber": 2,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 246,
+          "d1": 1,
+          "avg": 123.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 41,
+          "d1": 150,
+          "avg": 95.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -6,
+          "d1": 158,
+          "avg": 76
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "JPY",
+          "w1": -360,
+          "d1": -244,
+          "avg": -302
+        },
+        {
+          "currency": "USD",
+          "w1": -79,
+          "d1": -115,
+          "avg": -97
+        },
+        {
+          "currency": "NZD",
+          "w1": -116,
+          "d1": 99,
+          "avg": -8.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 246,
+          "d1": 1,
+          "avg": 123.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 41,
+          "d1": 150,
+          "avg": 95.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -6,
+          "d1": 158,
+          "avg": 76
+        },
+        {
+          "currency": "CHF",
+          "w1": 157,
+          "d1": -34,
+          "avg": 61.5
+        },
+        {
+          "currency": "EUR",
+          "w1": 117,
+          "d1": -15,
+          "avg": 51
+        },
+        {
+          "currency": "NZD",
+          "w1": -116,
+          "d1": 99,
+          "avg": -8.5
+        },
+        {
+          "currency": "USD",
+          "w1": -79,
+          "d1": -115,
+          "avg": -97
+        },
+        {
+          "currency": "JPY",
+          "w1": -360,
+          "d1": -244,
+          "avg": -302
+        }
+      ]
+    },
+    {
+      "timestamp": "2025-12-22 04:01:00",
+      "recordNumber": 3,
       "strongest": [
         {
           "currency": "AUD",
@@ -96,7 +284,7 @@
     },
     {
       "timestamp": "2025-12-19 04:01:00",
-      "recordNumber": 2,
+      "recordNumber": 4,
       "strongest": [
         {
           "currency": "EUR",
@@ -190,7 +378,7 @@
     },
     {
       "timestamp": "2025-12-18 04:01:00",
-      "recordNumber": 3,
+      "recordNumber": 5,
       "strongest": [
         {
           "currency": "EUR",
@@ -284,7 +472,7 @@
     },
     {
       "timestamp": "2025-12-17 04:01:00",
-      "recordNumber": 4,
+      "recordNumber": 6,
       "strongest": [
         {
           "currency": "EUR",
@@ -378,7 +566,7 @@
     },
     {
       "timestamp": "2025-12-16 04:01:00",
-      "recordNumber": 5,
+      "recordNumber": 7,
       "strongest": [
         {
           "currency": "AUD",
@@ -472,7 +660,7 @@
     },
     {
       "timestamp": "2025-12-15 12:53:00",
-      "recordNumber": 6,
+      "recordNumber": 8,
       "strongest": [
         {
           "currency": "AUD",
@@ -566,7 +754,7 @@
     },
     {
       "timestamp": "2025-12-12 04:01:00",
-      "recordNumber": 7,
+      "recordNumber": 9,
       "strongest": [
         {
           "currency": "AUD",
@@ -660,7 +848,7 @@
     },
     {
       "timestamp": "2025-12-11 04:01:00",
-      "recordNumber": 8,
+      "recordNumber": 10,
       "strongest": [
         {
           "currency": "AUD",
@@ -754,7 +942,7 @@
     },
     {
       "timestamp": "2025-12-10 12:01:00",
-      "recordNumber": 9,
+      "recordNumber": 11,
       "strongest": [
         {
           "currency": "AUD",
@@ -848,7 +1036,7 @@
     },
     {
       "timestamp": "2025-12-09 04:01:00",
-      "recordNumber": 10,
+      "recordNumber": 12,
       "strongest": [
         {
           "currency": "AUD",
@@ -942,7 +1130,7 @@
     },
     {
       "timestamp": "2025-12-08 04:01:00",
-      "recordNumber": 11,
+      "recordNumber": 13,
       "strongest": [
         {
           "currency": "AUD",
@@ -1035,8 +1223,8 @@
       ]
     }
   ],
-  "totalRecords": 11,
-  "generatedAt": "2025-12-22T04:00:32.622Z",
+  "totalRecords": 13,
+  "generatedAt": "2025-12-23T04:00:33.449Z",
   "dataSource": "Google Sheets - FX Cloud Strength",
   "description": "Historical currency strength data - last 7 records"
 }
