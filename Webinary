@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webinary Ichimoku – Grzegorz Moskwa</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --blue-dark: #0a1f44;
+    --blue-mid: #1a56db;
+    --blue-light: #3b82f6;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --red-yt: #ff0000;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* ── HEADER CARD ── */
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,.07);
+  }
+
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: .75rem;
+    border-bottom: 3px solid var(--blue-light);
+  }
+
+  .section-subtitle {
+    color: var(--muted);
+    font-size: .9rem;
+    margin-top: -.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    padding: .35rem .9rem;
+    border-radius: 20px;
+    border: 2px solid var(--border);
+    background: #fff;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .2s;
+    letter-spacing: .04em;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--blue-dark);
+    border-color: var(--blue-dark);
+    color: #fff;
+  }
+
+  /* ── VIDEO GRID ── */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* ── VIDEO CARD ── */
+  .video-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    border: 1px solid var(--border);
+    transition: transform .2s, box-shadow .2s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(0,0,0,.14);
+  }
+
+  .video-card a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* thumbnail */
+  .thumb-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    overflow: hidden;
+    background: #0a1f44;
+  }
+
+  .thumb-wrap img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .3s;
+  }
+
+  .video-card:hover .thumb-wrap img {
+    transform: scale(1.04);
+  }
+
+  /* play button overlay */
+  .play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px;
+    background: rgba(255,0,0,.88);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, transform .2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,.4);
+  }
+
+  .play-btn svg { width: 22px; height: 22px; fill: #fff; margin-left: 3px; }
+
+  .video-card:hover .play-btn {
+    background: var(--red-yt);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  /* series badge */
+  .series-badge {
+    position: absolute;
+    top: 8px; left: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: .72rem;
+    font-weight: 700;
+    padding: .2rem .55rem;
+    border-radius: 20px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+
+  .badge-xtb    { background: #0057b8; color: #fff; }
+  .badge-tickmill { background: #e63946; color: #fff; }
+  .badge-inne   { background: #16a34a; color: #fff; }
+
+  /* number badge */
+  .num-badge {
+    position: absolute;
+    bottom: 8px; right: 8px;
+    background: rgba(0,0,0,.65);
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: .8rem;
+    padding: .15rem .45rem;
+    border-radius: 6px;
+  }
+
+  /* info */
+  .video-info {
+    padding: .85rem 1rem 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+  }
+
+  .video-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1.35;
+  }
+
+  .video-meta {
+    font-size: .78rem;
+    color: var(--muted);
+    margin-top: auto;
+    padding-top: .4rem;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-val {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--blue-mid);
+  }
+
+  .stat-lbl {
+    font-size: .78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  .stat-div {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .video-grid { grid-template-columns: 1fr; }
+    .stats-bar { gap: 1rem; }
+    .stat-val { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ── HEADER ── -->
+  <div class="card">
+    <h2 class="section-title">🎥 Webinary – Grzegorz Moskwa</h2>
+    <p class="section-subtitle">Nagrania webinarów i szkoleń z analizy Ichimoku Kinko Hyo</p>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-val" id="total-count">15</span>
+        <span class="stat-lbl">Nagrań</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat">
+        <span class="stat-val">3</span>
+        <span class="stat-lbl">Serie</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat">
+        <span class="stat-val">100%</span>
+        <span class="stat-lbl">Za darmo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VIDEOS ── -->
+  <div class="card">
+    <!-- Filter -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">Wszystkie</button>
+      <button class="filter-btn" data-filter="xtb">XTB – Pomysły Inwestycyjne</button>
+      <button class="filter-btn" data-filter="tickmill">Tickmill – Ichimoku</button>
+      <button class="filter-btn" data-filter="inne">Inne</button>
+    </div>
+
+    <div class="video-grid" id="grid">
+
+      <!-- ═══════════════════════════════════════════════
+           SERIA XTB – Pomysły Inwestycyjne (indeks 1-7)
+           ═══════════════════════════════════════════════ -->
+
+      <div class="video-card" data-series="xtb">
+        <a href="https://www.youtube.com/watch?v=01WbX71auww" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/01WbX71auww/hqdefault.jpg" alt="Webinar XTB #1" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-xtb">XTB</span>
+            <span class="num-badge">#1</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Pomysły Inwestycyjne z Ichimoku – Odcinek 1</div>
+            <div class="video-meta">📺 XTB · Seria: Pomysły Inwestycyjne</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="xtb">
+        <a href="https://www.youtube.com/watch?v=3ZA22xWalsY" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/3ZA22xWalsY/hqdefault.jpg" alt="Webinar XTB #2" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-xtb">XTB</span>
+            <span class="num-badge">#2</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Pomysły Inwestycyjne z Ichimoku – Odcinek 2</div>
+            <div class="video-meta">📺 XTB · Seria: Pomysły Inwestycyjne</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="xtb">
+        <a href="https://www.youtube.com/watch?v=5dO_ICNVM9U" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/5dO_ICNVM9U/hqdefault.jpg" alt="Webinar XTB #3" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-xtb">XTB</span>
+            <span class="num-badge">#3</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Pomysły Inwestycyjne z Ichimoku – Odcinek 3</div>
+            <div class="video-meta">📺 XTB · Seria: Pomysły Inwestycyjne</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="xtb">
+        <a href="https://www.youtube.com/watch?v=7-185WE_G9c" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/7-185WE_G9c/hqdefault.jpg" alt="Webinar XTB #4" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-xtb">XTB</span>
+            <span class="num-badge">#4</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Pomysły Inwestycyjne z Ichimoku – Odcinek 4</div>
+            <div class="video-meta">📺 XTB · Seria: Pomysły Inwestycyjne</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="xtb">
+        <a href="https://www.youtube.com/watch?v=CfP6hL9aIaE" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/CfP6hL9aIaE/hqdefault.jpg" alt="Webinar XTB #5" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-xtb">XTB</span>
+            <span class="num-badge">#5</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Pomysły Inwestycyjne z Ichimoku – Odcinek 5</div>
+            <div class="video-meta">📺 XTB · Seria: Pomysły Inwestycyjne</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="xtb">
+        <a href="https://www.youtube.com/watch?v=X35X4S3DFxk" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/X35X4S3DFxk/hqdefault.jpg" alt="Webinar XTB #6" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-xtb">XTB</span>
+            <span class="num-badge">#6</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Pomysły Inwestycyjne z Ichimoku – Odcinek 6</div>
+            <div class="video-meta">📺 XTB · Seria: Pomysły Inwestycyjne</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="xtb">
+        <a href="https://www.youtube.com/watch?v=tUrwCKeYlO8" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/tUrwCKeYlO8/hqdefault.jpg" alt="Webinar XTB #8" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-xtb">XTB</span>
+            <span class="num-badge">#8</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Pomysły Inwestycyjne z Ichimoku – Odcinek 8</div>
+            <div class="video-meta">📺 XTB · Seria: Pomysły Inwestycyjne</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════
+           SERIA TICKMILL – Ichimoku w praktyce
+           ═══════════════════════════════════════════════ -->
+
+      <div class="video-card" data-series="tickmill">
+        <a href="https://www.youtube.com/watch?v=bqfIOCb0VNU" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/bqfIOCb0VNU/hqdefault.jpg" alt="Tickmill Webinar #1" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-tickmill">Tickmill</span>
+            <span class="num-badge">#1</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Ichimoku w czasach kryzysu – Webinar 1</div>
+            <div class="video-meta">📺 Tickmill · Seria: Ichimoku w praktyce</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="tickmill">
+        <a href="https://www.youtube.com/watch?v=khebTe6_f2I" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/khebTe6_f2I/hqdefault.jpg" alt="Tickmill Webinar #2" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-tickmill">Tickmill</span>
+            <span class="num-badge">#2</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Ichimoku w czasach kryzysu – Webinar 2</div>
+            <div class="video-meta">📺 Tickmill · Seria: Ichimoku w praktyce</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="tickmill">
+        <a href="https://www.youtube.com/watch?v=e8fJffsDxUs" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/e8fJffsDxUs/hqdefault.jpg" alt="Tickmill Webinar #3" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-tickmill">Tickmill</span>
+            <span class="num-badge">#3</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Ichimoku w czasach kryzysu – Webinar 3</div>
+            <div class="video-meta">📺 Tickmill · Seria: Ichimoku w praktyce</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="tickmill">
+        <a href="https://www.youtube.com/watch?v=lGqqZI5mXII" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/lGqqZI5mXII/hqdefault.jpg" alt="Tickmill Webinar #4" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-tickmill">Tickmill</span>
+            <span class="num-badge">#4</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Ichimoku w czasach kryzysu – Webinar 4</div>
+            <div class="video-meta">📺 Tickmill · Seria: Ichimoku w praktyce</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="tickmill">
+        <a href="https://www.youtube.com/watch?v=fCvUEx185mo" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/fCvUEx185mo/hqdefault.jpg" alt="Tickmill Webinar #5" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-tickmill">Tickmill</span>
+            <span class="num-badge">#5</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Ichimoku w praktyce – Webinar 5</div>
+            <div class="video-meta">📺 Tickmill · Seria: Ichimoku w praktyce</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════
+           INNE
+           ═══════════════════════════════════════════════ -->
+
+      <div class="video-card" data-series="inne">
+        <a href="https://www.youtube.com/watch?v=pFse84xKHbA" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/pFse84xKHbA/hqdefault.jpg" alt="Webinar inne" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-inne">Inne</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Ichimoku – Webinar specjalny</div>
+            <div class="video-meta">📺 Kanał niezależny</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="inne">
+        <a href="https://www.youtube.com/watch?v=qhhHlr-noIg" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/qhhHlr-noIg/hqdefault.jpg" alt="Q&A Ichimoku" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-inne">Inne</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Ichimoku – Q&amp;A / Analiza rynku</div>
+            <div class="video-meta">📺 Kanał niezależny</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="video-card" data-series="inne">
+        <a href="https://www.youtube.com/watch?v=I3RcdTUfmG0" target="_blank" rel="noopener">
+          <div class="thumb-wrap">
+            <img src="https://i.ytimg.com/vi/I3RcdTUfmG0/hqdefault.jpg" alt="Webinar Ichimoku" loading="lazy">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="series-badge badge-inne">Inne</span>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Ichimoku – Prezentacja i analiza</div>
+            <div class="video-meta">📺 Kanał niezależny</div>
+          </div>
+        </a>
+      </div>
+
+    </div><!-- /video-grid -->
+  </div><!-- /card -->
+
+</div><!-- /container -->
+
+<script>
+  // Filter logic
+  const btns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.video-card');
+  const countEl = document.getElementById('total-count');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      let visible = 0;
+      cards.forEach(card => {
+        const show = f === 'all' || card.dataset.series === f;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      countEl.textContent = visible;
+    });
+  });
+</script>
+</body>
+</html>
