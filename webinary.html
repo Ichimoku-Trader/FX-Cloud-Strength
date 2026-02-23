@@ -538,7 +538,7 @@
 </div><!-- /container -->
 
 <script>
-  // Filter logic
+  // ── Filter logic ──
   const btns = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.video-card');
   const countEl = document.getElementById('total-count');
@@ -555,6 +555,40 @@
         if (show) visible++;
       });
       countEl.textContent = visible;
+    });
+  });
+
+  // ── Auto-fetch real titles from YouTube oEmbed ──
+  function extractVideoId(href) {
+    const match = href.match(/[?&]v=([^&]+)/);
+    return match ? match[1] : null;
+  }
+
+  async function fetchTitle(videoId, titleEl) {
+    try {
+      const url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
+      const res = await fetch(url);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.title) {
+        titleEl.textContent = data.title;
+        titleEl.classList.add('loaded');
+      }
+    } catch (e) {
+      // zostaw oryginalny tytuł jeśli fetch nie zadziała
+    }
+  }
+
+  document.querySelectorAll('.video-card').forEach(card => {
+    const link = card.querySelector('a');
+    const titleEl = card.querySelector('.video-title');
+    if (!link || !titleEl) return;
+    const videoId = extractVideoId(link.href);
+    if (!videoId) return;
+    titleEl.textContent = '⏳ Ładowanie...';
+    titleEl.style.opacity = '0.5';
+    fetchTitle(videoId, titleEl).then(() => {
+      titleEl.style.opacity = '1';
     });
   });
 </script>
