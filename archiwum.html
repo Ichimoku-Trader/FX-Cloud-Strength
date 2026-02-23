@@ -24,11 +24,12 @@
         }
 
         .top-bar {
-            background: white;
-            border-radius: 10px;
+            background: #2d3238;
+            border-radius: 12px;
             padding: 15px 30px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(212,175,55,0.15);
+            border: 1px solid rgba(212,175,55,0.2);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -43,25 +44,37 @@
         }
 
         .logo-container img {
-            height: 50px;
+            height: 80px;
             width: auto;
+            margin-left: 20px;
         }
 
         .contact-info {
             text-align: right;
-            color: #4a5568;
+            color: rgba(255,255,255,0.6);
         }
 
         .contact-info .name {
             font-weight: 700;
             font-size: 1.1em;
-            color: #2d3748;
+            color: #d4af37;
             margin-bottom: 3px;
+            letter-spacing: 0.05em;
         }
 
         .contact-info .email {
             font-size: 0.9em;
-            color: #718096;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .contact-info .email a {
+            color: rgba(255,255,255,0.45);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-info .email a:hover {
+            color: #d4af37;
         }
 
         .back-button {
@@ -69,7 +82,7 @@
             align-items: center;
             gap: 8px;
             padding: 10px 20px;
-            background: #3182ce;
+            background: #0a1f44;
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -79,7 +92,7 @@
         }
 
         .back-button:hover {
-            background: #2c5282;
+            background: #1a56db;
         }
 
         .header {
@@ -172,17 +185,9 @@
             background: #2c5282;
         }
 
-        .video-icon::before {
-            content: "🎥 ";
-        }
-
-        .pdf-icon::before {
-            content: "📄 ";
-        }
-
-        .article-icon::before {
-            content: "📝 ";
-        }
+        .video-icon::before { content: "🎥 "; }
+        .pdf-icon::before   { content: "📄 "; }
+        .article-icon::before { content: "📝 "; }
 
         .stats-box {
             background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
@@ -204,159 +209,163 @@
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-
+            .header h1 { font-size: 1.8em; }
             .analysis-item {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
             }
-
             .analysis-link {
                 align-self: stretch;
                 text-align: center;
             }
-
             .top-bar {
                 flex-direction: column;
                 text-align: center;
             }
-
-            .contact-info {
-                text-align: center;
-            }
-
-            .logo-container {
-                justify-content: center;
-            }
+            .contact-info { text-align: center; }
+            .logo-container { justify-content: center; }
         }
     </style>
 </head>
 <body>
-   
+<div class="container">
 
-        <!-- Back Button -->
-        <a href="index.html" class="back-button">← Powrót do Dashboard</a>
-
-        <!-- Header -->
-        <div class="header">
-            <h1>📚 Archiwum Analiz i Pomysłów Inwestycyjnych</h1>
-            <p>Wszystkie analizy Ichimoku i setupy tradingowe z poprzednich miesięcy</p>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="logo-container">
+            <img src="logo-1.png" alt="Ichimoku Trader Logo">
         </div>
-
-        <!-- Statistics -->
-        <div class="stats-box">
-            <h3>Łączna liczba analiz</h3>
-            <div class="number" id="totalAnalyses">12</div>
+        <div class="contact-info">
+            <div class="name">Grzegorz Moskwa</div>
+            <div class="email"><a href="mailto:btrader.ext@gmail.com">btrader.ext@gmail.com</a></div>
         </div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">← Powrót do Dashboard</a>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>📚 Archiwum Analiz i Pomysłów Inwestycyjnych</h1>
+        <p>Wszystkie analizy Ichimoku i setupy tradingowe z poprzednich miesięcy</p>
+    </div>
+
+    <!-- Statistics -->
+    <div class="stats-box">
+        <h3>Łączna liczba analiz</h3>
+        <div class="number" id="totalAnalyses">0</div>
+    </div>
+
     <!-- 2026 Section -->
-        <div class="year-section">
-            <h2>📅 Rok 2026</h2>
-            <div class="analysis-list">
+    <div class="year-section">
+        <h2>📅 Rok 2026</h2>
+        <div class="analysis-list">
 
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">23 Lutego 2026</div>
-                        <div class="analysis-description">Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</div>
-                    </div>
-                    <a href=https://www.youtube.com/watch?v=grXNkpUYXq8 class="analysis-link" target="_blank">Zobacz →</a>
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">23 Lutego 2026</div>
+                    <div class="analysis-description">Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</div>
                 </div>
-                
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">26 Stycznia 2026</div>
-                        <div class="analysis-description">Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</div>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=M89gbQg1dqk" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-        <!-- 2025 Section -->
-        <div class="year-section">
-            <h2>📅 Rok 2025</h2>
-            <div class="analysis-list">
-                
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">29 Grudnia 2025</div>
-                        <div class="analysis-description">Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</div>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=BKWbTCa8B3M" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">1 Grudnia 2025</div>
-                        <div class="analysis-description">Podsumowanie listopada i najlepsze setupy tradingowe</div>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">3 Listopada 2025</div>
-                        <div class="analysis-description">Analiza Currency Strength i wyniki października</div>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=Iuek65e1Too" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">13 Października 2025</div>
-                        <div class="analysis-description">Analiza końca lata - setupy na jesień</div>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=pMSL7PxN1Ok" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">8 Września 2025</div>
-                        <div class="analysis-description">Letnia korekta - analiza możliwości tradingowych</div>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=p1rzYdlRgDM" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">11 Sierpnia 2025</div>
-                        <div class="analysis-description">Letnia korekta - analiza możliwości tradingowych</div>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=tkoGlREN3fM" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">14 Lipca 2025</div>
-                        <div class="analysis-description">Połowa roku - podsumowanie H1 i prognozy H2</div>
-                    </div>
-                    <a href="https://www.youtube.com/live/ZgltLqfClCM" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">19 Maja 2025</div>
-                        <div class="analysis-description">Wiosenna analiza - setupy na Q2</div>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=MwHc_kSSrtY" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-
-                <div class="analysis-item">
-                    <div class="analysis-info">
-                        <div class="analysis-date video-icon">14 Kwietnia 2025</div>
-                        <div class="analysis-description">Analiza Q2 - Currency Strength w drugiej połowie roku</div>
-                    </div>
-                    <a href="https://www.youtube.com/watch?v=vninW8cduJU" class="analysis-link" target="_blank">Zobacz →</a>
-                </div>
-
+                <a href="https://www.youtube.com/watch?v=grXNkpUYXq8" class="analysis-link" target="_blank">Zobacz →</a>
             </div>
+
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">26 Stycznia 2026</div>
+                    <div class="analysis-description">Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=M89gbQg1dqk" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
         </div>
+    </div><!-- /rok 2026 -->
 
-    
+    <!-- 2025 Section -->
+    <div class="year-section">
+        <h2>📅 Rok 2025</h2>
+        <div class="analysis-list">
 
-    <script>
-        // Count total analyses
-        const totalItems = document.querySelectorAll('.analysis-item').length;
-        document.getElementById('totalAnalyses').textContent = totalItems;
-    </script>
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">29 Grudnia 2025</div>
+                    <div class="analysis-description">Najnowsza analiza rynkowa i pomysły inwestycyjne na bieżący miesiąc</div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=BKWbTCa8B3M" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">1 Grudnia 2025</div>
+                    <div class="analysis-description">Podsumowanie listopada i najlepsze setupy tradingowe</div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=0EoygC3YC2s" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">3 Listopada 2025</div>
+                    <div class="analysis-description">Analiza Currency Strength i wyniki października</div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=Iuek65e1Too" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">13 Października 2025</div>
+                    <div class="analysis-description">Analiza końca lata - setupy na jesień</div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=pMSL7PxN1Ok" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">8 Września 2025</div>
+                    <div class="analysis-description">Letnia korekta - analiza możliwości tradingowych</div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=p1rzYdlRgDM" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">11 Sierpnia 2025</div>
+                    <div class="analysis-description">Letnia korekta - analiza możliwości tradingowych</div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=tkoGlREN3fM" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">14 Lipca 2025</div>
+                    <div class="analysis-description">Połowa roku - podsumowanie H1 i prognozy H2</div>
+                </div>
+                <a href="https://www.youtube.com/live/ZgltLqfClCM" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">19 Maja 2025</div>
+                    <div class="analysis-description">Wiosenna analiza - setupy na Q2</div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=MwHc_kSSrtY" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
+            <div class="analysis-item">
+                <div class="analysis-info">
+                    <div class="analysis-date video-icon">14 Kwietnia 2025</div>
+                    <div class="analysis-description">Analiza Q2 - Currency Strength w drugiej połowie roku</div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=vninW8cduJU" class="analysis-link" target="_blank">Zobacz →</a>
+            </div>
+
+        </div>
+    </div><!-- /rok 2025 -->
+
+</div><!-- /container -->
+
+<script>
+    const totalItems = document.querySelectorAll('.analysis-item').length;
+    document.getElementById('totalAnalyses').textContent = totalItems;
+</script>
 </body>
 </html>
