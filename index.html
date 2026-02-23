@@ -622,10 +622,10 @@
 
         <!-- Tabs Navigation -->
         <div class="tabs-nav">
-            <button class="tab-button active" onclick="switchTab('dashboard')">📊 Dashboard</button>
-            <button class="tab-button" onclick="switchTab('analysis')">📝 Krótka Analiza</button>
-            <button class="tab-button" onclick="switchTab('ideas')">💡 Pomysły Inwestycyjne</button>
-            <button class="tab-button" onclick="switchTab('history')">📁 Archiwum Siły Walut</button>
+            <button class="tab-button active" onclick="switchTab('dashboard', event)">📊 Dashboard</button>
+            <button class="tab-button" onclick="switchTab('analysis', event)">📝 Krótka Analiza</button>
+            <button class="tab-button" onclick="switchTab('ideas', event)">💡 Pomysły Inwestycyjne</button>
+            <button class="tab-button" onclick="switchTab('history', event)">📁 Archiwum Siły Walut</button>
             <button class="tab-button" onclick="window.open('webinary.html', '_blank')">🎥 Webinary</button>
         </div>
 
@@ -798,11 +798,11 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         let chart = null;
 
         // Tab switching
-        function switchTab(tabName) {
+        function switchTab(tabName, event) {
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
@@ -817,13 +817,14 @@
             document.getElementById(tabName).classList.add('active');
             
             // Add active to clicked button
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
 
             // Load content based on tab
             if (tabName === 'analysis') {
                 loadAnalysis();
             }
-            // history tab now redirects to separate page
         }
 
         // Set current date
@@ -1037,10 +1038,4 @@
             const lastUpdateElement = document.getElementById('updateTime');
             if (timestamp) {
                 const date = new Date(timestamp);
-                lastUpdateElement.textContent = `Ostatnia aktualizacja: ${date.toLocaleString('pl-PL')}`;
-            } else {
-                lastUpdateElement.textContent = `Ostatnia aktualizacja: niedostępna`;
-            }
-        }
-
-        // Initialize on page load
+                lastUpdateE
