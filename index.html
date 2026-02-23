@@ -583,60 +583,15 @@
 </head>
 <body>
     <div class="container">
-       /* Top Bar */
-.top-bar {
-    background: linear-gradient(135deg, #0d1b2a 0%, #1a2a3a 60%, #0d1b2a 100%);
-    border-radius: 12px;
-    padding: 15px 30px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(212,175,55,0.2);
-    border: 1px solid rgba(212,175,55,0.25);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo-container img {
-    height: 90px;
-    width: auto;
-    filter: drop-shadow(0 2px 8px rgba(212,175,55,0.3));
-}
-
-.contact-info {
-    text-align: right;
-    color: rgba(255,255,255,0.7);
-}
-
-.contact-info .name {
-    font-weight: 700;
-    font-size: 1.1em;
-    color: #d4af37;
-    margin-bottom: 3px;
-    letter-spacing: 0.03em;
-}
-
-.contact-info .email {
-    font-size: 0.9em;
-    color: rgba(255,255,255,0.55);
-}
-
-.contact-info .email a {
-    color: rgba(255,255,255,0.55);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.contact-info .email a:hover {
-    color: #d4af37;
-}
+        <!-- Top Bar with Logo and Contact -->
+        <div class="top-bar">
+            <div class="logo-container">
+                <img src="logo-1.png" alt="Ichimoku Trader Logo">
+            </div>
+            <div class="contact-info">
+                <div class="name">Grzegorz Moskwa</div>
+                <div class="email"><a href="mailto:btrader.ext@gmail.com">btrader.ext@gmail.com</a></div>
+            </div>
         </div>
 
         <!-- Header -->
@@ -653,14 +608,13 @@
             </div>
         </div>
 
-       <!-- Tabs Navigation -->
-<div class="tabs-nav">
-    <button class="tab-button active" onclick="switchTab('dashboard')">📊 Dashboard</button>
-    <button class="tab-button" onclick="switchTab('analysis')">📝 Krótka Analiza</button>
-    <button class="tab-button" onclick="switchTab('ideas')">💡 Pomysły Inwestycyjne</button>
-    <button class="tab-button" onclick="switchTab('history')">📁 Archiwum Siły Walut</button>
-    <button class="tab-button" onclick="window.open('webinary.html', '_blank')">🎥 Webinary</button>
-</div>
+        <!-- Tabs Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-button active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-button" onclick="switchTab('analysis')">📝 Krótka Analiza</button>
+            <button class="tab-button" onclick="switchTab('ideas')">💡 Pomysły Inwestycyjne</button>
+            <button class="tab-button" onclick="switchTab('history')">📁 Archiwum Siły Walut</button>
+        </div>
 
         <!-- Tab 1: Dashboard -->
         <div id="dashboard" class="tab-content active">
