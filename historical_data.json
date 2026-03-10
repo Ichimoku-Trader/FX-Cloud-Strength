@@ -1,8 +1,102 @@
 {
   "history": [
     {
-      "timestamp": "2026-03-09 01:01:00",
+      "timestamp": "2026-03-10 01:01:00",
       "recordNumber": 1,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 348,
+          "d1": 256,
+          "avg": 302
+        },
+        {
+          "currency": "CAD",
+          "w1": 116,
+          "d1": 153,
+          "avg": 134.5
+        },
+        {
+          "currency": "CHF",
+          "w1": 208,
+          "d1": 21,
+          "avg": 114.5
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "JPY",
+          "w1": -252,
+          "d1": -158,
+          "avg": -205
+        },
+        {
+          "currency": "EUR",
+          "w1": -160,
+          "d1": -236,
+          "avg": -198
+        },
+        {
+          "currency": "GBP",
+          "w1": -138,
+          "d1": -104,
+          "avg": -121
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 348,
+          "d1": 256,
+          "avg": 302
+        },
+        {
+          "currency": "CAD",
+          "w1": 116,
+          "d1": 153,
+          "avg": 134.5
+        },
+        {
+          "currency": "CHF",
+          "w1": 208,
+          "d1": 21,
+          "avg": 114.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 15,
+          "d1": -2,
+          "avg": 6.5
+        },
+        {
+          "currency": "USD",
+          "w1": -137,
+          "d1": 70,
+          "avg": -33.5
+        },
+        {
+          "currency": "GBP",
+          "w1": -138,
+          "d1": -104,
+          "avg": -121
+        },
+        {
+          "currency": "EUR",
+          "w1": -160,
+          "d1": -236,
+          "avg": -198
+        },
+        {
+          "currency": "JPY",
+          "w1": -252,
+          "d1": -158,
+          "avg": -205
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-03-09 01:01:00",
+      "recordNumber": 2,
       "strongest": [
         {
           "currency": "AUD",
@@ -96,7 +190,7 @@
     },
     {
       "timestamp": "2026-03-06 01:01:00",
-      "recordNumber": 2,
+      "recordNumber": 3,
       "strongest": [
         {
           "currency": "AUD",
@@ -190,7 +284,7 @@
     },
     {
       "timestamp": "2026-03-05 01:01:00",
-      "recordNumber": 3,
+      "recordNumber": 4,
       "strongest": [
         {
           "currency": "AUD",
@@ -284,7 +378,7 @@
     },
     {
       "timestamp": "2026-03-04 01:01:00",
-      "recordNumber": 4,
+      "recordNumber": 5,
       "strongest": [
         {
           "currency": "AUD",
@@ -378,7 +472,7 @@
     },
     {
       "timestamp": "2026-03-03 01:01:00",
-      "recordNumber": 5,
+      "recordNumber": 6,
       "strongest": [
         {
           "currency": "AUD",
@@ -472,7 +566,7 @@
     },
     {
       "timestamp": "2026-03-02 01:01:00",
-      "recordNumber": 6,
+      "recordNumber": 7,
       "strongest": [
         {
           "currency": "AUD",
@@ -566,7 +660,7 @@
     },
     {
       "timestamp": "2026-02-27 01:01:00",
-      "recordNumber": 7,
+      "recordNumber": 8,
       "strongest": [
         {
           "currency": "AUD",
@@ -660,7 +754,7 @@
     },
     {
       "timestamp": "2026-02-26 01:01:00",
-      "recordNumber": 8,
+      "recordNumber": 9,
       "strongest": [
         {
           "currency": "AUD",
@@ -754,7 +848,7 @@
     },
     {
       "timestamp": "2026-02-25 01:01:00",
-      "recordNumber": 9,
+      "recordNumber": 10,
       "strongest": [
         {
           "currency": "AUD",
@@ -848,7 +942,7 @@
     },
     {
       "timestamp": "2026-02-24 01:01:00",
-      "recordNumber": 10,
+      "recordNumber": 11,
       "strongest": [
         {
           "currency": "AUD",
@@ -942,7 +1036,7 @@
     },
     {
       "timestamp": "2026-02-23 01:01:00",
-      "recordNumber": 11,
+      "recordNumber": 12,
       "strongest": [
         {
           "currency": "AUD",
@@ -1035,8 +1129,8 @@
       ]
     }
   ],
-  "totalRecords": 11,
-  "generatedAt": "2026-03-09T04:00:54.989Z",
+  "totalRecords": 12,
+  "generatedAt": "2026-03-10T04:00:53.918Z",
   "dataSource": "Google Sheets - FX Cloud Strength",
   "description": "Historical currency strength data - last 7 records"
 }
