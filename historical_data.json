@@ -1,8 +1,102 @@
 {
   "history": [
     {
-      "timestamp": "2026-07-31 01:01:00",
+      "timestamp": "2026-08-03 01:01:00",
       "recordNumber": 1,
+      "strongest": [
+        {
+          "currency": "NZD",
+          "w1": 152,
+          "d1": 241,
+          "avg": 196.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 158,
+          "d1": 64,
+          "avg": 111
+        },
+        {
+          "currency": "AUD",
+          "w1": 212,
+          "d1": -32,
+          "avg": 90
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -218,
+          "avg": -277
+        },
+        {
+          "currency": "CAD",
+          "w1": -144,
+          "d1": -46,
+          "avg": -95
+        },
+        {
+          "currency": "EUR",
+          "w1": -125,
+          "d1": 22,
+          "avg": -51.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "NZD",
+          "w1": 152,
+          "d1": 241,
+          "avg": 196.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 158,
+          "d1": 64,
+          "avg": 111
+        },
+        {
+          "currency": "AUD",
+          "w1": 212,
+          "d1": -32,
+          "avg": 90
+        },
+        {
+          "currency": "JPY",
+          "w1": -45,
+          "d1": 179,
+          "avg": 67
+        },
+        {
+          "currency": "USD",
+          "w1": 128,
+          "d1": -210,
+          "avg": -41
+        },
+        {
+          "currency": "EUR",
+          "w1": -125,
+          "d1": 22,
+          "avg": -51.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -144,
+          "d1": -46,
+          "avg": -95
+        },
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -218,
+          "avg": -277
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-07-31 01:01:00",
+      "recordNumber": 2,
       "strongest": [
         {
           "currency": "NZD",
@@ -96,7 +190,7 @@
     },
     {
       "timestamp": "2026-07-30 01:01:00",
-      "recordNumber": 2,
+      "recordNumber": 3,
       "strongest": [
         {
           "currency": "GBP",
@@ -190,7 +284,7 @@
     },
     {
       "timestamp": "2026-07-29 01:01:00",
-      "recordNumber": 3,
+      "recordNumber": 4,
       "strongest": [
         {
           "currency": "USD",
@@ -284,7 +378,7 @@
     },
     {
       "timestamp": "2026-07-28 01:01:00",
-      "recordNumber": 4,
+      "recordNumber": 5,
       "strongest": [
         {
           "currency": "AUD",
@@ -378,7 +472,7 @@
     },
     {
       "timestamp": "2026-07-27 01:01:00",
-      "recordNumber": 5,
+      "recordNumber": 6,
       "strongest": [
         {
           "currency": "AUD",
@@ -472,7 +566,7 @@
     },
     {
       "timestamp": "2026-07-24 01:01:00",
-      "recordNumber": 6,
+      "recordNumber": 7,
       "strongest": [
         {
           "currency": "GBP",
@@ -566,7 +660,7 @@
     },
     {
       "timestamp": "2026-07-23 01:01:00",
-      "recordNumber": 7,
+      "recordNumber": 8,
       "strongest": [
         {
           "currency": "NZD",
@@ -660,7 +754,7 @@
     },
     {
       "timestamp": "2026-07-22 01:01:00",
-      "recordNumber": 8,
+      "recordNumber": 9,
       "strongest": [
         {
           "currency": "NZD",
@@ -754,7 +848,7 @@
     },
     {
       "timestamp": "2026-07-21 01:01:00",
-      "recordNumber": 9,
+      "recordNumber": 10,
       "strongest": [
         {
           "currency": "GBP",
@@ -848,7 +942,7 @@
     },
     {
       "timestamp": "2026-07-20 01:01:00",
-      "recordNumber": 10,
+      "recordNumber": 11,
       "strongest": [
         {
           "currency": "GBP",
@@ -942,7 +1036,7 @@
     },
     {
       "timestamp": "2026-07-17 01:01:00",
-      "recordNumber": 11,
+      "recordNumber": 12,
       "strongest": [
         {
           "currency": "GBP",
@@ -1036,7 +1130,7 @@
     },
     {
       "timestamp": "2026-07-16 01:01:00",
-      "recordNumber": 12,
+      "recordNumber": 13,
       "strongest": [
         {
           "currency": "GBP",
@@ -1130,7 +1224,7 @@
     },
     {
       "timestamp": "2026-07-15 01:01:00",
-      "recordNumber": 13,
+      "recordNumber": 14,
       "strongest": [
         {
           "currency": "USD",
@@ -1224,7 +1318,7 @@
     },
     {
       "timestamp": "2026-07-14 01:01:00",
-      "recordNumber": 14,
+      "recordNumber": 15,
       "strongest": [
         {
           "currency": "USD",
@@ -1317,8 +1411,8 @@
       ]
     }
   ],
-  "totalRecords": 14,
-  "generatedAt": "2026-08-02T03:00:39.149Z",
+  "totalRecords": 15,
+  "generatedAt": "2026-08-03T03:00:39.128Z",
   "dataSource": "Google Sheets - FX Cloud Strength",
   "description": "Historical currency strength data - last 7 records"
 }
