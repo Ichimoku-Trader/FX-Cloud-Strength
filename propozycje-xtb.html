@@ -14,196 +14,109 @@
     <title>Propozycje XTB - Ichimoku Trader</title>
     <link rel="icon" href="data:,">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
-            padding: 20px;
-            min-height: 100vh;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:#f5f7fa; padding:20px; min-height:100vh; color:#2d3748;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width:1240px; margin:0 auto; }
 
         /* Top Bar */
         .top-bar {
-            background: #2d3238;
-            border-radius: 12px;
-            padding: 15px 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(212,175,55,0.15);
-            border: 1px solid rgba(212,175,55,0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            background:#2d3238; border-radius:12px; padding:15px 30px; margin-bottom:20px;
+            box-shadow:0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(212,175,55,0.15);
+            border:1px solid rgba(212,175,55,0.2);
+            display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;
         }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .logo-container img {
-            height: 200px;
-            width: auto;
-        }
-
-        .contact-info {
-            text-align: right;
-            color: rgba(255,255,255,0.6);
-        }
-
-        .contact-info .name {
-            font-weight: 700;
-            font-size: 1.1em;
-            color: #d4af37;
-            margin-bottom: 3px;
-            letter-spacing: 0.05em;
-        }
-
-        .contact-info .email {
-            font-size: 0.9em;
-            color: rgba(255,255,255,0.45);
-        }
-
-        .contact-info .email a {
-            color: rgba(255,255,255,0.45);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .contact-info .email a:hover {
-            color: #d4af37;
-        }
+        .logo-container img { height:200px; width:auto; }
+        .contact-info { text-align:right; color:rgba(255,255,255,0.6); }
+        .contact-info .name { font-weight:700; font-size:1.1em; color:#d4af37; margin-bottom:3px; letter-spacing:0.05em; }
+        .contact-info .email { font-size:0.9em; color:rgba(255,255,255,0.45); }
+        .contact-info .email a { color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s; }
+        .contact-info .email a:hover { color:#d4af37; }
 
         /* Back link */
         .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: white;
-            border-radius: 8px;
-            padding: 10px 18px;
-            margin-bottom: 20px;
-            color: #2d3748;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display:inline-flex; align-items:center; gap:8px; background:white; border-radius:8px;
+            padding:10px 18px; margin-bottom:20px; color:#2d3748; text-decoration:none; font-weight:600;
+            box-shadow:0 2px 10px rgba(0,0,0,0.05); transition:transform .2s ease, box-shadow .2s ease;
         }
-        .back-link:hover {
-            transform: translateX(-3px);
-            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-        }
+        .back-link:hover { transform:translateX(-3px); box-shadow:0 4px 14px rgba(0,0,0,0.1); }
 
         /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #2d3748;
-            font-weight: 700;
-        }
-
-        .header p {
-            font-size: 1.15em;
-            color: #4a5568;
+        .header { text-align:center; margin-bottom:24px; }
+        .header h1 { font-size:2.5em; margin-bottom:10px; color:#2d3748; font-weight:700; }
+        .header p { font-size:1.15em; color:#4a5568; }
+        .header .count {
+            display:inline-block; margin-top:12px; font-size:.85em; font-weight:700; letter-spacing:.03em;
+            color:#b91c1c; background:#fee2e2; padding:5px 14px; border-radius:20px;
         }
 
         /* Disclaimer */
         .disclaimer {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-radius: 10px;
-            padding: 20px 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border-left: 5px solid #f59e0b;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
+            background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%); border-radius:10px;
+            padding:18px 22px; margin-bottom:26px; box-shadow:0 2px 10px rgba(0,0,0,0.08);
+            border-left:5px solid #f59e0b; display:flex; align-items:flex-start; gap:15px;
         }
-        .disclaimer-icon {
-            font-size: 28px;
-            flex-shrink: 0;
-            line-height: 1;
+        .disclaimer-icon { font-size:26px; flex-shrink:0; line-height:1; }
+        .disclaimer-text { color:#78350f; line-height:1.7; font-size:0.93em; font-weight:500; }
+        .disclaimer-text strong { color:#92400e; font-weight:700; }
+
+        /* ── MOZAIKA (masonry) ── */
+        .mosaic { column-count:3; column-gap:18px; }
+        @media (max-width:1024px) { .mosaic { column-count:2; } }
+        @media (max-width:620px)  { .mosaic { column-count:1; } }
+
+        .tile {
+            position:relative; display:block; break-inside:avoid; margin:0 0 18px;
+            border-radius:14px; overflow:hidden; background:#fff; text-decoration:none;
+            box-shadow:0 2px 12px rgba(0,0,0,0.07);
+            transition:transform .25s ease, box-shadow .25s ease;
         }
-        .disclaimer-text {
-            color: #78350f;
-            line-height: 1.7;
-            font-size: 0.95em;
-            font-weight: 500;
+        .tile img { display:block; width:100%; height:auto; transition:transform .4s ease; }
+        .tile:hover { transform:translateY(-4px); box-shadow:0 14px 30px rgba(0,0,0,0.16); }
+        .tile.has-link:hover img { transform:scale(1.045); }
+
+        /* CTA pill (tylko dla kafelków z linkiem) */
+        .tile .cta {
+            position:absolute; bottom:12px; right:12px; opacity:0; transform:translateY(8px);
+            background:rgba(15,15,17,0.88); color:#fff; font-size:.8em; font-weight:700;
+            padding:7px 14px; border-radius:20px; transition:opacity .25s ease, transform .25s ease;
+            pointer-events:none; backdrop-filter:blur(2px);
         }
-        .disclaimer-text strong {
-            color: #92400e;
-            font-weight: 700;
+        .tile.has-link:hover .cta { opacity:1; transform:translateY(0); }
+        .tile.has-link { cursor:pointer; }
+
+        /* Badge dla kafelków BEZ linku */
+        .tile .addlink {
+            position:absolute; top:10px; right:10px; display:none;
+            background:rgba(37,99,235,0.92); color:#fff; font-size:.72em; font-weight:700;
+            padding:5px 11px; border-radius:20px; letter-spacing:.02em;
+        }
+        .tile.no-link .addlink { display:inline-block; }
+        .tile.no-link { cursor:default; }
+        .tile.no-link::after {
+            content:""; position:absolute; inset:0; background:rgba(255,255,255,0.35);
+            opacity:0; transition:opacity .25s ease;
+        }
+        .tile.no-link:hover::after { opacity:1; }
+
+        /* Wyróżniony kafelek (Twój kurs) */
+        .tile.featured { box-shadow:0 4px 18px rgba(212,175,55,0.35); outline:2px solid #d4af37; }
+        .tile .ribbon {
+            position:absolute; top:12px; left:12px; z-index:2;
+            background:#d4af37; color:#2d3238; font-size:.75em; font-weight:800;
+            padding:5px 12px; border-radius:20px; letter-spacing:.03em;
+            box-shadow:0 2px 8px rgba(0,0,0,0.2);
         }
 
-        /* Offers grid */
-        .offers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
+        .footer-note { text-align:center; color:#94a3b8; font-size:.85em; margin:30px 0 10px; }
 
-        .offer-card {
-            display: block;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .offer-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 26px rgba(0,0,0,0.14);
-        }
-        .offer-card img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-        .offer-info {
-            padding: 18px 20px;
-        }
-        .offer-label {
-            display: inline-block;
-            font-size: 0.8em;
-            font-weight: 700;
-            color: #b45309;
-            background: #fef3c7;
-            padding: 3px 10px;
-            border-radius: 20px;
-            margin-bottom: 8px;
-        }
-        .offer-title {
-            font-size: 1.15em;
-            color: #2d3748;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        @media (max-width: 768px) {
-            .top-bar { flex-direction: column; text-align: center; }
-            .contact-info { text-align: center; }
-            .logo-container img { height: 120px; }
-            .header h1 { font-size: 1.8em; }
-            .offers-grid { grid-template-columns: 1fr; }
+        @media (max-width:768px) {
+            .top-bar { flex-direction:column; text-align:center; }
+            .contact-info { text-align:center; }
+            .logo-container img { height:120px; }
+            .header h1 { font-size:1.8em; }
         }
     </style>
 </head>
@@ -227,7 +140,8 @@
         <!-- Header -->
         <div class="header">
             <h1>🎯 Propozycje XTB</h1>
-            <p>Aktualne oferty i propozycje naszego partnera – XTB</p>
+            <p>Aktualne oferty, kursy i materiały naszego partnera – XTB</p>
+            <span class="count" id="offerCount"></span>
         </div>
 
         <!-- Disclaimer -->
@@ -238,45 +152,136 @@
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════════════════════
-             OFERTY XTB
-             Aby dodać nową propozycję, skopiuj jeden blok <a class="offer-card">…</a>,
-             podmień:  href (link afiliacyjny XTB)  ·  src (nazwa pliku obrazka)  ·  tekst.
-             Obrazek wgraj do tego samego folderu co ten plik na serwerze.
-             ═══════════════════════════════════════════════════════════ -->
-        <div class="offers-grid">
-
-            <!-- Oferta 1 -->
-            <a href="https://link-pso.xtb.com/pso/G8jwY" target="_blank" rel="noopener" class="offer-card">
-                <img src="Pomysly_Moskwa.png" alt="Pomysły Inwestycyjne z Ichimoku – Grzegorz Moskwa">
-                <div class="offer-info">
-                    <span class="offer-label">🎯 Partner Główny</span>
-                    <div class="offer-title">Pomysły Inwestycyjne z Ichimoku</div>
-                </div>
-            </a>
-
-            <!-- Oferta 2 -->
-            <a href="https://link-pso.xtb.com/pso/DMxWn" target="_blank" rel="noopener" class="offer-card">
-                <img src="xtb_banner.png" alt="Więcej niż prezent – podaruj akcje z XTB">
-                <div class="offer-info">
-                    <span class="offer-label">🎁 Oferta specjalna</span>
-                    <div class="offer-title">Więcej niż prezent – podaruj akcje z XTB!</div>
-                </div>
-            </a>
-
-            <!-- Oferta 3 -->
-            <a href="https://link-pso.xtb.com/pso/WDuHt" target="_blank" rel="noopener" class="offer-card">
-                <img src="weekly_banner.png" alt="Co przyniesie tydzień? – analiza tygodniowa">
-                <div class="offer-info">
-                    <span class="offer-label">📊 Analiza Tygodniowa</span>
-                    <div class="offer-title">Co Przyniesie Tydzień?</div>
-                </div>
-            </a>
-
-            <!-- ▼▼▼ KOLEJNE OFERTY DODAWAJ TUTAJ (kopiuj blok powyżej) ▼▼▼ -->
-
+        <!-- ═══════════════════════════════════════════════════════════════════
+             MOZAIKA BANERÓW XTB
+             Aby PODPIĄĆ LINK do kafelka: w danym <a class="tile" ...> wpisz adres
+             w atrybucie  data-href="TU_WKLEJ_LINK_AFILIACYJNY_XTB"
+             Przykład:  data-href="https://link-pso.xtb.com/pso/XXXXX"
+             • Kafelek z linkiem -> klikalny, otwiera się w nowej karcie.
+             • Kafelek bez linku -> pokazuje niebieski znacznik „➕ dodaj link”.
+             Aby dodać NOWY baner: skopiuj dowolny blok <a class="tile">…</a>,
+             podmień src (nazwa pliku obrazka), alt/title (opis) i data-href.
+             ═══════════════════════════════════════════════════════════════════ -->
+        <div class="mosaic">
+      <a class="tile featured" data-href="" title="Strategia Ichimoku krok po kroku – G. Moskwa">
+        <span class="ribbon">★ Twój kurs</span>
+        <img src="xtb-strategia-ichimoku-moskwa.png" alt="Strategia Ichimoku krok po kroku – G. Moskwa" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Tu pracują Twoje pieniądze">
+        <img src="xtb-tu-pracuja-twoje-pieniadze.png" alt="Tu pracują Twoje pieniądze" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Inwestuj na IKE bez prowizji">
+        <img src="xtb-ike-bez-prowizji.png" alt="Inwestuj na IKE bez prowizji" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Ebook „Smart Money” – Rafał Glinicki">
+        <img src="xtb-ebook-smart-money-glinicki.png" alt="Ebook „Smart Money” – Rafał Glinicki" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Bezpłatny kurs analizy wolumenu – M. Siudek">
+        <img src="xtb-kurs-analiza-wolumenu-siudek.png" alt="Bezpłatny kurs analizy wolumenu – M. Siudek" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Kurs Price Action w praktyce – M. Tuszkiewicz">
+        <img src="xtb-kurs-price-action-tuszkiewicz.png" alt="Kurs Price Action w praktyce – M. Tuszkiewicz" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Inwestowanie pasywne krok po kroku – T. Turski">
+        <img src="xtb-inwestowanie-pasywne-turski.png" alt="Inwestowanie pasywne krok po kroku – T. Turski" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Inwestuj z ulgą podatkową (IKZE)">
+        <img src="xtb-ikze-ulga-podatkowa.png" alt="Inwestuj z ulgą podatkową (IKZE)" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="E-book: Kryptowaluty dla początkujących">
+        <img src="xtb-ebook-kryptowaluty.png" alt="E-book: Kryptowaluty dla początkujących" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Nie tylko zarabiaj – pozwól pieniądzom pracować">
+        <img src="xtb-nie-tylko-zarabiaj-zlatan.png" alt="Nie tylko zarabiaj – pozwól pieniądzom pracować" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Prognozy rynkowe 2026">
+        <img src="xtb-prognozy-rynkowe-2026.png" alt="Prognozy rynkowe 2026" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Szukasz pomysłu na prezent? Podaruj akcje">
+        <img src="xtb-prezent-akcje.png" alt="Szukasz pomysłu na prezent? Podaruj akcje" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Dzień zaczynam od IKE">
+        <img src="xtb-dzien-od-kawy-ike.png" alt="Dzień zaczynam od IKE" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Inwestuj w 35+ Krypto CFD">
+        <img src="xtb-krypto-cfd-35.png" alt="Inwestuj w 35+ Krypto CFD" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="W co inwestują kobiety w XTB">
+        <img src="xtb-inwestuja-kobiety.png" alt="W co inwestują kobiety w XTB" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Podejrzany ruch? Zablokuj konto">
+        <img src="xtb-podejrzany-ruch-blokada.png" alt="Podejrzany ruch? Zablokuj konto" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Koniec taniej ropy? – Raport">
+        <img src="xtb-koniec-taniej-ropy.png" alt="Koniec taniej ropy? – Raport" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="SpaceX – największy debiut giełdowy?">
+        <img src="xtb-spacex-debiut.png" alt="SpaceX – największy debiut giełdowy?" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
+      <a class="tile" data-href="" title="Karta XTB – 1% cashbacku">
+        <img src="xtb-karta-cashback.png" alt="Karta XTB – 1% cashbacku" loading="lazy">
+        <span class="cta">Otwórz ↗</span>
+        <span class="addlink">➕ dodaj link</span>
+      </a>
         </div>
 
+        <div class="footer-note">© Ichimoku Trader · Grzegorz Moskwa — partner XTB</div>
+
     </div>
+
+    <script>
+        // Wiąże data-href z kafelkami i oznacza te bez linku.
+        document.querySelectorAll('.tile').forEach(function(t) {
+            var url = (t.getAttribute('data-href') || '').trim();
+            if (url) {
+                t.classList.add('has-link');
+                t.setAttribute('href', url);
+                t.setAttribute('target', '_blank');
+                t.setAttribute('rel', 'noopener sponsored');
+            } else {
+                t.classList.add('no-link');
+                t.addEventListener('click', function(e) { e.preventDefault(); });
+            }
+        });
+        // Licznik ofert
+        var n = document.querySelectorAll('.tile').length;
+        document.getElementById('offerCount').textContent = n + ' propozycji';
+    </script>
 </body>
 </html>
