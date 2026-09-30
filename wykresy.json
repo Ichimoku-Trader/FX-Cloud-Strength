@@ -1,0 +1,20 @@
+[
+  {
+    "id": "2026-09-30-eurusd",
+    "date": "2026-09-30T09:15",
+    "pair": "EURUSD",
+    "timeframe": "H4",
+    "title": "EURUSD – test Kumo od góry",
+    "image": "wykresy/2026-09-30-eurusd-h4.png",
+    "comment": "Cena wróciła do górnej krawędzi chmury. Tenkan nad Kijun, Chikou wolny.\n\nCzekam na reakcję – wybicie pod Kijun zmienia scenariusz."
+  },
+  {
+    "id": "2026-09-29-gbpjpy",
+    "date": "2026-09-29",
+    "pair": "GBPJPY",
+    "timeframe": "D1",
+    "title": "GBPJPY – przełamanie Kijun",
+    "image": "wykresy/2026-09-29-gbpjpy-d1.png",
+    "comment": "Świeca D1 zamknęła się pod Kijun-sen. Siła JPY rośnie na dashboardzie – obserwuję kontynuację."
+  }
+]
