@@ -557,6 +557,130 @@
         }
 
         /* Responsive */
+
+        /* ===== Zakładka Wykresy ===== */
+        .charts-intro {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+        .chart-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        .chart-filter {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            background: white;
+            color: #4a5568;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .chart-filter:hover { border-color: #3182ce; color: #3182ce; }
+        .chart-filter.active { background: #061b4f; border-color: #061b4f; color: #d4af37; }
+        .chart-filter:focus-visible,
+        .chart-post button:focus-visible,
+        .chart-post-img:focus-visible { outline: 3px solid #d4af37; outline-offset: 2px; }
+
+        .chart-post {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            background: white;
+        }
+        .chart-post:target,
+        .chart-post.highlight { box-shadow: 0 0 0 3px #d4af37; }
+        .chart-post-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            padding: 16px 20px;
+            background: #061b4f;
+            color: white;
+        }
+        .chart-post-head h3 {
+            font-size: 1.2em;
+            color: white;
+            margin: 0;
+        }
+        .chart-post-tags { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+        .chart-tag {
+            font-size: 13px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            background: rgba(212,175,55,0.18);
+            color: #d4af37;
+        }
+        .chart-post-date { font-size: 13px; color: rgba(255,255,255,0.6); }
+        .chart-post-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            cursor: zoom-in;
+            background: #f5f7fa;
+            border: 0;
+            padding: 0;
+        }
+        .chart-post-img img { display: block; width: 100%; height: auto; }
+        .chart-post-body { padding: 18px 20px 6px; }
+        .chart-post-comment {
+            color: #2d3748;
+            line-height: 1.75;
+            font-size: 1.02em;
+            max-width: 75ch;
+        }
+        .chart-post-comment p + p { margin-top: 10px; }
+        .chart-post-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 12px 20px 18px;
+        }
+        .chart-post-actions button {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e0;
+            background: #f7fafc;
+            color: #2d3748;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .chart-post-actions button:hover { border-color: #3182ce; color: #3182ce; }
+        .chart-post-actions .btn-comments[aria-expanded="true"] {
+            background: #3182ce; border-color: #3182ce; color: white;
+        }
+        .chart-comments { padding: 0 20px 20px; }
+        .chart-comments:empty { display: none; }
+        .charts-more { text-align: center; margin-top: 10px; }
+        .charts-more button {
+            padding: 10px 24px; border: none; border-radius: 8px;
+            background: #e2e8f0; color: #4a5568; font-weight: 600; cursor: pointer; font-size: 15px;
+        }
+        .charts-more button:hover { background: #cbd5e0; }
+
+        /* Powiększenie wykresu */
+        .chart-lightbox {
+            position: fixed; inset: 0; z-index: 1000;
+            background: rgba(6,27,79,0.92);
+            display: none; align-items: center; justify-content: center;
+            padding: 20px; cursor: zoom-out;
+        }
+        .chart-lightbox.open { display: flex; }
+        .chart-lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+        .chart-lightbox-close {
+            position: absolute; top: 14px; right: 18px;
+            background: none; border: none; color: white; font-size: 34px; cursor: pointer; line-height: 1;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
@@ -652,10 +776,10 @@
 
        <!-- Tabs Navigation -->
 <div class="tabs-nav">
-    <button class="tab-button active" onclick="switchTab('dashboard')">📊 Dashboard</button>
-    <button class="tab-button" onclick="switchTab('analysis')">📝 Krótka Analiza</button>
-    <button class="tab-button" onclick="switchTab('ideas')">💡 Pomysły Inwestycyjne</button>
-    <button class="tab-button" onclick="switchTab('history')">📁 Archiwum Siły Walut</button>
+    <button class="tab-button active" data-tab="dashboard" onclick="switchTab('dashboard')">📊 Dashboard</button>
+    <button class="tab-button" data-tab="charts" onclick="switchTab('charts')">📈 Wykresy</button>
+    <button class="tab-button" data-tab="ideas" onclick="switchTab('ideas')">💡 Pomysły Inwestycyjne</button>
+    <button class="tab-button" data-tab="history" onclick="switchTab('history')">📁 Archiwum Siły Walut</button>
     <button class="tab-button" onclick="window.open('webinary.html', '_blank')">🎥 Webinary</button>
 </div>
 
@@ -792,14 +916,23 @@
             </div>
         </div>
 
-        <!-- Tab 2: Krótka Analiza -->
-        <div id="analysis" class="tab-content">
+        <!-- Tab 2: Wykresy -->
+        <div id="charts" class="tab-content">
             <div class="card">
-                <h2>💡 Krótka Analiza AI</h2>
-                <div id="analysisContent" class="loading">
-                    Ładowanie analizy...
+                <h2>📈 Wykresy</h2>
+                <p class="charts-intro">Bieżące spojrzenie na wykresy z krótkim komentarzem. Pod każdym wykresem możesz zostawić swój komentarz lub pytanie.</p>
+                <div class="chart-filters" id="chartFilters" role="group" aria-label="Filtruj według instrumentu"></div>
+                <div id="chartsFeed" class="loading">Ładowanie wykresów...</div>
+                <div class="charts-more" id="chartsMore" hidden>
+                    <button type="button" onclick="showMoreCharts()">Pokaż starsze wykresy</button>
                 </div>
             </div>
+        </div>
+
+        <!-- Powiększenie wykresu -->
+        <div class="chart-lightbox" id="chartLightbox" role="dialog" aria-modal="true" aria-label="Powiększony wykres" onclick="closeLightbox()">
+            <button class="chart-lightbox-close" type="button" aria-label="Zamknij" onclick="closeLightbox()">×</button>
+            <img id="chartLightboxImg" alt="">
         </div>
 
         <!-- Tab 3: Pomysły Inwestycyjne -->
@@ -853,12 +986,13 @@
             // Show selected tab
             document.getElementById(tabName).classList.add('active');
             
-            // Add active to clicked button
-            event.target.classList.add('active');
+            // Add active to matching button
+            const btn = document.querySelector(`.tab-button[data-tab="${tabName}"]`);
+            if (btn) btn.classList.add('active');
 
             // Load content based on tab
-            if (tabName === 'analysis') {
-                loadAnalysis();
+            if (tabName === 'charts') {
+                loadCharts();
             }
             // history tab now redirects to separate page
         }
@@ -888,56 +1022,190 @@
             }
         }
 
-        // Load AI analysis
-        async function loadAnalysis() {
-            const contentDiv = document.getElementById('analysisContent');
-            contentDiv.className = 'loading';
-            contentDiv.innerHTML = 'Ładowanie analizy...';
+        // ===================== WYKRESY =====================
+        // Konfiguracja komentarzy (giscus). Wartości z https://giscus.app
+        const GISCUS = {
+            repo: 'TWOJ-LOGIN/TWOJE-REPO',          // np. 'gmoskwa/fx-cloud-strength'
+            repoId: 'WKLEJ_REPO_ID',
+            category: 'Wykresy',
+            categoryId: 'WKLEJ_CATEGORY_ID',
+            lang: 'pl',
+            theme: 'light'
+        };
+        const CHARTS_PAGE_SIZE = 10;
 
+        let chartsData = null;
+        let chartsFilter = 'all';
+        let chartsShown = CHARTS_PAGE_SIZE;
+        let openCommentsId = null;
+
+        function escapeHtml(str) {
+            return String(str ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function formatChartDate(d) {
+            const date = new Date(d);
+            if (isNaN(date)) return escapeHtml(d);
+            const hasTime = /T\d/.test(d);
+            return date.toLocaleString('pl-PL', hasTime
+                ? { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }
+                : { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        async function loadCharts() {
+            const feed = document.getElementById('chartsFeed');
+            if (chartsData) { renderCharts(); return; }
             try {
-                const timestamp = new Date().getTime();
-                const response = await fetch(`ai_analysis.json?t=${timestamp}`);
-                
-                if (!response.ok) {
-                    throw new Error('Nie można załadować analizy');
-                }
-                
+                const response = await fetch(`wykresy.json?t=${Date.now()}`);
+                if (!response.ok) throw new Error('HTTP ' + response.status);
                 const data = await response.json();
-                displayAnalysis(data);
+                chartsData = (Array.isArray(data) ? data : data.posts || [])
+                    .filter(p => p && p.id && p.image)
+                    .sort((a, b) => new Date(b.date) - new Date(a.date));
+                renderFilters();
+                renderCharts();
+                openChartFromHash();
             } catch (error) {
-                console.error('Błąd ładowania analizy:', error);
-                contentDiv.className = 'error';
-                contentDiv.innerHTML = 'Błąd ładowania analizy. Analiza może nie być jeszcze dostępna lub wystąpił problem z połączeniem.';
+                console.error('Błąd ładowania wykresów:', error);
+                feed.className = 'error';
+                feed.textContent = 'Nie udało się wczytać wykresów. Odśwież stronę za chwilę.';
             }
         }
 
-        // Display analysis
-        function displayAnalysis(data) {
-            const contentDiv = document.getElementById('analysisContent');
-            contentDiv.className = 'analysis-section';
-            
-            let html = data.analysis || 'Brak dostępnej analizy.';
-            
-            // Add metadata
-            if (data.timestamp || data.metadata) {
-                html += '<div class="analysis-meta">';
-                html += '<strong>Informacje o analizie:</strong><br>';
-                if (data.timestamp) {
-                    html += `Wygenerowano: ${new Date(data.timestamp).toLocaleString('pl-PL')}<br>`;
-                }
-                if (data.metadata) {
-                    if (data.metadata.dataDate) {
-                        html += `Dane z: ${data.metadata.dataDate}<br>`;
-                    }
-                    if (data.metadata.model) {
-                        html += `Model AI: ${data.metadata.model}<br>`;
-                    }
-                }
-                html += '</div>';
-            }
-            
-            contentDiv.innerHTML = html;
+        function renderFilters() {
+            const pairs = [...new Set(chartsData.map(p => p.pair).filter(Boolean))].sort();
+            const box = document.getElementById('chartFilters');
+            if (pairs.length < 2) { box.innerHTML = ''; return; }
+            box.innerHTML = ['all', ...pairs].map(p =>
+                `<button type="button" class="chart-filter${p === chartsFilter ? ' active' : ''}" data-pair="${escapeHtml(p)}">${p === 'all' ? 'Wszystkie' : escapeHtml(p)}</button>`
+            ).join('');
+            box.querySelectorAll('.chart-filter').forEach(b => b.addEventListener('click', () => {
+                chartsFilter = b.dataset.pair;
+                chartsShown = CHARTS_PAGE_SIZE;
+                renderFilters();
+                renderCharts();
+            }));
         }
+
+        function renderCharts() {
+            const feed = document.getElementById('chartsFeed');
+            const list = chartsFilter === 'all' ? chartsData : chartsData.filter(p => p.pair === chartsFilter);
+            feed.className = '';
+            if (!list.length) {
+                feed.innerHTML = '<p class="charts-intro">Nie ma jeszcze wykresów w tej kategorii.</p>';
+                document.getElementById('chartsMore').hidden = true;
+                return;
+            }
+            openCommentsId = null;
+            feed.innerHTML = list.slice(0, chartsShown).map(p => {
+                const comment = escapeHtml(p.comment).split(/\n\s*\n/).map(par => `<p>${par.replace(/\n/g, '<br>')}</p>`).join('');
+                const tags = [p.pair, p.timeframe].filter(Boolean).map(t => `<span class="chart-tag">${escapeHtml(t)}</span>`).join('');
+                return `
+                <article class="chart-post" id="wykres-${escapeHtml(p.id)}">
+                    <header class="chart-post-head">
+                        <h3>${escapeHtml(p.title || p.pair || 'Wykres')}</h3>
+                        <div class="chart-post-tags">${tags}<span class="chart-post-date">${formatChartDate(p.date)}</span></div>
+                    </header>
+                    <button type="button" class="chart-post-img" data-full="${escapeHtml(p.image)}" aria-label="Powiększ wykres">
+                        <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title || p.pair || 'Wykres')}" loading="lazy">
+                    </button>
+                    <div class="chart-post-body"><div class="chart-post-comment">${comment}</div></div>
+                    <div class="chart-post-actions">
+                        <button type="button" class="btn-comments" aria-expanded="false" data-id="${escapeHtml(p.id)}">💬 Komentarze</button>
+                        <button type="button" class="btn-share" data-id="${escapeHtml(p.id)}">🔗 Kopiuj link</button>
+                    </div>
+                    <div class="chart-comments" id="comments-${escapeHtml(p.id)}"></div>
+                </article>`;
+            }).join('');
+
+            document.getElementById('chartsMore').hidden = list.length <= chartsShown;
+
+            feed.querySelectorAll('.chart-post-img').forEach(b => b.addEventListener('click', () => openLightbox(b.dataset.full, b.querySelector('img').alt)));
+            feed.querySelectorAll('.btn-comments').forEach(b => b.addEventListener('click', () => toggleComments(b.dataset.id)));
+            feed.querySelectorAll('.btn-share').forEach(b => b.addEventListener('click', () => copyChartLink(b)));
+        }
+
+        function showMoreCharts() {
+            chartsShown += CHARTS_PAGE_SIZE;
+            renderCharts();
+        }
+
+        // Komentarze: jeden wątek giscus na wykres, ładowany dopiero po kliknięciu
+        function toggleComments(id) {
+            if (openCommentsId) {
+                const prev = document.getElementById('comments-' + openCommentsId);
+                if (prev) prev.innerHTML = '';
+                const prevBtn = document.querySelector(`.btn-comments[data-id="${CSS.escape(openCommentsId)}"]`);
+                if (prevBtn) prevBtn.setAttribute('aria-expanded', 'false');
+                if (openCommentsId === id) { openCommentsId = null; return; }
+            }
+            const box = document.getElementById('comments-' + id);
+            const s = document.createElement('script');
+            s.src = 'https://giscus.app/client.js';
+            s.async = true;
+            s.crossOrigin = 'anonymous';
+            const attrs = {
+                'data-repo': GISCUS.repo,
+                'data-repo-id': GISCUS.repoId,
+                'data-category': GISCUS.category,
+                'data-category-id': GISCUS.categoryId,
+                'data-mapping': 'specific',
+                'data-term': 'wykres-' + id,
+                'data-strict': '1',
+                'data-reactions-enabled': '1',
+                'data-emit-metadata': '0',
+                'data-input-position': 'top',
+                'data-theme': GISCUS.theme,
+                'data-lang': GISCUS.lang,
+                'data-loading': 'lazy'
+            };
+            Object.entries(attrs).forEach(([k, v]) => s.setAttribute(k, v));
+            box.appendChild(s);
+            document.querySelector(`.btn-comments[data-id="${CSS.escape(id)}"]`).setAttribute('aria-expanded', 'true');
+            openCommentsId = id;
+        }
+
+        async function copyChartLink(btn) {
+            const url = location.origin + location.pathname + '#wykres-' + btn.dataset.id;
+            try {
+                await navigator.clipboard.writeText(url);
+                btn.textContent = '✅ Skopiowano';
+            } catch {
+                prompt('Skopiuj link:', url);
+            }
+            setTimeout(() => { btn.textContent = '🔗 Kopiuj link'; }, 2000);
+        }
+
+        // Link typu index.html#wykres-2026-09-30-eurusd otwiera zakładkę i przewija do wykresu
+        function openChartFromHash() {
+            const m = location.hash.match(/^#wykres-(.+)$/);
+            if (!m || !chartsData) return;
+            const id = decodeURIComponent(m[1]);
+            const idx = chartsData.findIndex(p => p.id === id);
+            if (idx === -1) return;
+            chartsFilter = 'all';
+            if (idx >= chartsShown) { chartsShown = idx + 1; }
+            renderFilters();
+            renderCharts();
+            const el = document.getElementById('wykres-' + id);
+            if (el) {
+                el.classList.add('highlight');
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                toggleComments(id);
+            }
+        }
+
+        function openLightbox(src, alt) {
+            const img = document.getElementById('chartLightboxImg');
+            img.src = src; img.alt = alt || '';
+            document.getElementById('chartLightbox').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('chartLightbox').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
         // Update chart
         function updateChart(data) {
@@ -1085,8 +1353,12 @@
             // Load currency data immediately
             loadCurrencyData();
             
-            // Set active tab
-            switchTab('dashboard');
+            // Set active tab (link #wykres-... otwiera od razu zakładkę Wykresy)
+            if (location.hash.startsWith('#wykres-')) {
+                switchTab('charts');
+            } else {
+                switchTab('dashboard');
+            }
         });
     </script>
 </body>
