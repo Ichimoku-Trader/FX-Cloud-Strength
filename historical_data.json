@@ -1,14 +1,101 @@
 {
   "history": [
     {
-      "timestamp": "#REF! (Array result was not expanded because it would overwrite data in  A26.)",
+      "timestamp": "2026-10-02 01:01:00",
       "recordNumber": 1,
-      "strongest": [],
-      "weakest": [],
-      "allCurrencies": []
+      "strongest": [
+        {
+          "currency": "JPY",
+          "w1": 281,
+          "d1": 202,
+          "avg": 241.5
+        },
+        {
+          "currency": "USD",
+          "w1": 143,
+          "d1": 247,
+          "avg": 195
+        },
+        {
+          "currency": "AUD",
+          "w1": 245,
+          "d1": -95,
+          "avg": 75
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "NZD",
+          "w1": -214,
+          "d1": -244,
+          "avg": -229
+        },
+        {
+          "currency": "CHF",
+          "w1": -307,
+          "d1": -41,
+          "avg": -174
+        },
+        {
+          "currency": "EUR",
+          "w1": -42,
+          "d1": -149,
+          "avg": -95.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "JPY",
+          "w1": 281,
+          "d1": 202,
+          "avg": 241.5
+        },
+        {
+          "currency": "USD",
+          "w1": 143,
+          "d1": 247,
+          "avg": 195
+        },
+        {
+          "currency": "AUD",
+          "w1": 245,
+          "d1": -95,
+          "avg": 75
+        },
+        {
+          "currency": "GBP",
+          "w1": 33,
+          "d1": 55,
+          "avg": 44
+        },
+        {
+          "currency": "CAD",
+          "w1": -139,
+          "d1": 25,
+          "avg": -57
+        },
+        {
+          "currency": "EUR",
+          "w1": -42,
+          "d1": -149,
+          "avg": -95.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -307,
+          "d1": -41,
+          "avg": -174
+        },
+        {
+          "currency": "NZD",
+          "w1": -214,
+          "d1": -244,
+          "avg": -229
+        }
+      ]
     },
     {
-      "timestamp": "2026-10-01 14:58:00",
+      "timestamp": "2026-10-01 14:44:00",
       "recordNumber": 2,
       "strongest": [
         {
@@ -100,10 +187,2172 @@
           "avg": -265
         }
       ]
+    },
+    {
+      "timestamp": "2026-09-30 01:01:00",
+      "recordNumber": 3,
+      "strongest": [
+        {
+          "currency": "JPY",
+          "w1": 281,
+          "d1": 200,
+          "avg": 240.5
+        },
+        {
+          "currency": "USD",
+          "w1": 143,
+          "d1": 262,
+          "avg": 202.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 245,
+          "d1": -3,
+          "avg": 121
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -307,
+          "d1": -202,
+          "avg": -254.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -214,
+          "d1": -243,
+          "avg": -228.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -139,
+          "d1": -11,
+          "avg": -75
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "JPY",
+          "w1": 281,
+          "d1": 200,
+          "avg": 240.5
+        },
+        {
+          "currency": "USD",
+          "w1": 143,
+          "d1": 262,
+          "avg": 202.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 245,
+          "d1": -3,
+          "avg": 121
+        },
+        {
+          "currency": "GBP",
+          "w1": 33,
+          "d1": -17,
+          "avg": 8
+        },
+        {
+          "currency": "EUR",
+          "w1": -42,
+          "d1": 14,
+          "avg": -14
+        },
+        {
+          "currency": "CAD",
+          "w1": -139,
+          "d1": -11,
+          "avg": -75
+        },
+        {
+          "currency": "NZD",
+          "w1": -214,
+          "d1": -243,
+          "avg": -228.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -307,
+          "d1": -202,
+          "avg": -254.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-29 01:01:00",
+      "recordNumber": 4,
+      "strongest": [
+        {
+          "currency": "JPY",
+          "w1": 281,
+          "d1": 205,
+          "avg": 243
+        },
+        {
+          "currency": "USD",
+          "w1": 143,
+          "d1": 272,
+          "avg": 207.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 245,
+          "d1": 7,
+          "avg": 126
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -307,
+          "d1": -207,
+          "avg": -257
+        },
+        {
+          "currency": "NZD",
+          "w1": -214,
+          "d1": -237,
+          "avg": -225.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -139,
+          "d1": -43,
+          "avg": -91
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "JPY",
+          "w1": 281,
+          "d1": 205,
+          "avg": 243
+        },
+        {
+          "currency": "USD",
+          "w1": 143,
+          "d1": 272,
+          "avg": 207.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 245,
+          "d1": 7,
+          "avg": 126
+        },
+        {
+          "currency": "GBP",
+          "w1": 33,
+          "d1": -27,
+          "avg": 3
+        },
+        {
+          "currency": "EUR",
+          "w1": -42,
+          "d1": 30,
+          "avg": -6
+        },
+        {
+          "currency": "CAD",
+          "w1": -139,
+          "d1": -43,
+          "avg": -91
+        },
+        {
+          "currency": "NZD",
+          "w1": -214,
+          "d1": -237,
+          "avg": -225.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -307,
+          "d1": -207,
+          "avg": -257
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-28 01:01:00",
+      "recordNumber": 5,
+      "strongest": [
+        {
+          "currency": "JPY",
+          "w1": 281,
+          "d1": 209,
+          "avg": 245
+        },
+        {
+          "currency": "USD",
+          "w1": 143,
+          "d1": 236,
+          "avg": 189.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 245,
+          "d1": 57,
+          "avg": 151
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -307,
+          "d1": -130,
+          "avg": -218.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -214,
+          "d1": -212,
+          "avg": -213
+        },
+        {
+          "currency": "CAD",
+          "w1": -139,
+          "d1": -56,
+          "avg": -97.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "JPY",
+          "w1": 281,
+          "d1": 209,
+          "avg": 245
+        },
+        {
+          "currency": "USD",
+          "w1": 143,
+          "d1": 236,
+          "avg": 189.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 245,
+          "d1": 57,
+          "avg": 151
+        },
+        {
+          "currency": "EUR",
+          "w1": -42,
+          "d1": 21,
+          "avg": -10.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 33,
+          "d1": -125,
+          "avg": -46
+        },
+        {
+          "currency": "CAD",
+          "w1": -139,
+          "d1": -56,
+          "avg": -97.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -214,
+          "d1": -212,
+          "avg": -213
+        },
+        {
+          "currency": "CHF",
+          "w1": -307,
+          "d1": -130,
+          "avg": -218.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-25 01:01:00",
+      "recordNumber": 6,
+      "strongest": [
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 277,
+          "avg": 205.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 50,
+          "avg": 164.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 66,
+          "avg": 132
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -211,
+          "avg": -210
+        },
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": -61,
+          "avg": -194
+        },
+        {
+          "currency": "CAD",
+          "w1": -103,
+          "d1": -5,
+          "avg": -54
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 277,
+          "avg": 205.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 50,
+          "avg": 164.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 66,
+          "avg": 132
+        },
+        {
+          "currency": "EUR",
+          "w1": -50,
+          "d1": 14,
+          "avg": -18
+        },
+        {
+          "currency": "GBP",
+          "w1": 78,
+          "d1": -130,
+          "avg": -26
+        },
+        {
+          "currency": "CAD",
+          "w1": -103,
+          "d1": -5,
+          "avg": -54
+        },
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": -61,
+          "avg": -194
+        },
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -211,
+          "avg": -210
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-24 01:01:00",
+      "recordNumber": 7,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 96,
+          "avg": 187.5
+        },
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 215,
+          "avg": 174.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 82,
+          "avg": 140
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -256,
+          "avg": -232.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": 22,
+          "avg": -152.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -50,
+          "d1": -63,
+          "avg": -56.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 96,
+          "avg": 187.5
+        },
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 215,
+          "avg": 174.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 82,
+          "avg": 140
+        },
+        {
+          "currency": "GBP",
+          "w1": 78,
+          "d1": -105,
+          "avg": -13.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -103,
+          "d1": 9,
+          "avg": -47
+        },
+        {
+          "currency": "EUR",
+          "w1": -50,
+          "d1": -63,
+          "avg": -56.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": 22,
+          "avg": -152.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -256,
+          "avg": -232.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-23 01:01:00",
+      "recordNumber": 8,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 193,
+          "avg": 236
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 117,
+          "avg": 157.5
+        },
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 162,
+          "avg": 148
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -171,
+          "avg": -190
+        },
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": -30,
+          "avg": -178.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -103,
+          "d1": -118,
+          "avg": -110.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 193,
+          "avg": 236
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 117,
+          "avg": 157.5
+        },
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 162,
+          "avg": 148
+        },
+        {
+          "currency": "EUR",
+          "w1": -50,
+          "d1": -3,
+          "avg": -26.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 78,
+          "d1": -150,
+          "avg": -36
+        },
+        {
+          "currency": "CAD",
+          "w1": -103,
+          "d1": -118,
+          "avg": -110.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": -30,
+          "avg": -178.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -171,
+          "avg": -190
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-22 01:01:00",
+      "recordNumber": 9,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 189,
+          "avg": 234
+        },
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 187,
+          "avg": 160.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 92,
+          "avg": 145
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -263,
+          "avg": -236
+        },
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": -72,
+          "avg": -199.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -103,
+          "d1": -41,
+          "avg": -72
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 189,
+          "avg": 234
+        },
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 187,
+          "avg": 160.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 92,
+          "avg": 145
+        },
+        {
+          "currency": "GBP",
+          "w1": 78,
+          "d1": -99,
+          "avg": -10.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -50,
+          "d1": 7,
+          "avg": -21.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -103,
+          "d1": -41,
+          "avg": -72
+        },
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": -72,
+          "avg": -199.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -263,
+          "avg": -236
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-21 01:01:00",
+      "recordNumber": 10,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 198,
+          "avg": 238.5
+        },
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 192,
+          "avg": 163
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 103,
+          "avg": 150.5
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": -184,
+          "avg": -255.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -274,
+          "avg": -241.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -103,
+          "d1": 32,
+          "avg": -35.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 279,
+          "d1": 198,
+          "avg": 238.5
+        },
+        {
+          "currency": "USD",
+          "w1": 134,
+          "d1": 192,
+          "avg": 163
+        },
+        {
+          "currency": "JPY",
+          "w1": 198,
+          "d1": 103,
+          "avg": 150.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 78,
+          "d1": -68,
+          "avg": 5
+        },
+        {
+          "currency": "EUR",
+          "w1": -50,
+          "d1": 1,
+          "avg": -24.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -103,
+          "d1": 32,
+          "avg": -35.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -209,
+          "d1": -274,
+          "avg": -241.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -327,
+          "d1": -184,
+          "avg": -255.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-18 01:01:00",
+      "recordNumber": 11,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 265,
+          "d1": 157,
+          "avg": 211
+        },
+        {
+          "currency": "JPY",
+          "w1": 211,
+          "d1": 191,
+          "avg": 201
+        },
+        {
+          "currency": "USD",
+          "w1": -66,
+          "d1": 190,
+          "avg": 62
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -298,
+          "d1": -195,
+          "avg": -246.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -70,
+          "d1": -284,
+          "avg": -177
+        },
+        {
+          "currency": "CAD",
+          "w1": -153,
+          "d1": 64,
+          "avg": -44.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 265,
+          "d1": 157,
+          "avg": 211
+        },
+        {
+          "currency": "JPY",
+          "w1": 211,
+          "d1": 191,
+          "avg": 201
+        },
+        {
+          "currency": "USD",
+          "w1": -66,
+          "d1": 190,
+          "avg": 62
+        },
+        {
+          "currency": "GBP",
+          "w1": 124,
+          "d1": -88,
+          "avg": 18
+        },
+        {
+          "currency": "EUR",
+          "w1": -13,
+          "d1": -35,
+          "avg": -24
+        },
+        {
+          "currency": "CAD",
+          "w1": -153,
+          "d1": 64,
+          "avg": -44.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -70,
+          "d1": -284,
+          "avg": -177
+        },
+        {
+          "currency": "CHF",
+          "w1": -298,
+          "d1": -195,
+          "avg": -246.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-17 01:01:00",
+      "recordNumber": 12,
+      "strongest": [
+        {
+          "currency": "JPY",
+          "w1": 211,
+          "d1": 237,
+          "avg": 224
+        },
+        {
+          "currency": "AUD",
+          "w1": 265,
+          "d1": 147,
+          "avg": 206
+        },
+        {
+          "currency": "USD",
+          "w1": -66,
+          "d1": 175,
+          "avg": 54.5
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -298,
+          "d1": -235,
+          "avg": -266.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -70,
+          "d1": -259,
+          "avg": -164.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -153,
+          "d1": 29,
+          "avg": -62
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "JPY",
+          "w1": 211,
+          "d1": 237,
+          "avg": 224
+        },
+        {
+          "currency": "AUD",
+          "w1": 265,
+          "d1": 147,
+          "avg": 206
+        },
+        {
+          "currency": "USD",
+          "w1": -66,
+          "d1": 175,
+          "avg": 54.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 124,
+          "d1": -37,
+          "avg": 43.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -13,
+          "d1": -57,
+          "avg": -35
+        },
+        {
+          "currency": "CAD",
+          "w1": -153,
+          "d1": 29,
+          "avg": -62
+        },
+        {
+          "currency": "NZD",
+          "w1": -70,
+          "d1": -259,
+          "avg": -164.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -298,
+          "d1": -235,
+          "avg": -266.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-16 01:01:00",
+      "recordNumber": 13,
+      "strongest": [
+        {
+          "currency": "JPY",
+          "w1": 211,
+          "d1": 232,
+          "avg": 221.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 265,
+          "d1": 82,
+          "avg": 173.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 124,
+          "d1": -26,
+          "avg": 49
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -298,
+          "d1": -205,
+          "avg": -251.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -70,
+          "d1": -274,
+          "avg": -172
+        },
+        {
+          "currency": "CAD",
+          "w1": -153,
+          "d1": 87,
+          "avg": -33
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "JPY",
+          "w1": 211,
+          "d1": 232,
+          "avg": 221.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 265,
+          "d1": 82,
+          "avg": 173.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 124,
+          "d1": -26,
+          "avg": 49
+        },
+        {
+          "currency": "USD",
+          "w1": -66,
+          "d1": 105,
+          "avg": 19.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -13,
+          "d1": -1,
+          "avg": -7
+        },
+        {
+          "currency": "CAD",
+          "w1": -153,
+          "d1": 87,
+          "avg": -33
+        },
+        {
+          "currency": "NZD",
+          "w1": -70,
+          "d1": -274,
+          "avg": -172
+        },
+        {
+          "currency": "CHF",
+          "w1": -298,
+          "d1": -205,
+          "avg": -251.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-14 01:01:00",
+      "recordNumber": 14,
+      "strongest": [
+        {
+          "currency": "JPY",
+          "w1": 211,
+          "d1": 274,
+          "avg": 242.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 265,
+          "d1": 151,
+          "avg": 208
+        },
+        {
+          "currency": "GBP",
+          "w1": 124,
+          "d1": 3,
+          "avg": 63.5
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -298,
+          "d1": -235,
+          "avg": -266.5
+        },
+        {
+          "currency": "NZD",
+          "w1": -70,
+          "d1": -289,
+          "avg": -179.5
+        },
+        {
+          "currency": "USD",
+          "w1": -66,
+          "d1": -16,
+          "avg": -41
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "JPY",
+          "w1": 211,
+          "d1": 274,
+          "avg": 242.5
+        },
+        {
+          "currency": "AUD",
+          "w1": 265,
+          "d1": 151,
+          "avg": 208
+        },
+        {
+          "currency": "GBP",
+          "w1": 124,
+          "d1": 3,
+          "avg": 63.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -13,
+          "d1": 30,
+          "avg": 8.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -153,
+          "d1": 82,
+          "avg": -35.5
+        },
+        {
+          "currency": "USD",
+          "w1": -66,
+          "d1": -16,
+          "avg": -41
+        },
+        {
+          "currency": "NZD",
+          "w1": -70,
+          "d1": -289,
+          "avg": -179.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -298,
+          "d1": -235,
+          "avg": -266.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-11 01:01:00",
+      "recordNumber": 15,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 147,
+          "avg": 227.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 284,
+          "avg": 148
+        },
+        {
+          "currency": "GBP",
+          "w1": 137,
+          "d1": -32,
+          "avg": 52.5
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -234,
+          "avg": -285
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -294,
+          "avg": -144.5
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -42,
+          "avg": -41.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 147,
+          "avg": 227.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 284,
+          "avg": 148
+        },
+        {
+          "currency": "GBP",
+          "w1": 137,
+          "d1": -32,
+          "avg": 52.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -56,
+          "d1": 141,
+          "avg": 42.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -29,
+          "d1": 30,
+          "avg": 0.5
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -42,
+          "avg": -41.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -294,
+          "avg": -144.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -234,
+          "avg": -285
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-10 01:01:00",
+      "recordNumber": 16,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 240,
+          "avg": 274
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 251,
+          "avg": 131.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 137,
+          "d1": -42,
+          "avg": 47.5
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -240,
+          "avg": -288
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -213,
+          "avg": -104
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -116,
+          "avg": -78.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 240,
+          "avg": 274
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 251,
+          "avg": 131.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 137,
+          "d1": -42,
+          "avg": 47.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -56,
+          "d1": 80,
+          "avg": 12
+        },
+        {
+          "currency": "EUR",
+          "w1": -29,
+          "d1": 40,
+          "avg": 5.5
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -116,
+          "avg": -78.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -213,
+          "avg": -104
+        },
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -240,
+          "avg": -288
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-09 01:01:00",
+      "recordNumber": 17,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 239,
+          "avg": 273.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 252,
+          "avg": 132
+        },
+        {
+          "currency": "GBP",
+          "w1": 137,
+          "d1": -99,
+          "avg": 19
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -195,
+          "avg": -265.5
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -157,
+          "avg": -99
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -162,
+          "avg": -78.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 239,
+          "avg": 273.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 252,
+          "avg": 132
+        },
+        {
+          "currency": "GBP",
+          "w1": 137,
+          "d1": -99,
+          "avg": 19
+        },
+        {
+          "currency": "CAD",
+          "w1": -56,
+          "d1": 91,
+          "avg": 17.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -29,
+          "d1": 31,
+          "avg": 1
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -162,
+          "avg": -78.5
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -157,
+          "avg": -99
+        },
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -195,
+          "avg": -265.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-08 01:01:00",
+      "recordNumber": 18,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 268,
+          "avg": 288
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 242,
+          "avg": 127
+        },
+        {
+          "currency": "CAD",
+          "w1": -56,
+          "d1": 132,
+          "avg": 38
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -247,
+          "avg": -291.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -198,
+          "avg": -96.5
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -117,
+          "avg": -79
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 268,
+          "avg": 288
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 242,
+          "avg": 127
+        },
+        {
+          "currency": "CAD",
+          "w1": -56,
+          "d1": 132,
+          "avg": 38
+        },
+        {
+          "currency": "GBP",
+          "w1": 137,
+          "d1": -97,
+          "avg": 20
+        },
+        {
+          "currency": "EUR",
+          "w1": -29,
+          "d1": 17,
+          "avg": -6
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -117,
+          "avg": -79
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -198,
+          "avg": -96.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -247,
+          "avg": -291.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-07 01:01:00",
+      "recordNumber": 19,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 253,
+          "avg": 280.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 150,
+          "avg": 81
+        },
+        {
+          "currency": "GBP",
+          "w1": 137,
+          "d1": -71,
+          "avg": 33
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -257,
+          "avg": -296.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -152,
+          "avg": -73.5
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -93,
+          "avg": -67
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 308,
+          "d1": 253,
+          "avg": 280.5
+        },
+        {
+          "currency": "JPY",
+          "w1": 12,
+          "d1": 150,
+          "avg": 81
+        },
+        {
+          "currency": "GBP",
+          "w1": 137,
+          "d1": -71,
+          "avg": 33
+        },
+        {
+          "currency": "CAD",
+          "w1": -56,
+          "d1": 117,
+          "avg": 30.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -29,
+          "d1": 53,
+          "avg": 12
+        },
+        {
+          "currency": "USD",
+          "w1": -41,
+          "d1": -93,
+          "avg": -67
+        },
+        {
+          "currency": "NZD",
+          "w1": 5,
+          "d1": -152,
+          "avg": -73.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -336,
+          "d1": -257,
+          "avg": -296.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-04 01:01:00",
+      "recordNumber": 20,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 201,
+          "avg": 253
+        },
+        {
+          "currency": "CAD",
+          "w1": -36,
+          "d1": 151,
+          "avg": 57.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -131,
+          "avg": 17
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -190,
+          "avg": -252
+        },
+        {
+          "currency": "USD",
+          "w1": 83,
+          "d1": -218,
+          "avg": -67.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -58,
+          "d1": 35,
+          "avg": -11.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 201,
+          "avg": 253
+        },
+        {
+          "currency": "CAD",
+          "w1": -36,
+          "d1": 151,
+          "avg": 57.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -131,
+          "avg": 17
+        },
+        {
+          "currency": "JPY",
+          "w1": -221,
+          "d1": 240,
+          "avg": 9.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 76,
+          "d1": -88,
+          "avg": -6
+        },
+        {
+          "currency": "EUR",
+          "w1": -58,
+          "d1": 35,
+          "avg": -11.5
+        },
+        {
+          "currency": "USD",
+          "w1": 83,
+          "d1": -218,
+          "avg": -67.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -190,
+          "avg": -252
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-03 01:01:00",
+      "recordNumber": 21,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 233,
+          "avg": 269
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -34,
+          "avg": 65.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -36,
+          "d1": 155,
+          "avg": 59.5
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -218,
+          "avg": -266
+        },
+        {
+          "currency": "JPY",
+          "w1": -221,
+          "d1": 87,
+          "avg": -67
+        },
+        {
+          "currency": "NZD",
+          "w1": 76,
+          "d1": -148,
+          "avg": -36
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 233,
+          "avg": 269
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -34,
+          "avg": 65.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -36,
+          "d1": 155,
+          "avg": 59.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -58,
+          "d1": 43,
+          "avg": -7.5
+        },
+        {
+          "currency": "USD",
+          "w1": 83,
+          "d1": -118,
+          "avg": -17.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 76,
+          "d1": -148,
+          "avg": -36
+        },
+        {
+          "currency": "JPY",
+          "w1": -221,
+          "d1": 87,
+          "avg": -67
+        },
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -218,
+          "avg": -266
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-02 01:01:00",
+      "recordNumber": 22,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 274,
+          "avg": 289.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -48,
+          "avg": 58.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 76,
+          "d1": 31,
+          "avg": 53.5
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -177,
+          "avg": -245.5
+        },
+        {
+          "currency": "JPY",
+          "w1": -221,
+          "d1": -89,
+          "avg": -155
+        },
+        {
+          "currency": "USD",
+          "w1": 83,
+          "d1": -120,
+          "avg": -18.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 274,
+          "avg": 289.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -48,
+          "avg": 58.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 76,
+          "d1": 31,
+          "avg": 53.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -36,
+          "d1": 61,
+          "avg": 12.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -58,
+          "d1": 68,
+          "avg": 5
+        },
+        {
+          "currency": "USD",
+          "w1": 83,
+          "d1": -120,
+          "avg": -18.5
+        },
+        {
+          "currency": "JPY",
+          "w1": -221,
+          "d1": -89,
+          "avg": -155
+        },
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -177,
+          "avg": -245.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-01 01:01:00",
+      "recordNumber": 23,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 299,
+          "avg": 302
+        },
+        {
+          "currency": "NZD",
+          "w1": 76,
+          "d1": 69,
+          "avg": 72.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -95,
+          "avg": 35
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -198,
+          "avg": -256
+        },
+        {
+          "currency": "JPY",
+          "w1": -221,
+          "d1": -71,
+          "avg": -146
+        },
+        {
+          "currency": "USD",
+          "w1": 83,
+          "d1": -110,
+          "avg": -13.5
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 299,
+          "avg": 302
+        },
+        {
+          "currency": "NZD",
+          "w1": 76,
+          "d1": 69,
+          "avg": 72.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -95,
+          "avg": 35
+        },
+        {
+          "currency": "CAD",
+          "w1": -36,
+          "d1": 57,
+          "avg": 10.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -58,
+          "d1": 49,
+          "avg": -4.5
+        },
+        {
+          "currency": "USD",
+          "w1": 83,
+          "d1": -110,
+          "avg": -13.5
+        },
+        {
+          "currency": "JPY",
+          "w1": -221,
+          "d1": -71,
+          "avg": -146
+        },
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -198,
+          "avg": -256
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-31 01:01:00",
+      "recordNumber": 24,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 293,
+          "avg": 299
+        },
+        {
+          "currency": "NZD",
+          "w1": 76,
+          "d1": 169,
+          "avg": 122.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -44,
+          "avg": 60.5
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -193,
+          "avg": -253.5
+        },
+        {
+          "currency": "JPY",
+          "w1": -221,
+          "d1": -137,
+          "avg": -179
+        },
+        {
+          "currency": "EUR",
+          "w1": -58,
+          "d1": 4,
+          "avg": -27
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 305,
+          "d1": 293,
+          "avg": 299
+        },
+        {
+          "currency": "NZD",
+          "w1": 76,
+          "d1": 169,
+          "avg": 122.5
+        },
+        {
+          "currency": "GBP",
+          "w1": 165,
+          "d1": -44,
+          "avg": 60.5
+        },
+        {
+          "currency": "USD",
+          "w1": 83,
+          "d1": -99,
+          "avg": -8
+        },
+        {
+          "currency": "CAD",
+          "w1": -36,
+          "d1": 7,
+          "avg": -14.5
+        },
+        {
+          "currency": "EUR",
+          "w1": -58,
+          "d1": 4,
+          "avg": -27
+        },
+        {
+          "currency": "JPY",
+          "w1": -221,
+          "d1": -137,
+          "avg": -179
+        },
+        {
+          "currency": "CHF",
+          "w1": -314,
+          "d1": -193,
+          "avg": -253.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-28 01:01:00",
+      "recordNumber": 25,
+      "strongest": [
+        {
+          "currency": "AUD",
+          "w1": 221,
+          "d1": 278,
+          "avg": 249.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 186,
+          "d1": 124,
+          "avg": 155
+        },
+        {
+          "currency": "GBP",
+          "w1": 177,
+          "d1": -31,
+          "avg": 73
+        }
+      ],
+      "weakest": [
+        {
+          "currency": "CHF",
+          "w1": -264,
+          "d1": -133,
+          "avg": -198.5
+        },
+        {
+          "currency": "JPY",
+          "w1": -143,
+          "d1": -88,
+          "avg": -115.5
+        },
+        {
+          "currency": "USD",
+          "w1": -32,
+          "d1": -158,
+          "avg": -95
+        }
+      ],
+      "allCurrencies": [
+        {
+          "currency": "AUD",
+          "w1": 221,
+          "d1": 278,
+          "avg": 249.5
+        },
+        {
+          "currency": "NZD",
+          "w1": 186,
+          "d1": 124,
+          "avg": 155
+        },
+        {
+          "currency": "GBP",
+          "w1": 177,
+          "d1": -31,
+          "avg": 73
+        },
+        {
+          "currency": "EUR",
+          "w1": -56,
+          "d1": 73,
+          "avg": 8.5
+        },
+        {
+          "currency": "CAD",
+          "w1": -89,
+          "d1": -65,
+          "avg": -77
+        },
+        {
+          "currency": "USD",
+          "w1": -32,
+          "d1": -158,
+          "avg": -95
+        },
+        {
+          "currency": "JPY",
+          "w1": -143,
+          "d1": -88,
+          "avg": -115.5
+        },
+        {
+          "currency": "CHF",
+          "w1": -264,
+          "d1": -133,
+          "avg": -198.5
+        }
+      ]
     }
   ],
-  "totalRecords": 2,
-  "generatedAt": "2026-10-02T05:32:41.363Z",
+  "totalRecords": 25,
+  "generatedAt": "2026-10-02T05:50:58.344Z",
   "dataSource": "Google Sheets - FX Cloud Strength",
   "description": "Historical currency strength data - last 7 records"
 }
