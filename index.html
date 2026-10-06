@@ -185,6 +185,20 @@
             transition: all 0.3s ease;
         }
 
+        .tab-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+        }
+
+        .tab-icon {
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+
         .tab-button:hover {
             background: #cbd5e0;
         }
@@ -776,12 +790,12 @@
 
        <!-- Tabs Navigation -->
 <div class="tabs-nav">
-    <button class="tab-button active" data-tab="dashboard" onclick="switchTab('dashboard')">📊 Dashboard</button>
-    <button class="tab-button" data-tab="charts" onclick="switchTab('charts')">📈 Wykresy</button>
-    <button class="tab-button" data-tab="ideas" onclick="switchTab('ideas')">💡 Pomysły Inwestycyjne</button>
-    <button class="tab-button" data-tab="history" onclick="switchTab('history')">📁 Archiwum Siły Walut</button>
-    <button class="tab-button" onclick="window.open('webinary.html', '_blank')">🎥 Webinary</button>
-    <button class="tab-button" onclick="window.location.href='kalkulator.html'">🧮 Kalkulator Ichimoku</button>
+    <button class="tab-button active" data-tab="dashboard" onclick="switchTab('dashboard')"><img class="tab-icon" src="img/ikony/ikona-dashboard.png" alt="">Dashboard</button>
+    <button class="tab-button" data-tab="charts" onclick="switchTab('charts')"><img class="tab-icon" src="img/ikony/ikona-wykresy.png" alt="">Wykresy</button>
+    <button class="tab-button" data-tab="ideas" onclick="switchTab('ideas')"><img class="tab-icon" src="img/ikony/ikona-pomysly.png" alt="">Pomysły Inwestycyjne</button>
+    <button class="tab-button" data-tab="history" onclick="switchTab('history')"><img class="tab-icon" src="img/ikony/ikona-archiwum.png" alt="">Archiwum Siły Walut</button>
+    <button class="tab-button" onclick="window.open('webinary.html', '_blank')"><img class="tab-icon" src="img/ikony/ikona-webinary.png" alt="">Webinary</button>
+    <button class="tab-button" onclick="window.location.href='kalkulator.html'"><img class="tab-icon" src="img/ikony/ikona-kalkulator.png" alt="">Kalkulator Ichimoku</button>
 </div>
 
         <!-- Tab 1: Dashboard -->
