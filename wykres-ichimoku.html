@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wykres Ichimoku · Ichimoku Trader</title>
+<meta name="description" content="Wykres Ichimoku: wgraj zrzut wykresu, skalibruj osie i nanieś cele V, N, E, NT, cykle Hosody i taitō. Zapis jako obrazek PNG.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&family=Shippori+Mincho:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF0F5; --surface:#FFFFFF; --surface-2:#F5F7FA; --ink:#16233B; --ink-2:#4A5A75; --line:#D5DCE7;
+  --indigo:#24467A; --indigo-soft:#E3EAF5; --bull:#1F7A65; --bull-soft:#E1F1EC; --bear:#A8432F; --bear-soft:#F6E6E1;
+  --gold:#D9A521; --gold-soft:#FBF1D5; --focus:#2F6FD6; --sun:#E60012; --sun-soft:#FDE3E5;
+  --serif:"Spectral",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --jp:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1524; --surface:#142036; --surface-2:#1A2843; --ink:#E5EAF3; --ink-2:#9FB0CA; --line:#2A3B5A;
+    --indigo:#8FB0E6; --indigo-soft:#1F3254; --bull:#4FC1A3; --bull-soft:#173A36; --bear:#E58B74; --bear-soft:#3E2523;
+    --gold:#E8BC4A; --gold-soft:#3A3220; --focus:#7FA8F0; --sun:#F0303E; --sun-soft:#43202A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1524; --surface:#142036; --surface-2:#1A2843; --ink:#E5EAF3; --ink-2:#9FB0CA; --line:#2A3B5A;
+  --indigo:#8FB0E6; --indigo-soft:#1F3254; --bull:#4FC1A3; --bull-soft:#173A36; --bear:#E58B74; --bear-soft:#3E2523;
+  --gold:#E8BC4A; --gold-soft:#3A3220; --focus:#7FA8F0; --sun:#F0303E; --sun-soft:#43202A;
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1360px;margin:0 auto;padding:0 20px}
+.num{font-variant-numeric:tabular-nums}
+
+.band{background:#121C30;color:#EEF2F8;border-bottom:3px solid var(--sun)}
+.bandin{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-top:18px;padding-bottom:18px}
+.brand{display:flex;gap:14px;align-items:center}
+.brand .jp{font-family:var(--jp);font-size:1.5rem;color:#fff;line-height:1;padding:8px 10px;border:1px solid rgba(255,255,255,.2);border-radius:8px}
+.brand h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.05;margin:0;color:#fff}
+.brand p{margin:4px 0 0;color:#B8C4D8;font-size:.92rem;max-width:62ch}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.backbtn{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:var(--sun);color:#fff;text-decoration:none;font-weight:600;font-size:.88rem}
+.backbtn:hover{background:#C9000F}
+.seg{display:inline-flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;padding:5px 12px;border-radius:999px;cursor:pointer;font-size:.85rem;color:#B8C4D8}
+.seg button[aria-pressed="true"]{background:#fff;color:#121C30}
+.iconbtn{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;border-radius:999px;width:36px;height:36px;cursor:pointer;display:grid;place-items:center}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start;padding:22px 0 40px}
+@media (max-width:1000px){.layout{grid-template-columns:1fr}}
+
+.stage{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.stage.over{outline:3px dashed var(--gold);outline-offset:-8px}
+.modebar{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--line);font-size:.86rem;color:var(--ink-2);min-height:44px;flex-wrap:wrap}
+.modebar .on{color:var(--ink);font-weight:600}
+.modebar .on b{background:var(--gold);color:#16233B;padding:1px 8px;border-radius:999px;margin-left:4px}
+.readout{font-variant-numeric:tabular-nums;white-space:nowrap}
+#cv{display:none;width:100%;max-width:none;height:auto;cursor:crosshair;touch-action:none}
+.scroller{overflow:auto}
+body.zoomed .scroller{max-height:84vh}
+.viewctl{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.vbtn{border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:.8rem;font-weight:600;color:var(--ink)}
+.vbtn[aria-pressed="true"]{background:var(--indigo);color:var(--surface);border-color:var(--indigo)}
+.vsep{width:1px;height:20px;background:var(--line);margin:0 2px}
+body.wide .wrap{max-width:none}
+body.wide .layout{grid-template-columns:1fr}
+body.wide .side{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}
+.stage.has #cv{display:block}
+.drop{min-height:420px;display:grid;place-items:center;text-align:center;padding:28px;color:var(--ink-2)}
+.drop .big{font-family:var(--serif);font-size:1.35rem;color:var(--ink);margin:0 0 6px}
+.drop .cta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.stage.has .drop{display:none}
+.loupe{position:absolute;top:56px;left:14px;width:150px;height:150px;border-radius:50%;border:2px solid var(--gold);background:var(--surface-2);pointer-events:none;display:none;box-shadow:0 6px 20px rgba(8,14,28,.35)}
+.loupe.r{left:auto;right:14px}
+.stage.hov .loupe{display:block}
+
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h2{font-family:var(--serif);font-weight:600;font-size:1.08rem;margin:0 0 10px}
+.hint{font-size:.8rem;color:var(--ink-2);margin:8px 0 0}
+.warn{margin-top:10px;padding:8px 10px;border-radius:8px;background:var(--bear-soft);color:var(--bear);font-size:.84rem;display:none}
+.warn.on{display:block}
+.prow{display:grid;grid-template-columns:92px minmax(0,1fr) 20px;gap:8px;align-items:center;margin-top:7px}
+.pick{border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:7px 6px;cursor:pointer;font-weight:600;font-size:.84rem;color:var(--ink);text-align:center}
+.pick:hover{border-color:var(--gold)}
+.pick[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#16233B}
+.ok{color:var(--bull);font-weight:700;text-align:center}
+input.v,select.v{background:var(--gold-soft);border:1px solid transparent;border-bottom:2px solid var(--gold);border-radius:6px 6px 2px 2px;padding:6px 8px;width:100%;min-width:0;font-size:.92rem;color:var(--ink)}
+select.v{background:var(--surface-2);border:1px solid var(--line)}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.82rem;color:var(--ink-2);font-weight:500;margin-top:10px}
+.toggle{display:flex;gap:8px;align-items:center;font-size:.86rem;color:var(--ink);cursor:pointer;margin-top:7px}
+.toggle input{accent-color:var(--indigo);width:16px;height:16px;flex:0 0 auto}
+.swatch{display:inline-block;width:10px;height:10px;border-radius:3px;flex:0 0 auto}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:500;color:var(--ink)}
+.btn:hover{border-color:var(--indigo)}
+.btn.primary{background:var(--indigo);color:var(--surface);border-color:var(--indigo)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.range{display:flex;gap:10px;align-items:center;margin-top:10px;font-size:.84rem;color:var(--ink-2)}
+.range input{flex:1;accent-color:var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:3px 10px;cursor:pointer;font-size:.8rem;font-weight:600;color:var(--ink-2)}
+.chip.s{border-style:solid}
+.chip[aria-pressed="true"]{background:var(--sun);border-color:var(--sun);color:#fff}
+.tvals{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.tv{display:flex;gap:6px;align-items:center;padding:6px 8px;border-radius:8px;background:var(--surface-2);font-size:.82rem}
+.tv b{font-family:var(--serif)}
+.tv span.num{margin-left:auto;font-weight:600}
+.dir{font-size:.84rem;font-weight:600;margin-top:8px}
+.dir.up{color:var(--bull)} .dir.down{color:var(--bear)}
+table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:10px}
+th{font-weight:500;color:var(--ink-2);font-size:.74rem;text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
+td{padding:4px 6px;border-bottom:1px solid var(--line)}
+tr.off td{color:var(--ink-2)}
+td.n{text-align:right;white-space:nowrap}
+footer{border-top:1px solid var(--line);padding:18px 0 32px;color:var(--ink-2);font-size:.82rem}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:10px;font-size:.9rem;opacity:0;transition:.25s;pointer-events:none;max-width:calc(100vw - 32px);z-index:50}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="band">
+  <div class="wrap bandin">
+    <div class="brand">
+      <span class="jp" aria-hidden="true">一目</span>
+      <div><h1 data-t="title"></h1><p data-t="subtitle"></p></div>
+    </div>
+    <div class="tools">
+      <a class="backbtn" href="kalkulator-ichimoku.html"><span aria-hidden="true">←</span><span data-t="back"></span></a>
+      <div class="seg" role="group" aria-label="Language" id="langSeg">
+        <button data-lang="pl">PL</button><button data-lang="it">IT</button><button data-lang="en">EN</button>
+      </div>
+      <button class="iconbtn" id="themeBtn" aria-label="Theme" title="Theme">◐</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="layout">
+    <section class="stage" id="stage">
+      <div class="modebar">
+        <span id="modeTxt"></span>
+        <span class="readout" id="readout"></span>
+        <span class="viewctl">
+          <button class="vbtn" data-view="wide"><span aria-hidden="true">⤢ </span><span data-t="wide"></span></button>
+          <span class="vsep" aria-hidden="true"></span>
+          <button class="vbtn" data-zoom="1" data-t="fit"></button>
+          <button class="vbtn" data-zoom="1.5">150%</button>
+          <button class="vbtn" data-zoom="2">200%</button>
+          <button class="vbtn" data-zoom="3">300%</button>
+        </span>
+      </div>
+      <div class="drop" id="drop">
+        <div>
+          <p class="big" data-t="empty"></p>
+          <p style="margin:0" data-t="pasteHint"></p>
+          <div class="cta">
+            <button class="btn primary" data-act="load" data-t="load"></button>
+            <button class="btn" data-act="demo" data-t="demo"></button>
+          </div>
+        </div>
+      </div>
+      <div class="scroller" id="scroller"><canvas id="cv" aria-label="Chart"></canvas></div>
+      <canvas class="loupe" id="loupe" width="150" height="150" aria-hidden="true"></canvas>
+    </section>
+
+    <aside class="side">
+      <div class="card">
+        <h2 data-t="s1"></h2>
+        <div class="btns" style="margin-top:0">
+          <button class="btn primary" data-act="load" data-t="load"></button>
+          <button class="btn" data-act="demo" data-t="demo"></button>
+        </div>
+        <input type="file" id="file" accept="image/*" hidden>
+        <p class="hint" data-t="pasteHint"></p>
+        <div class="range"><span data-t="extra"></span><input type="range" id="extra" min="0" max="80" step="5"><span class="num" id="extraOut"></span></div>
+        <label class="toggle"><input type="checkbox" id="tfD1"><span data-t="tfD1"></span></label>
+      </div>
+
+      <div class="card">
+        <h2 data-t="s2"></h2>
+        <div class="prow"><button class="pick" data-pick="p1" data-t="price1"></button><input class="v num" data-v="v1" inputmode="decimal" autocomplete="off" data-tp="pricePh"><span class="ok" data-ok="p1"></span></div>
+        <div class="prow"><button class="pick" data-pick="p2" data-t="price2"></button><input class="v num" data-v="v2" inputmode="decimal" autocomplete="off" data-tp="pricePh"><span class="ok" data-ok="p2"></span></div>
+        <div class="prow"><button class="pick" data-pick="k1" data-t="candle1"></button><input class="v" type="date" data-v="kd" data-ta="c1date"><span class="ok" data-ok="k1"></span></div>
+        <div class="prow"><button class="pick" data-pick="k2" data-t="candle2"></button><input class="v num" data-v="kn" inputmode="numeric" autocomplete="off" data-tp="c2n"><span class="ok" data-ok="k2"></span></div>
+        <p class="hint" data-t="calHint"></p>
+      </div>
+
+      <div class="card">
+        <h2 data-t="s3"></h2>
+        <div class="prow"><button class="pick" data-pick="A">A</button><input class="v num" data-v="A" inputmode="decimal" autocomplete="off"><span class="ok" data-ok="A"></span></div>
+        <div class="prow"><button class="pick" data-pick="B">B</button><input class="v num" data-v="B" inputmode="decimal" autocomplete="off"><span class="ok" data-ok="B"></span></div>
+        <div class="prow"><button class="pick" data-pick="C">C</button><input class="v num" data-v="C" inputmode="decimal" autocomplete="off"><span class="ok" data-ok="C"></span></div>
+        <div class="dir" id="dirTxt"></div>
+        <div class="warn" id="warn" role="status"></div>
+        <div class="tvals" id="tvals"></div>
+        <p class="hint" data-t="ptHint"></p>
+        <div class="btns"><button class="btn" data-act="clearPts" data-t="clearPts"></button></div>
+      </div>
+
+      <div class="card">
+        <h2 data-t="s4"></h2>
+        <div style="font-size:.8rem;color:var(--ink-2);font-weight:500" data-t="targets"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 10px">
+          <label class="toggle"><input type="checkbox" data-show="V"><span class="swatch" style="background:#2F6FD6"></span>V</label>
+          <label class="toggle"><input type="checkbox" data-show="N"><span class="swatch" style="background:#1FA37F"></span>N</label>
+          <label class="toggle"><input type="checkbox" data-show="E"><span class="swatch" style="background:#E0A21B"></span>E</label>
+          <label class="toggle"><input type="checkbox" data-show="NT"><span class="swatch" style="background:#9B5DE5"></span>NT</label>
+        </div>
+        <label class="toggle"><input type="checkbox" id="mult"><span data-t="mult"></span></label>
+        <label class="toggle"><input type="checkbox" id="legs"><span data-t="legs"></span></label>
+        <label class="f"><span data-t="anchor"></span><select class="v" id="anchor"></select></label>
+        <div class="chips" id="chips"></div>
+        <label class="toggle"><input type="checkbox" id="taitoB"><span class="swatch" style="background:#E0A21B"></span><span data-t="taitoB"></span></label>
+        <label class="toggle"><input type="checkbox" id="taitoC"><span class="swatch" style="background:#E0A21B"></span><span data-t="taitoC"></span></label>
+        <div class="warn" id="cycWarn" role="status"></div>
+        <table id="cycTbl"></table>
+      </div>
+
+      <div class="card">
+        <h2 data-t="s5"></h2>
+        <label class="f" style="margin-top:0"><span data-t="name"></span><input class="v" id="name" maxlength="80" autocomplete="off" data-tp="namePh"></label>
+        <div class="btns">
+          <button class="btn primary" data-act="png" data-t="png"></button>
+          <button class="btn" data-act="share" id="shareBtn" data-t="share" hidden></button>
+        </div>
+        <div class="btns"><button class="btn" data-act="toCalc" data-t="toCalc"></button></div>
+        <p class="hint" data-t="toCalcHint"></p>
+      </div>
+    </aside>
+  </div>
+  <footer><strong>Ichimoku Trader</strong> · <span data-t="disclaimer"></span></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const CALC_KEY="ichimokuCalc.v1",KEY="ichimokuChart.v1",THEME_KEY="ichimokuCalc.theme";
+function readCalc(){try{const o=JSON.parse(localStorage.getItem(CALC_KEY)||"{}");return o&&typeof o==="object"?o:{}}catch(e){return {}}}
+function writeCalc(o){try{localStorage.setItem(CALC_KEY,JSON.stringify(o));return true}catch(e){return false}}
+let calc=readCalc();
+
+/* ---------- i18n ---------- */
+const T={
+pl:{wide:"Szeroki widok",fit:"Dopasuj",title:"Wykres Ichimoku",subtitle:"Wgraj zrzut wykresu, skalibruj osie i nanieś cele cenowe oraz cykle czasowe Hosody. Wynik zapiszesz jako obrazek PNG.",back:"Kalkulator",
+s1:"1. Wykres",load:"Wgraj obrazek",demo:"Przykład",pasteHint:"Możesz też przeciągnąć plik na pole wykresu albo wkleić zrzut ekranu (Ctrl+V).",empty:"Wgraj zrzut wykresu z MT5 lub TradingView",
+extra:"Miejsce po prawej",tfD1:"Interwał D1 (1 świeca = 1 dzień handlowy)",
+s2:"2. Kalibracja osi",price1:"Cena 1",price2:"Cena 2",candle1:"Świeca 1",candle2:"Świeca 2",pricePh:"wartość ceny",c1date:"data świecy 1",c2n:"ile świec od świecy 1",
+calHint:"Kliknij przycisk, potem miejsce na wykresie. Ceny: dwa poziomy daleko od siebie (np. etykiety na osi cen) i ich wartości. Czas: dwie świece daleko od siebie, data pierwszej i liczba świec między nimi.",
+s3:"3. Punkty fali",ptHint:"Kliknij A, potem knot na wykresie – dalej B i C. Cenę możesz poprawić ręcznie, a punkty przeciągać myszą.",clearPts:"Wyczyść punkty",
+dirUp:"↗ Fala wzrostowa",dirDown:"↘ Fala spadkowa",warnUp:"Dla fali wzrostowej powinno być A < C < B.",warnDown:"Dla fali spadkowej powinno być A > C > B.",
+s4:"4. Co narysować",targets:"Cele cenowe",mult:"Wielokrotności V i E",legs:"Odcinki z liczbą świec",anchor:"Cykle Hosody liczone od",anchorCalc:"daty z kalkulatora",anchorNone:"bez cykli",
+taitoB:"Taitō: czas A–B odłożony od B",taitoC:"Taitō: czas A–B odłożony od C",tB:"T od B",tC:"T od C",cN:"Cykl",cDate:"Data",offChart:"poza wykresem",
+needPrice:"Najpierw skalibruj cenę (Cena 1 i Cena 2).",needTime:"Cykle i taitō wymagają kalibracji czasu (Świeca 1 i Świeca 2).",needDate:"Dla dat i kotwicy z kalkulatora wpisz datę świecy 1 i zaznacz interwał D1.",needAnchor:"Zaznacz punkt, od którego liczysz cykle.",
+s5:"5. Zapis",name:"Nazwa analizy",namePh:"np. EURUSD D1 – październik",png:"Zapisz PNG",share:"Udostępnij",toCalc:"Przenieś A/B/C do kalkulatora",
+toCalcHint:"Działa, gdy wykres i kalkulator leżą na tej samej stronie. Jako datę cykli kalkulator dostanie datę wybranego punktu.",toCalcOk:"Zapisano w kalkulatorze – otwórz go, aby zobaczyć obliczenia.",toCalcNeed:"Najpierw zaznacz A, B i C z cenami.",
+bars:"{n} św.",notImg:"To nie jest plik graficzny.",badImg:"Nie udało się wczytać obrazka.",expFail:"Nie udało się zapisać obrazka.",
+modeNone:"Wybierz punkt po prawej i kliknij na wykresie. Gotowe punkty możesz przeciągać.",modeOn:"Kliknij na wykresie:",priceLbl:"cena",barLbl:"świeca",generated:"Wygenerowano",cycFrom:"cykle od {p}",
+disclaimer:"Narzędzie edukacyjne. Obliczenia nie są rekomendacją inwestycyjną."},
+it:{wide:"Vista ampia",fit:"Adatta",title:"Grafico Ichimoku",subtitle:"Carica uno screenshot del grafico, calibra gli assi e disegna gli obiettivi di prezzo e i cicli temporali di Hosoda. Il risultato si salva come immagine PNG.",back:"Calcolatore",
+s1:"1. Grafico",load:"Carica immagine",demo:"Esempio",pasteHint:"Puoi anche trascinare il file sul grafico o incollare uno screenshot (Ctrl+V).",empty:"Carica uno screenshot da MT5 o TradingView",
+extra:"Spazio a destra",tfD1:"Timeframe D1 (1 candela = 1 giorno lavorativo)",
+s2:"2. Calibrazione assi",price1:"Prezzo 1",price2:"Prezzo 2",candle1:"Candela 1",candle2:"Candela 2",pricePh:"valore del prezzo",c1date:"data della candela 1",c2n:"candele dalla candela 1",
+calHint:"Clicca il pulsante, poi il punto sul grafico. Prezzi: due livelli lontani (es. etichette dell'asse) e i loro valori. Tempo: due candele lontane, la data della prima e il numero di candele tra loro.",
+s3:"3. Punti dell'onda",ptHint:"Clicca A, poi lo stoppino sul grafico – poi B e C. Puoi correggere il prezzo a mano e trascinare i punti.",clearPts:"Cancella punti",
+dirUp:"↗ Onda rialzista",dirDown:"↘ Onda ribassista",warnUp:"Per un'onda rialzista deve valere A < C < B.",warnDown:"Per un'onda ribassista deve valere A > C > B.",
+s4:"4. Cosa disegnare",targets:"Obiettivi di prezzo",mult:"Multipli di V ed E",legs:"Segmenti con numero di candele",anchor:"Cicli di Hosoda contati da",anchorCalc:"data del calcolatore",anchorNone:"senza cicli",
+taitoB:"Taitō: tempo A–B riportato da B",taitoC:"Taitō: tempo A–B riportato da C",tB:"T da B",tC:"T da C",cN:"Ciclo",cDate:"Data",offChart:"fuori grafico",
+needPrice:"Prima calibra il prezzo (Prezzo 1 e Prezzo 2).",needTime:"Cicli e taitō richiedono la calibrazione del tempo (Candela 1 e 2).",needDate:"Per le date e l'ancora dal calcolatore inserisci la data della candela 1 e scegli D1.",needAnchor:"Segna il punto da cui contare i cicli.",
+s5:"5. Salvataggio",name:"Nome dell'analisi",namePh:"es. EURUSD D1 – ottobre",png:"Salva PNG",share:"Condividi",toCalc:"Trasferisci A/B/C al calcolatore",
+toCalcHint:"Funziona se grafico e calcolatore sono sullo stesso sito. Il calcolatore riceve come data dei cicli la data del punto scelto.",toCalcOk:"Salvato nel calcolatore – aprilo per vedere i calcoli.",toCalcNeed:"Prima segna A, B e C con i prezzi.",
+bars:"{n} cand.",notImg:"Non è un file immagine.",badImg:"Impossibile caricare l'immagine.",expFail:"Impossibile salvare l'immagine.",
+modeNone:"Scegli un punto a destra e clicca sul grafico. I punti fatti si possono trascinare.",modeOn:"Clicca sul grafico:",priceLbl:"prezzo",barLbl:"candela",generated:"Generato il",cycFrom:"cicli da {p}",
+disclaimer:"Strumento didattico. I calcoli non sono una raccomandazione d'investimento."},
+en:{wide:"Wide view",fit:"Fit",title:"Ichimoku Chart",subtitle:"Upload a chart screenshot, calibrate the axes and draw price targets and Hosoda's time cycles. Save the result as a PNG image.",back:"Calculator",
+s1:"1. Chart",load:"Upload image",demo:"Example",pasteHint:"You can also drag the file onto the chart area or paste a screenshot (Ctrl+V).",empty:"Upload a chart screenshot from MT5 or TradingView",
+extra:"Space on the right",tfD1:"D1 timeframe (1 candle = 1 trading day)",
+s2:"2. Axis calibration",price1:"Price 1",price2:"Price 2",candle1:"Candle 1",candle2:"Candle 2",pricePh:"price value",c1date:"date of candle 1",c2n:"candles from candle 1",
+calHint:"Click a button, then the spot on the chart. Prices: two levels far apart (e.g. price-axis labels) and their values. Time: two candles far apart, the date of the first and the number of candles between them.",
+s3:"3. Wave points",ptHint:"Click A, then the wick on the chart – then B and C. You can correct the price by hand and drag the points.",clearPts:"Clear points",
+dirUp:"↗ Up wave",dirDown:"↘ Down wave",warnUp:"For an up wave A < C < B should hold.",warnDown:"For a down wave A > C > B should hold.",
+s4:"4. What to draw",targets:"Price targets",mult:"V and E multiples",legs:"Legs with candle count",anchor:"Hosoda cycles counted from",anchorCalc:"date from the calculator",anchorNone:"no cycles",
+taitoB:"Taitō: A–B time laid from B",taitoC:"Taitō: A–B time laid from C",tB:"T from B",tC:"T from C",cN:"Cycle",cDate:"Date",offChart:"off chart",
+needPrice:"Calibrate the price first (Price 1 and Price 2).",needTime:"Cycles and taitō need time calibration (Candle 1 and 2).",needDate:"For dates and the calculator anchor enter the date of candle 1 and tick D1.",needAnchor:"Mark the point the cycles start from.",
+s5:"5. Save",name:"Analysis name",namePh:"e.g. EURUSD D1 – October",png:"Save PNG",share:"Share",toCalc:"Send A/B/C to the calculator",
+toCalcHint:"Works when the chart and the calculator live on the same site. The calculator gets the chosen point's date as its cycle date.",toCalcOk:"Saved in the calculator – open it to see the calculations.",toCalcNeed:"Mark A, B and C with prices first.",
+bars:"{n} c.",notImg:"That is not an image file.",badImg:"Couldn't load the image.",expFail:"Couldn't save the image.",
+modeNone:"Pick a point on the right and click the chart. Placed points can be dragged.",modeOn:"Click on the chart:",priceLbl:"price",barLbl:"candle",generated:"Generated",cycFrom:"cycles from {p}",
+disclaimer:"Educational tool. The calculations are not investment advice."}
+};
+const LOC={pl:"pl-PL",it:"it-IT",en:"en-GB"};
+const navL=(navigator.language||"pl").slice(0,2);
+let lang=T[calc.lang]?calc.lang:(T[navL]?navL:"pl");
+const t=(k,v)=>{let s=(T[lang]||T.pl)[k]??T.pl[k]??k;if(v)for(const x in v)s=s.replace("{"+x+"}",v[x]);return s};
+
+/* ---------- options ---------- */
+const CYC=[9,13,17,26,33,42,51,65,76,129,172,200,226,257,676],SIMPLE=new Set([9,17,26]);
+const DEF_CYC=[9,17,26,33,42,65,76];
+const ZOOMS=[1,1.5,2,3];
+const OPT0={wide:false,zoom:1,extra:25,tfD1:true,show:{V:true,N:true,E:true,NT:true},mult:false,legs:true,anchor:"C",cyc:DEF_CYC.slice(),taitoB:true,taitoC:true,name:""};
+let O=JSON.parse(JSON.stringify(OPT0));
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s==="object"){O=Object.assign(O,s);O.show=Object.assign({},OPT0.show,s.show||{});if(!Array.isArray(O.cyc))O.cyc=DEF_CYC.slice();O.cyc=O.cyc.map(Number).filter(n=>CYC.includes(n));O.extra=Math.min(80,Math.max(0,+O.extra||0));if(!ZOOMS.includes(+O.zoom))O.zoom=1;O.zoom=+O.zoom;O.wide=!!O.wide}}catch(e){}
+function applyView(){
+  document.body.classList.toggle("wide",O.wide);
+  document.body.classList.toggle("zoomed",O.zoom>1);
+  cv.style.width=(O.zoom*100)+"%";
+  document.querySelectorAll("[data-zoom]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.zoom===O.zoom));
+  document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-pressed",O.wide));
+}
+function setZoom(z){
+  const sc=$("scroller"),cx=(sc.scrollLeft+sc.clientWidth/2)/Math.max(1,sc.scrollWidth),cy=(sc.scrollTop+sc.clientHeight/2)/Math.max(1,sc.scrollHeight);
+  O.zoom=z;applyView();saveO();
+  requestAnimationFrame(()=>{sc.scrollLeft=cx*sc.scrollWidth-sc.clientWidth/2;sc.scrollTop=cy*sc.scrollHeight-sc.clientHeight/2});
+}
+function saveO(){try{localStorage.setItem(KEY,JSON.stringify(O))}catch(e){}}
+
+/* ---------- business days (same rules as the calculator) ---------- */
+const DAY=864e5;
+function todayDN(){const n=new Date();return Math.floor(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())/DAY)}
+function iso(dn){return new Date(dn*DAY).toISOString().slice(0,10)}
+function parseISO(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||""))return null;const [y,m,d]=s.split("-").map(Number);const v=Date.UTC(y,m-1,d);return isNaN(v)?null:Math.round(v/DAY)}
+let HOL=new Set(),holStd=true,day1=true;
+function loadRules(){calc=readCalc();holStd=calc.holStd!==false;day1=calc.day1!==false;HOL=new Set();String(calc.holExtra||"").split(/[\s,;]+/).forEach(x=>{const d=parseISO(x);if(d!=null)HOL.add(d)})}
+function isBiz(dn){const w=(dn+4)%7;if(w===0||w===6)return false;if(holStd){const d=new Date(dn*DAY),m=d.getUTCMonth(),dd=d.getUTCDate();if((m===0&&dd===1)||(m===11&&dd===25))return false}return !HOL.has(dn)}
+function workday(start,n){let d=start;const step=n<0?-1:1;n=Math.abs(n);while(n>0){d+=step;if(isBiz(d))n--}return d}
+function fdate(dn,long){return new Date(dn*DAY).toLocaleDateString(LOC[lang],long?{timeZone:"UTC",weekday:"short",day:"numeric",month:"short",year:"numeric"}:{timeZone:"UTC",day:"numeric",month:"short"})}
+
+/* ---------- number helpers ---------- */
+function num(s){if(s==null)return NaN;s=String(s).trim().replace(/\s/g,"").replace(",",".");return s===""?NaN:Number(s)}
+function decs(s){s=String(s||"").replace(",",".");const i=s.indexOf(".");return i<0?0:s.length-i-1}
+function fmt(x,d){return isFinite(x)?x.toFixed(d):"–"}
+
+/* ---------- chart state ---------- */
+const P={p1:null,p2:null,k1:null,k2:null,A:null,B:null,C:null};
+const V={v1:"",v2:"",kd:"",kn:"",A:"",B:"",C:""};
+const ORDER=["p1","p2","k1","k2","A","B","C"];
+let img=null,BG="#000000",DARK=true,mode=null,hover=null,drag=null;
+const cv=$("cv"),stage=$("stage");
+
+function priceOK(){return !!(P.p1&&P.p2)&&isFinite(num(V.v1))&&isFinite(num(V.v2))&&num(V.v1)!==num(V.v2)&&Math.abs(P.p2.y-P.p1.y)>3}
+function priceAt(y){const a=num(V.v1),b=num(V.v2);return a+(y-P.p1.y)*(b-a)/(P.p2.y-P.p1.y)}
+function yOf(p){const a=num(V.v1),b=num(V.v2);return P.p1.y+(p-a)*(P.p2.y-P.p1.y)/(b-a)}
+function nBars(){const n=parseInt(V.kn,10);return n>0?n:0}
+function timeOK(){return !!(P.k1&&P.k2)&&nBars()>0&&Math.abs(P.k2.x-P.k1.x)>3}
+function bw(){return (P.k2.x-P.k1.x)/nBars()}
+function barAt(x){return Math.round((x-P.k1.x)/bw())}
+function xOfBar(b){return P.k1.x+b*bw()}
+function d1(){return parseISO(V.kd)}
+function dateOK(){return O.tfD1&&timeOK()&&d1()!=null}
+function dateOfBar(b){const s=d1();return b===0?s:workday(s,b)}
+function barOfDate(d){const s=d1();let c=0;if(d>s){for(let x=s+1;x<=d;x++)if(isBiz(x))c++}else if(d<s){for(let x=d;x<s;x++)if(isBiz(x))c--}return c}
+function DEC(){return Math.max(2,decs(V.v1),decs(V.v2))}
+function ptPrice(k){const v=num(V[k]);if(isFinite(v))return v;return priceOK()&&P[k]?priceAt(P[k].y):NaN}
+function ptY(k){const v=num(V[k]);return priceOK()&&isFinite(v)?yOf(v):P[k].y}
+function size(){const w=img.width,h=img.height;return {W:w+Math.round(w*O.extra/100),H:h}}
+
+function wave(){
+  if(!(P.A&&P.B&&P.C))return null;
+  const A=ptPrice("A"),B=ptPrice("B"),C=ptPrice("C");
+  if(![A,B,C].every(isFinite))return null;
+  const up=B>A;
+  const R={V:B+(B-C),N:C+(B-A),E:B+(B-A),NT:C+(C-A)},mV=[],mE=[];
+  for(let k=2;k<=7;k++){mV.push([k+"V",B+(B-C)*k]);mE.push([k+"E",A+(B-A)*(k+1)])}
+  return {A,B,C,up,R,mV,mE,ok:up?(A<C&&C<B):(A>C&&C>B)};
+}
+function anchorBar(){
+  if(!timeOK()||O.anchor==="none")return null;
+  if(O.anchor==="calc"){if(!dateOK())return null;const d=parseISO(calc.cyc);return d==null?null:barOfDate(d)}
+  return P[O.anchor]?barAt(P[O.anchor].x):null;
+}
+function cycles(W){
+  const a=anchorBar();if(a==null)return [];
+  return O.cyc.slice().sort((x,y)=>x-y).map(n=>{const bar=a+(day1?n-1:n);const x=xOfBar(bar);return {n,bar,x,on:x>=0&&x<=W,date:dateOK()?dateOfBar(bar):null}});
+}
+function taitos(W){
+  if(!timeOK()||!(P.A&&P.B))return [];
+  const a=barAt(P.A.x),b=barAt(P.B.x),d=b-a,out=[];
+  if(d===0)return out;
+  const len=Math.abs(d);
+  if(O.taitoB){const bar=b+len;out.push({lbl:t("tB"),bar,x:xOfBar(bar),date:dateOK()?dateOfBar(bar):null})}
+  if(O.taitoC&&P.C){const bar=barAt(P.C.x)+len;out.push({lbl:t("tC"),bar,x:xOfBar(bar),date:dateOK()?dateOfBar(bar):null})}
+  out.forEach(o=>o.on=o.x>=0&&o.x<=W);return out;
+}
+
+/* ---------- drawing ---------- */
+const COL={V:"#2F6FD6",N:"#1FA37F",E:"#E0A21B",NT:"#9B5DE5",mult:"#7C8BA6",cyc:"#E60012",cyc2:"#F0707C",taito:"#E0A21B",leg:"#FF8A1F",pt:"#16233B",cal:"#D9A521"};
+let CW=0,CH=0;
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function font(fs,w){return `${w||600} ${fs}px "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif`}
+function tagW(c,txt,fs){c.font=font(fs);return c.measureText(txt).width+fs*.9}
+function tag(c,txt,x,y,bg,fg,fs,align){
+  c.font=font(fs);const pw=fs*.45,w=c.measureText(txt).width+pw*2,h=fs*1.5;
+  let x0=align==="right"?x-w:align==="center"?x-w/2:x;x0=Math.max(1,Math.min(CW-w-1,x0));
+  const y0=Math.max(1,Math.min(CH-h-1,y-h/2));
+  c.fillStyle=bg;rr(c,x0,y0,w,h,h*.28);c.fill();
+  c.fillStyle=fg||"#fff";c.textBaseline="middle";c.textAlign="left";c.fillText(txt,x0+pw,y0+h/2+fs*.04);
+  return {x0,y0,w,h};
+}
+function line(c,x0,y0,x1,y1,col,lw,dash){c.save();c.strokeStyle=col;c.lineWidth=lw;c.setLineDash(dash||[]);c.beginPath();c.moveTo(x0,y0);c.lineTo(x1,y1);c.stroke();c.restore()}
+
+function draw(c,exp){
+  const {W,H}=size();CW=W;CH=H;
+  const k=Math.max(1,Math.min(3,H/620)),fs=Math.round(12*k);
+  const ink=DARK?"rgba(255,255,255,.55)":"rgba(10,16,30,.5)";
+  c.drawImage(img,0,0);
+  if(W>img.width){c.fillStyle=BG;c.fillRect(img.width,0,W-img.width,H);line(c,img.width+.5,0,img.width+.5,H,ink,1,[4*k,4*k])}
+  const w=wave(),D=DEC();
+
+  /* time: cycles + taitō */
+  const cyc=cycles(W),tai=taitos(W);
+  const rowsX=[-1e9,-1e9];
+  cyc.forEach(o=>{if(!o.on)return;const simple=SIMPLE.has(o.n);
+    line(c,o.x,0,o.x,H,simple?COL.cyc:COL.cyc2,(simple?2:1.4)*k,simple?[]:[7*k,5*k]);
+    const txt=o.n+(o.date!=null?" · "+fdate(o.date):"");const tw=tagW(c,txt,fs);
+    let r=o.x-rowsX[0]>tw+4*k?0:(o.x-rowsX[1]>tw+4*k?1:0);
+    tag(c,txt,o.x,fs*.95+r*fs*1.75,simple?COL.cyc:COL.cyc2,"#fff",fs,"center");rowsX[r]=o.x});
+  let ty=H-fs*1.0;
+  tai.forEach(o=>{if(!o.on)return;line(c,o.x,0,o.x,H,COL.taito,1.8*k,[12*k,6*k]);
+    tag(c,o.lbl+(o.date!=null?" · "+fdate(o.date):""),o.x,ty,COL.taito,"#16233B",fs,"center");ty-=fs*1.75});
+
+  /* price targets */
+  if(w&&priceOK()){
+    const x0=P.C.x,L=[];
+    if(O.mult){w.mV.concat(w.mE).forEach(([key,v])=>L.push({key,v,col:COL.mult,thin:true}))}
+    ["V","N","E","NT"].forEach(key=>{if(O.show[key])L.push({key,v:w.R[key],col:COL[key]})});
+    L.forEach(l=>{l.y=yOf(l.v);l.out=l.y<0?-1:l.y>H?1:0;l.ly=Math.max(fs,Math.min(H-fs,l.y))});
+    L.forEach(l=>{if(!l.out)line(c,x0,l.y,W,l.y,l.col,(l.thin?1:2)*k,l.thin?[3*k,4*k]:[])});
+    L.sort((a,b)=>a.ly-b.ly);const gap=fs*1.65;
+    for(let i=1;i<L.length;i++)if(L[i].ly-L[i-1].ly<gap)L[i].ly=L[i-1].ly+gap;
+    const over=L.length?L[L.length-1].ly-(H-fs):0;if(over>0)L.forEach(l=>l.ly-=over);
+    for(let i=L.length-2;i>=0;i--)if(L[i+1].ly-L[i].ly<gap)L[i].ly=L[i+1].ly-gap;
+    L.forEach(l=>{const txt=(l.out<0?"↑ ":l.out>0?"↓ ":"")+l.key+" "+fmt(l.v,D);
+      const r=tag(c,txt,W-3*k,l.ly,l.col,l.key==="E"?"#16233B":"#fff",l.thin?Math.round(fs*.9):fs,"right");
+      if(!l.out&&Math.abs(l.ly-l.y)>2)line(c,r.x0-6*k,l.y,r.x0,l.ly,l.col,1*k)});
+  }
+
+  /* legs */
+  const pts=["A","B","C"].filter(key=>P[key]).map(key=>({key,x:P[key].x,y:ptY(key)}));
+  if(O.legs&&pts.length>1){
+    c.save();c.lineJoin="round";c.lineCap="round";
+    c.strokeStyle=DARK?"rgba(0,0,0,.55)":"rgba(255,255,255,.75)";c.lineWidth=5.5*k;c.beginPath();pts.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.stroke();
+    c.strokeStyle=COL.leg;c.lineWidth=2.6*k;c.beginPath();pts.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.stroke();c.restore();
+    if(timeOK()){for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];const n=Math.abs(barAt(b.x)-barAt(a.x))+(day1?1:0);
+      tag(c,a.key+"–"+b.key+": "+t("bars",{n}),(a.x+b.x)/2,(a.y+b.y)/2,COL.leg,"#16233B",Math.round(fs*.9),"center")}}
+  }
+  /* points */
+  pts.forEach(p=>{const high=w?((p.key==="B")===w.up):p.key==="B";
+    c.save();c.fillStyle="#fff";c.strokeStyle=COL.pt;c.lineWidth=2.2*k;c.beginPath();c.arc(p.x,p.y,5.5*k,0,Math.PI*2);c.fill();c.stroke();c.restore();
+    const pr=ptPrice(p.key);const txt=p.key+(isFinite(pr)?" "+fmt(pr,D):"");
+    tag(c,txt,p.x,p.y+(high?-1:1)*fs*1.75,COL.pt,"#fff",fs,"center")});
+
+  /* calibration markers & crosshair – screen only */
+  if(!exp){
+    ["p1","p2"].forEach((key,i)=>{const p=P[key];if(!p)return;line(c,p.x-40*k,p.y,p.x+40*k,p.y,COL.cal,2*k,[5*k,3*k]);
+      tag(c,"P"+(i+1)+(V["v"+(i+1)]?" = "+V["v"+(i+1)]:""),p.x+44*k,p.y,COL.cal,"#16233B",Math.round(fs*.9),"left")});
+    ["k1","k2"].forEach((key,i)=>{const p=P[key];if(!p)return;line(c,p.x,0,p.x,H,COL.cal,1.2*k,[3*k,5*k]);
+      tag(c,"K"+(i+1)+(i===0&&V.kd?" · "+V.kd:i===1&&V.kn?" · +"+V.kn:""),p.x,p.y,COL.cal,"#16233B",Math.round(fs*.9),"center")});
+    if(hover&&(mode||drag)){line(c,0,hover.y,W,hover.y,ink,1,[2,4]);line(c,hover.x,0,hover.x,H,ink,1,[2,4])}
+  }
+}
+
+function render(){
+  if(!img){updatePanel();return}
+  const {W,H}=size();if(cv.width!==W)cv.width=W;if(cv.height!==H)cv.height=H;
+  const c=cv.getContext("2d");c.clearRect(0,0,W,H);draw(c,false);
+  updatePanel();
+}
+
+/* ---------- image ---------- */
+function setImage(im,keep){
+  img=im;
+  try{const tc=document.createElement("canvas");tc.width=1;tc.height=1;const x=tc.getContext("2d");x.drawImage(im,Math.max(0,im.width-4),3,1,1,0,0,1,1);const d=x.getImageData(0,0,1,1).data;BG=`rgb(${d[0]},${d[1]},${d[2]})`;DARK=(0.299*d[0]+0.587*d[1]+0.114*d[2])<140}catch(e){BG="#000";DARK=true}
+  if(!keep){ORDER.forEach(k=>P[k]=null);Object.keys(V).forEach(k=>V[k]="");mode="p1"}
+  stage.classList.add("has");render();
+}
+function loadFile(f){
+  if(!f||!/^image\//.test(f.type)){toast(t("notImg"));return}
+  const url=URL.createObjectURL(f),im=new Image();
+  im.onload=()=>{setImage(im,false);URL.revokeObjectURL(url)};
+  im.onerror=()=>{toast(t("badImg"));URL.revokeObjectURL(url)};
+  im.src=url;
+}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let x=Math.imul(a^a>>>15,1|a);x=x+Math.imul(x^x>>>7,61|x)^x;return((x^x>>>14)>>>0)/4294967296}}
+function makeDemo(){
+  const W=1200,H=640,L=14,R=1088,TP=24,BT=596,N=86,lo=1.0740,hi=1.1220;
+  const rnd=mulberry32(11),key=[[0,1.1040],[20,1.0815],[47,1.1085],[61,1.0955],[85,1.1160]];
+  const base=i=>{for(let j=0;j<key.length-1;j++){const[a,va]=key[j],[b,vb]=key[j+1];if(i>=a&&i<=b)return va+(vb-va)*(i-a)/(b-a)}return key[key.length-1][1]};
+  const bars=[];let prev=base(0);
+  for(let i=0;i<N;i++){const c=base(i)+(rnd()-.5)*.0034,o=prev;bars.push({o,c,h:Math.max(o,c)+rnd()*.0017,l:Math.min(o,c)-rnd()*.0017});prev=c}
+  const ext=(a,b,hiSide)=>{let best=a;for(let i=a;i<=b;i++){if(hiSide?bars[i].h>bars[best].h:bars[i].l<bars[best].l)best=i}return best};
+  const iA=ext(12,28,false),iB=ext(38,55,true),iC=ext(56,68,false);
+  const bwid=(R-L)/N,xi=i=>L+(i+.5)*bwid,y=p=>TP+(hi-p)/(hi-lo)*(BT-TP);
+  const cnv=document.createElement("canvas");cnv.width=W;cnv.height=H;const c=cnv.getContext("2d");
+  c.fillStyle="#0E1320";c.fillRect(0,0,W,H);
+  c.font="12px ui-monospace,Consolas,monospace";c.textBaseline="middle";
+  for(let p=1.080;p<=1.1201;p+=.005){const yy=Math.round(y(p))+.5;c.strokeStyle="#1C2436";c.beginPath();c.moveTo(0,yy);c.lineTo(R,yy);c.stroke();c.fillStyle="#8A94A8";c.fillText(p.toFixed(5),R+8,yy)}
+  const kd=workday(todayDN(),-(N-1));
+  c.textAlign="center";
+  for(let i=0;i<N;i+=10){const xx=Math.round(xi(i))+.5;c.strokeStyle="#161D2C";c.beginPath();c.moveTo(xx,0);c.lineTo(xx,BT);c.stroke();c.fillStyle="#8A94A8";c.fillText(fdate(i===0?kd:workday(kd,i)),xx,H-22)}
+  c.textAlign="left";
+  c.strokeStyle="#3A4560";c.beginPath();c.moveTo(R+.5,0);c.lineTo(R+.5,H);c.moveTo(0,BT+.5);c.lineTo(W,BT+.5);c.stroke();
+  bars.forEach((b,i)=>{const col=b.c>=b.o?"#26A69A":"#EF5350",xx=xi(i);c.strokeStyle=col;c.lineWidth=1.2;c.beginPath();c.moveTo(xx,y(b.h));c.lineTo(xx,y(b.l));c.stroke();
+    c.fillStyle=col;const t0=y(Math.max(b.o,b.c)),t1=y(Math.min(b.o,b.c));c.fillRect(xx-bwid*.32,t0,bwid*.64,Math.max(1,t1-t0))});
+  c.fillStyle="#C7CEDB";c.font="600 14px system-ui,sans-serif";c.fillText("EURUSD · D1 · demo",16,16);
+  setImage(cnv,false);
+  P.p1={x:R+30,y:y(1.115)};V.v1="1.11500";P.p2={x:R+30,y:y(1.085)};V.v2="1.08500";
+  P.k1={x:xi(0),y:BT-12};P.k2={x:xi(80),y:BT-12};V.kn="80";V.kd=iso(kd);
+  P.A={x:xi(iA),y:y(bars[iA].l)};V.A=bars[iA].l.toFixed(5);
+  P.B={x:xi(iB),y:y(bars[iB].h)};V.B=bars[iB].h.toFixed(5);
+  P.C={x:xi(iC),y:y(bars[iC].l)};V.C=bars[iC].l.toFixed(5);
+  O.tfD1=true;mode=null;syncInputs(true);render();
+}
+
+/* ---------- panel ---------- */
+function syncInputs(force){
+  document.querySelectorAll("[data-v]").forEach(el=>{if(force||document.activeElement!==el)el.value=V[el.dataset.v]});
+}
+function updatePanel(){
+  document.querySelectorAll("[data-pick]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.pick===mode));
+  const okMap={p1:P.p1&&isFinite(num(V.v1)),p2:P.p2&&isFinite(num(V.v2)),k1:!!P.k1,k2:P.k2&&nBars()>0,A:!!P.A,B:!!P.B,C:!!P.C};
+  document.querySelectorAll("[data-ok]").forEach(el=>el.textContent=okMap[el.dataset.ok]?"✓":"");
+  syncInputs(false);
+  $("modeTxt").innerHTML=mode?`<span class="on">${t("modeOn")}<b>${modeName(mode)}</b></span>`:t("modeNone");
+  const w=wave(),D=DEC();
+  $("dirTxt").textContent=w?t(w.up?"dirUp":"dirDown"):"";$("dirTxt").className="dir "+(w?(w.up?"up":"down"):"");
+  const warn=$("warn");
+  if(img&&(P.A||P.B||P.C)&&!priceOK()){warn.textContent=t("needPrice");warn.classList.add("on")}
+  else if(w&&!w.ok){warn.textContent=t(w.up?"warnUp":"warnDown");warn.classList.add("on")}
+  else warn.classList.remove("on");
+  $("tvals").innerHTML=w?["V","N","E","NT"].map(k=>`<div class="tv"><span class="swatch" style="background:${COL[k]}"></span><b>${k}</b><span class="num">${fmt(w.R[k],D)}</span></div>`).join(""):"";
+  /* cycles */
+  const cw=$("cycWarn");let msg="";
+  if(img&&O.anchor!=="none"){if(!timeOK())msg=t("needTime");else if(O.anchor==="calc"&&!dateOK())msg=t("needDate");else if(O.anchor!=="calc"&&!P[O.anchor])msg=t("needAnchor")}
+  if(img&&!msg&&(O.taitoB||O.taitoC)&&!timeOK())msg=t("needTime");
+  cw.textContent=msg;cw.classList.toggle("on",!!msg);
+  const W=img?size().W:0,list=img?cycles(W):[],tl=img?taitos(W):[];
+  if(list.length||tl.length){
+    $("cycTbl").innerHTML=`<thead><tr><th>${t("cN")}</th><th>${t("cDate")}</th><th></th></tr></thead><tbody>`+
+      list.map(o=>`<tr class="${o.on?"":"off"}"><td><b>${o.n}</b></td><td class="num">${o.date!=null?fdate(o.date,true):"–"}</td><td class="n">${o.on?"":t("offChart")}</td></tr>`).join("")+
+      tl.map(o=>`<tr class="${o.on?"":"off"}"><td><b>${o.lbl}</b></td><td class="num">${o.date!=null?fdate(o.date,true):"–"}</td><td class="n">${o.on?"":t("offChart")}</td></tr>`).join("")+"</tbody>";
+  } else $("cycTbl").innerHTML="";
+}
+function modeName(m){return {p1:t("price1"),p2:t("price2"),k1:t("candle1"),k2:t("candle2")}[m]||m}
+function buildStatic(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-t]").forEach(el=>el.textContent=t(el.dataset.t));
+  document.querySelectorAll("[data-tp]").forEach(el=>el.placeholder=t(el.dataset.tp));
+  document.querySelectorAll("[data-ta]").forEach(el=>{el.setAttribute("aria-label",t(el.dataset.ta));el.title=t(el.dataset.ta)});
+  document.querySelectorAll("#langSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
+  document.title=t("title")+" · Ichimoku Trader";
+  const cd=parseISO(calc.cyc);
+  $("anchor").innerHTML=["A","B","C"].map(k=>`<option value="${k}">${k}</option>`).join("")+
+    `<option value="calc">${t("anchorCalc")}${cd!=null?" ("+fdate(cd,true)+")":""}</option><option value="none">${t("anchorNone")}</option>`;
+  $("anchor").value=O.anchor;
+  $("chips").innerHTML=CYC.map(n=>`<button class="chip" data-cyc="${n}" aria-pressed="${O.cyc.includes(n)}">${n}</button>`).join("");
+  document.querySelectorAll("[data-show]").forEach(el=>el.checked=!!O.show[el.dataset.show]);
+  ["mult","legs","taitoB","taitoC","tfD1"].forEach(id=>$(id).checked=!!O[id]);
+  applyView();
+  $("extra").value=O.extra;$("extraOut").textContent=O.extra+"%";
+  if(document.activeElement!==$("name"))$("name").value=O.name||"";
+  try{$("shareBtn").hidden=!(navigator.canShare&&navigator.canShare({files:[new File([""],"x.png",{type:"image/png"})]}))}catch(e){$("shareBtn").hidden=true}
+}
+
+/* ---------- pointer ---------- */
+function evPos(e){const r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}}
+function setPoint(key,p){
+  if(["A","B","C"].includes(key)){const x=timeOK()?xOfBar(barAt(p.x)):p.x;P[key]={x,y:p.y};V[key]=priceOK()?fmt(priceAt(p.y),DEC()):""}
+  else P[key]={x:p.x,y:p.y};
+}
+function nearest(p){
+  const k=Math.max(1,cv.width/cv.getBoundingClientRect().width)*14;let best=null,bd=k;
+  ORDER.forEach(key=>{const q=P[key];if(!q)return;const y=["A","B","C"].includes(key)?ptY(key):q.y;
+    const d=key[0]==="k"?Math.abs(q.x-p.x):key[0]==="p"?Math.hypot(q.x-p.x,y-p.y):Math.hypot(q.x-p.x,y-p.y);
+    if(d<bd){bd=d;best=key}});
+  return best;
+}
+cv.addEventListener("pointerdown",e=>{
+  if(!img)return;const p=evPos(e);
+  if(mode){const m=mode;setPoint(m,p);const i=ORDER.indexOf(m);mode=i<ORDER.length-1?ORDER[i+1]:null;
+    if(m==="p1"||m==="p2"||m==="k2"){const el=document.querySelector(`[data-v="${{p1:"v1",p2:"v2",k2:"kn"}[m]}"]`);if(el&&matchMedia("(pointer:fine)").matches)setTimeout(()=>el.select(),0)}
+    render();e.preventDefault();return}
+  const n=nearest(p);if(n){drag=n;cv.setPointerCapture(e.pointerId);e.preventDefault()}
+});
+cv.addEventListener("pointermove",e=>{
+  if(!img)return;const p=evPos(e);hover=p;
+  if(drag){setPoint(drag,p)}
+  render();loupe(p,e);readout(p);
+});
+cv.addEventListener("pointerup",e=>{if(drag){drag=null;try{cv.releasePointerCapture(e.pointerId)}catch(_){}render()}});
+cv.addEventListener("pointerleave",()=>{hover=null;stage.classList.remove("hov");$("readout").textContent="";render()});
+function readout(p){
+  const parts=[];if(priceOK())parts.push(t("priceLbl")+" "+fmt(priceAt(p.y),DEC()));
+  if(timeOK()){const b=barAt(p.x);parts.push(t("barLbl")+" "+(b>=0?"+":"")+b+(dateOK()?" · "+fdate(dateOfBar(b),true):""))}
+  $("readout").textContent=parts.join("  ·  ");
+}
+function loupe(p,e){
+  if(e.pointerType!=="mouse"){stage.classList.remove("hov");return}
+  stage.classList.add("hov");
+  const lp=$("loupe"),r=stage.getBoundingClientRect();
+  lp.classList.toggle("r",(e.clientX-r.left)<r.width*.35&&(e.clientY-r.top)<260);
+  const c=lp.getContext("2d"),src=36;
+  c.imageSmoothingEnabled=false;c.fillStyle="#000";c.fillRect(0,0,150,150);
+  c.drawImage(cv,p.x-src/2,p.y-src/2,src,src,0,0,150,150);
+  c.strokeStyle="#E0A21B";c.lineWidth=1;c.beginPath();c.moveTo(75,0);c.lineTo(75,150);c.moveTo(0,75);c.lineTo(150,75);c.stroke();
+}
+
+/* ---------- export ---------- */
+function fileName(){const n=(O.name||"").trim().replace(/[^\p{L}\p{N}\-]+/gu,"_").replace(/^_+|_+$/g,"");return (n||"ichimoku-wykres")+".png"}
+async function exportPNG(share){
+  if(!img)return;
+  try{if(document.fonts&&document.fonts.ready)await document.fonts.ready}catch(e){}
+  const {W,H}=size(),hh=Math.round(Math.max(56,Math.min(120,W*.05))),pad=Math.round(hh*.3);
+  const out=document.createElement("canvas");out.width=W;out.height=H+hh;const c=out.getContext("2d");
+  c.fillStyle="#121C30";c.fillRect(0,0,W,hh);c.fillStyle="#E60012";c.fillRect(0,hh-Math.max(3,hh*.05),W,Math.max(3,hh*.05));
+  const f1=Math.round(hh*.34),f2=Math.round(hh*.19);
+  c.textBaseline="middle";c.textAlign="left";c.fillStyle="#fff";c.font=`700 ${f1}px Spectral,Georgia,serif`;
+  const title=(O.name||"").trim()||t("title");c.fillText("Ichimoku Trader",pad,hh*.34);
+  const bw1=c.measureText("Ichimoku Trader").width;c.font=`500 ${f1}px Spectral,Georgia,serif`;c.fillStyle="#B8C4D8";c.fillText("· "+title,pad+bw1+f1*.4,hh*.34);
+  const anc=O.anchor==="none"?"":t("cycFrom",{p:O.anchor==="calc"?t("anchorCalc"):O.anchor});
+  const sub=[t("generated")+": "+new Date().toLocaleDateString(LOC[lang],{dateStyle:"medium"}),anc].filter(Boolean).join(" · ");
+  c.font=font(f2,500);c.fillStyle="#B8C4D8";c.fillText(sub,pad,hh*.72);
+  if(W>900){c.textAlign="right";c.fillText(t("disclaimer"),W-pad,hh*.72);c.textAlign="left"}
+  c.save();c.translate(0,hh);draw(c,true);c.restore();
+  out.toBlob(async blob=>{
+    if(!blob){toast(t("expFail"));return}
+    const fn=fileName();
+    if(share){try{await navigator.share({files:[new File([blob],fn,{type:"image/png"})],title})}catch(e){}return}
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);
+  },"image/png");
+  render();
+}
+function toCalc(){
+  const w=wave();if(!w){toast(t("toCalcNeed"));return}
+  const D=DEC(),o=readCalc(),dir=w.up?"up":"down";
+  o.dir=dir;o[dir]={A:fmt(w.A,D),B:fmt(w.B,D),C:fmt(w.C,D)};o.tab="targets";o.lang=lang;
+  if(dateOK()&&["A","B","C"].includes(O.anchor)&&P[O.anchor])o.cyc=iso(dateOfBar(barAt(P[O.anchor].x)));
+  toast(writeCalc(o)?t("toCalcOk"):t("expFail"));calc=o;
+}
+
+/* ---------- events ---------- */
+function toast(m){const e=$("toast");e.textContent=m;e.classList.add("on");clearTimeout(toast._t);toast._t=setTimeout(()=>e.classList.remove("on"),2800)}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.zoom){setZoom(+b.dataset.zoom)}
+  else if(b.dataset.view){O.wide=!O.wide;applyView();saveO()}
+  else if(b.dataset.pick){if(!img)return;mode=mode===b.dataset.pick?null:b.dataset.pick;render()}
+  else if(b.dataset.cyc){const n=+b.dataset.cyc;O.cyc=O.cyc.includes(n)?O.cyc.filter(x=>x!==n):O.cyc.concat(n);b.setAttribute("aria-pressed",O.cyc.includes(n));saveO();render()}
+  else if(b.dataset.lang){lang=b.dataset.lang;const o=readCalc();o.lang=lang;writeCalc(o);buildStatic();render()}
+  else if(b.dataset.act==="load")$("file").click();
+  else if(b.dataset.act==="demo")makeDemo();
+  else if(b.dataset.act==="clearPts"){P.A=P.B=P.C=null;V.A=V.B=V.C="";mode=img?"A":null;syncInputs(true);render()}
+  else if(b.dataset.act==="png")exportPNG(false);
+  else if(b.dataset.act==="share")exportPNG(true);
+  else if(b.dataset.act==="toCalc")toCalc();
+  else if(b.id==="themeBtn"){const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;r.dataset.theme=dark?"light":"dark";try{localStorage.setItem(THEME_KEY,r.dataset.theme)}catch(_){}}
+});
+document.addEventListener("input",e=>{
+  const el=e.target;
+  if(el.dataset.v){V[el.dataset.v]=el.value;render()}
+  else if(el.id==="extra"){O.extra=+el.value;$("extraOut").textContent=O.extra+"%";saveO();render()}
+  else if(el.id==="name"){O.name=el.value;saveO()}
+});
+document.addEventListener("change",e=>{
+  const el=e.target;
+  if(el.id==="file"){loadFile(el.files&&el.files[0]);el.value=""}
+  else if(el.dataset.show){O.show[el.dataset.show]=el.checked;saveO();render()}
+  else if(["mult","legs","taitoB","taitoC","tfD1"].includes(el.id)){O[el.id]=el.checked;saveO();render()}
+  else if(el.id==="anchor"){O.anchor=el.value;saveO();render()}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&mode){mode=null;render()}});
+document.addEventListener("paste",e=>{const items=[...((e.clipboardData&&e.clipboardData.items)||[])];const it=items.find(i=>i.type&&i.type.startsWith("image/"));if(it){loadFile(it.getAsFile());e.preventDefault()}});
+["dragenter","dragover"].forEach(ev=>stage.addEventListener(ev,e=>{e.preventDefault();stage.classList.add("over")}));
+["dragleave","drop"].forEach(ev=>stage.addEventListener(ev,e=>{e.preventDefault();stage.classList.remove("over")}));
+stage.addEventListener("drop",e=>{const f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];if(f)loadFile(f)});
+window.addEventListener("focus",()=>{const before=calc.cyc;loadRules();if(calc.cyc!==before)buildStatic();render()});
+
+try{const th=localStorage.getItem(THEME_KEY);if(th)document.documentElement.dataset.theme=th}catch(e){}
+loadRules();buildStatic();render();
+})();
+</script>
+</body>
+</html>
