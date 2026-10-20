@@ -47,6 +47,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .backbtn{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:var(--sun);color:#fff;text-decoration:none;font-weight:600;font-size:.88rem}
 .backbtn:hover{background:#C9000F}
+.navbtn{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#fff;text-decoration:none;font-weight:600;font-size:.88rem}
+.navbtn:hover{background:rgba(255,255,255,.16)}
 .seg{display:inline-flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:3px}
 .seg button{border:0;background:none;padding:5px 12px;border-radius:999px;cursor:pointer;font-size:.85rem;color:#B8C4D8}
 .seg button[aria-pressed="true"]{background:#fff;color:#121C30}
@@ -132,7 +134,8 @@ footer{border-top:1px solid var(--line);padding:18px 0 32px;color:var(--ink-2);f
       <div><h1 data-t="title"></h1><p data-t="subtitle"></p></div>
     </div>
     <div class="tools">
-      <a class="backbtn" href="kalkulator-ichimoku.html"><span aria-hidden="true">←</span><span data-t="back"></span></a>
+      <a class="backbtn" href="index.html"><span aria-hidden="true">←</span><span data-t="dash"></span></a>
+      <a class="navbtn" href="kalkulator.html"><span aria-hidden="true">値</span><span data-t="back"></span></a>
       <div class="seg" role="group" aria-label="Language" id="langSeg">
         <button data-lang="pl">PL</button><button data-lang="it">IT</button><button data-lang="en">EN</button>
       </div>
@@ -250,7 +253,7 @@ let calc=readCalc();
 
 /* ---------- i18n ---------- */
 const T={
-pl:{wide:"Szeroki widok",fit:"Dopasuj",title:"Wykres Ichimoku",subtitle:"Wgraj zrzut wykresu, skalibruj osie i nanieś cele cenowe oraz cykle czasowe Hosody. Wynik zapiszesz jako obrazek PNG.",back:"Kalkulator",
+pl:{dash:"Dashboard",wide:"Szeroki widok",fit:"Dopasuj",title:"Wykres Ichimoku",subtitle:"Wgraj zrzut wykresu, skalibruj osie i nanieś cele cenowe oraz cykle czasowe Hosody. Wynik zapiszesz jako obrazek PNG.",back:"Kalkulator",
 s1:"1. Wykres",load:"Wgraj obrazek",demo:"Przykład",pasteHint:"Możesz też przeciągnąć plik na pole wykresu albo wkleić zrzut ekranu (Ctrl+V).",empty:"Wgraj zrzut wykresu z MT5 lub TradingView",
 extra:"Miejsce po prawej",tfD1:"Interwał D1 (1 świeca = 1 dzień handlowy)",
 s2:"2. Kalibracja osi",price1:"Cena 1",price2:"Cena 2",candle1:"Świeca 1",candle2:"Świeca 2",pricePh:"wartość ceny",c1date:"data świecy 1",c2n:"ile świec od świecy 1",
@@ -261,11 +264,11 @@ s4:"4. Co narysować",targets:"Cele cenowe",mult:"Wielokrotności V i E",legs:"O
 taitoB:"Taitō: czas A–B odłożony od B",taitoC:"Taitō: czas A–B odłożony od C",tB:"T od B",tC:"T od C",cN:"Cykl",cDate:"Data",offChart:"poza wykresem",
 needPrice:"Najpierw skalibruj cenę (Cena 1 i Cena 2).",needTime:"Cykle i taitō wymagają kalibracji czasu (Świeca 1 i Świeca 2).",needDate:"Dla dat i kotwicy z kalkulatora wpisz datę świecy 1 i zaznacz interwał D1.",needAnchor:"Zaznacz punkt, od którego liczysz cykle.",
 s5:"5. Zapis",name:"Nazwa analizy",namePh:"np. EURUSD D1 – październik",png:"Zapisz PNG",share:"Udostępnij",toCalc:"Przenieś A/B/C do kalkulatora",
-toCalcHint:"Działa, gdy wykres i kalkulator leżą na tej samej stronie. Jako datę cykli kalkulator dostanie datę wybranego punktu.",toCalcOk:"Zapisano w kalkulatorze – otwórz go, aby zobaczyć obliczenia.",toCalcNeed:"Najpierw zaznacz A, B i C z cenami.",
+toCalcHint:"Kalkulator otworzy się w nowej karcie z wpisanymi A/B/C (ten wykres zostaje otwarty). Jako datę cykli kalkulator dostanie datę wybranego punktu.",toCalcOk:"Przeniesiono do kalkulatora.",toCalcPop:"Zapisano w kalkulatorze – przeglądarka zablokowała nową kartę, kliknij „Kalkulator” u góry.",toCalcNeed:"Najpierw zaznacz A, B i C z cenami.",
 bars:"{n} św.",notImg:"To nie jest plik graficzny.",badImg:"Nie udało się wczytać obrazka.",expFail:"Nie udało się zapisać obrazka.",
 modeNone:"Wybierz punkt po prawej i kliknij na wykresie. Gotowe punkty możesz przeciągać.",modeOn:"Kliknij na wykresie:",priceLbl:"cena",barLbl:"świeca",generated:"Wygenerowano",cycFrom:"cykle od {p}",
 disclaimer:"Narzędzie edukacyjne. Obliczenia nie są rekomendacją inwestycyjną."},
-it:{wide:"Vista ampia",fit:"Adatta",title:"Grafico Ichimoku",subtitle:"Carica uno screenshot del grafico, calibra gli assi e disegna gli obiettivi di prezzo e i cicli temporali di Hosoda. Il risultato si salva come immagine PNG.",back:"Calcolatore",
+it:{dash:"Dashboard",wide:"Vista ampia",fit:"Adatta",title:"Grafico Ichimoku",subtitle:"Carica uno screenshot del grafico, calibra gli assi e disegna gli obiettivi di prezzo e i cicli temporali di Hosoda. Il risultato si salva come immagine PNG.",back:"Calcolatore",
 s1:"1. Grafico",load:"Carica immagine",demo:"Esempio",pasteHint:"Puoi anche trascinare il file sul grafico o incollare uno screenshot (Ctrl+V).",empty:"Carica uno screenshot da MT5 o TradingView",
 extra:"Spazio a destra",tfD1:"Timeframe D1 (1 candela = 1 giorno lavorativo)",
 s2:"2. Calibrazione assi",price1:"Prezzo 1",price2:"Prezzo 2",candle1:"Candela 1",candle2:"Candela 2",pricePh:"valore del prezzo",c1date:"data della candela 1",c2n:"candele dalla candela 1",
@@ -276,11 +279,11 @@ s4:"4. Cosa disegnare",targets:"Obiettivi di prezzo",mult:"Multipli di V ed E",l
 taitoB:"Taitō: tempo A–B riportato da B",taitoC:"Taitō: tempo A–B riportato da C",tB:"T da B",tC:"T da C",cN:"Ciclo",cDate:"Data",offChart:"fuori grafico",
 needPrice:"Prima calibra il prezzo (Prezzo 1 e Prezzo 2).",needTime:"Cicli e taitō richiedono la calibrazione del tempo (Candela 1 e 2).",needDate:"Per le date e l'ancora dal calcolatore inserisci la data della candela 1 e scegli D1.",needAnchor:"Segna il punto da cui contare i cicli.",
 s5:"5. Salvataggio",name:"Nome dell'analisi",namePh:"es. EURUSD D1 – ottobre",png:"Salva PNG",share:"Condividi",toCalc:"Trasferisci A/B/C al calcolatore",
-toCalcHint:"Funziona se grafico e calcolatore sono sullo stesso sito. Il calcolatore riceve come data dei cicli la data del punto scelto.",toCalcOk:"Salvato nel calcolatore – aprilo per vedere i calcoli.",toCalcNeed:"Prima segna A, B e C con i prezzi.",
+toCalcHint:"Il calcolatore si apre in una nuova scheda con A/B/C già inseriti (questo grafico resta aperto). Il calcolatore riceve come data dei cicli la data del punto scelto.",toCalcOk:"Trasferito al calcolatore.",toCalcPop:"Salvato nel calcolatore – il browser ha bloccato la nuova scheda, clicca „Calcolatore” in alto.",toCalcNeed:"Prima segna A, B e C con i prezzi.",
 bars:"{n} cand.",notImg:"Non è un file immagine.",badImg:"Impossibile caricare l'immagine.",expFail:"Impossibile salvare l'immagine.",
 modeNone:"Scegli un punto a destra e clicca sul grafico. I punti fatti si possono trascinare.",modeOn:"Clicca sul grafico:",priceLbl:"prezzo",barLbl:"candela",generated:"Generato il",cycFrom:"cicli da {p}",
 disclaimer:"Strumento didattico. I calcoli non sono una raccomandazione d'investimento."},
-en:{wide:"Wide view",fit:"Fit",title:"Ichimoku Chart",subtitle:"Upload a chart screenshot, calibrate the axes and draw price targets and Hosoda's time cycles. Save the result as a PNG image.",back:"Calculator",
+en:{dash:"Dashboard",wide:"Wide view",fit:"Fit",title:"Ichimoku Chart",subtitle:"Upload a chart screenshot, calibrate the axes and draw price targets and Hosoda's time cycles. Save the result as a PNG image.",back:"Calculator",
 s1:"1. Chart",load:"Upload image",demo:"Example",pasteHint:"You can also drag the file onto the chart area or paste a screenshot (Ctrl+V).",empty:"Upload a chart screenshot from MT5 or TradingView",
 extra:"Space on the right",tfD1:"D1 timeframe (1 candle = 1 trading day)",
 s2:"2. Axis calibration",price1:"Price 1",price2:"Price 2",candle1:"Candle 1",candle2:"Candle 2",pricePh:"price value",c1date:"date of candle 1",c2n:"candles from candle 1",
@@ -291,7 +294,7 @@ s4:"4. What to draw",targets:"Price targets",mult:"V and E multiples",legs:"Legs
 taitoB:"Taitō: A–B time laid from B",taitoC:"Taitō: A–B time laid from C",tB:"T from B",tC:"T from C",cN:"Cycle",cDate:"Date",offChart:"off chart",
 needPrice:"Calibrate the price first (Price 1 and Price 2).",needTime:"Cycles and taitō need time calibration (Candle 1 and 2).",needDate:"For dates and the calculator anchor enter the date of candle 1 and tick D1.",needAnchor:"Mark the point the cycles start from.",
 s5:"5. Save",name:"Analysis name",namePh:"e.g. EURUSD D1 – October",png:"Save PNG",share:"Share",toCalc:"Send A/B/C to the calculator",
-toCalcHint:"Works when the chart and the calculator live on the same site. The calculator gets the chosen point's date as its cycle date.",toCalcOk:"Saved in the calculator – open it to see the calculations.",toCalcNeed:"Mark A, B and C with prices first.",
+toCalcHint:"The calculator opens in a new tab with A/B/C filled in (this chart stays open). The calculator gets the chosen point's date as its cycle date.",toCalcOk:"Sent to the calculator.",toCalcPop:"Saved in the calculator – the browser blocked the new tab, click “Calculator” at the top.",toCalcNeed:"Mark A, B and C with prices first.",
 bars:"{n} c.",notImg:"That is not an image file.",badImg:"Couldn't load the image.",expFail:"Couldn't save the image.",
 modeNone:"Pick a point on the right and click the chart. Placed points can be dragged.",modeOn:"Click on the chart:",priceLbl:"price",barLbl:"candle",generated:"Generated",cycFrom:"cycles from {p}",
 disclaimer:"Educational tool. The calculations are not investment advice."}
@@ -643,7 +646,10 @@ function toCalc(){
   const D=DEC(),o=readCalc(),dir=w.up?"up":"down";
   o.dir=dir;o[dir]={A:fmt(w.A,D),B:fmt(w.B,D),C:fmt(w.C,D)};o.tab="targets";o.lang=lang;
   if(dateOK()&&["A","B","C"].includes(O.anchor)&&P[O.anchor])o.cyc=iso(dateOfBar(barAt(P[O.anchor].x)));
-  toast(writeCalc(o)?t("toCalcOk"):t("expFail"));calc=o;
+  if(!writeCalc(o)){toast(t("expFail"));return}
+  calc=o;
+  const win=window.open("kalkulator.html","ichimokuCalc");
+  if(win){try{win.focus()}catch(_){}toast(t("toCalcOk"))}else toast(t("toCalcPop"));
 }
 
 /* ---------- events ---------- */
