@@ -187,6 +187,19 @@ td.n,th.n{text-align:right;white-space:nowrap}
 .chip{display:inline-block;margin:2px 4px 2px 0;padding:2px 9px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);font-size:.78rem;white-space:nowrap}
 .chip b{font-family:var(--serif)}
 .cmark{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;background:var(--sun);color:#fff;font-size:.7rem;font-weight:600;vertical-align:middle}
+.abcres{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.abr{display:grid;grid-template-columns:minmax(92px,auto) minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.abr .k{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:var(--indigo);white-space:nowrap}
+.abr .f{font-size:.8rem;color:var(--ink-2)}
+.abr .f b{display:block;font-size:.92rem;color:var(--ink);font-weight:600}
+.abr .v{font-size:1.05rem;font-weight:600;text-align:right;white-space:nowrap}
+.abr.stale{background:var(--surface-2)}
+.abr.stale .k,.abr.stale .v{color:var(--ink-2)}
+.abr.stale .v{text-decoration:line-through}
+.abr .st{display:block;font-size:.76rem;color:var(--bear);margin-top:2px}
+.abcnt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.chip.tt{border-color:var(--sun);color:var(--sun);font-weight:600}
+@media (max-width:560px){.abr{grid-template-columns:1fr auto}.abr .k{grid-column:1/-1}}
 .syncnote{padding:14px;border-radius:10px;background:var(--surface-2);color:var(--ink-2);font-size:.9rem}
 @media (max-width:760px){.lane{grid-template-columns:1fr;gap:8px}.months{margin-left:0}.months span.alt{display:none}}
 
@@ -316,6 +329,15 @@ body.op .track .empty{font-size:7.5px}
 body.op .chip{font-size:7.5px;padding:0 5px;margin:1px 3px 1px 0}
 body.op .pow{min-width:22px;height:16px;font-size:8.5px}
 body.op .syncnote{padding:5px 8px;font-size:8.5px}
+body.op #abcCard{margin-top:5px!important;padding:7px}
+body.op .abcres{gap:3px;margin-top:5px}
+body.op .abr{padding:3px 6px;gap:6px}
+body.op .abr .k{font-size:10px}
+body.op .abr .f{font-size:7.5px}
+body.op .abr .f b{font-size:8.5px}
+body.op .abr .v{font-size:10px}
+body.op .abcnt{gap:4px;margin-top:5px}
+body.op #abcConf tbody tr:nth-child(n+7){display:none}
 
 @page{size:A4;margin:12mm}
 @media print{
@@ -365,7 +387,6 @@ body.op .syncnote{padding:5px 8px;font-size:8.5px}
     </div>
     <div class="tools">
       <a class="backbtn" href="index.html" data-dash><span aria-hidden="true">←</span><span data-t="back"></span></a>
-      <a class="printbtn" href="wykres-ichimoku.html" target="ichimokuChart" style="text-decoration:none"><span aria-hidden="true">📈</span><span data-t="chartPage"></span></a>
       <div class="seg" role="group" aria-label="Language" id="langSeg">
         <button data-lang="pl">PL</button><button data-lang="it">IT</button><button data-lang="en">EN</button>
       </div>
@@ -501,6 +522,21 @@ body.op .syncnote{padding:5px 8px;font-size:8.5px}
           <div class="out"><div class="lab" data-t="tdNextHengi"></div><div class="big num" id="thOut"></div><span class="when" id="thWhen"></span></div>
         </div>
       </div>
+      <div class="card" id="abcCard" style="margin-top:18px">
+        <h3 style="margin-top:0"><span style="font-family:var(--jp);color:var(--indigo);margin-right:8px">変化日</span><span data-t="abcTitle"></span></h3>
+        <p class="hint" style="margin-top:0;max-width:78ch" data-t="abcLead"></p>
+        <div class="fields" style="margin-top:12px">
+          <label class="f"><span><span class="pt">A</span> <span data-t="abcA"></span></span><input type="date" id="abcA" data-abc="a"></label>
+          <label class="f"><span><span class="pt">B</span> <span data-t="abcB"></span></span><input type="date" id="abcB" data-abc="b"></label>
+          <label class="f"><span><span class="pt">C</span> <span data-t="abcC"></span></span><input type="date" id="abcC" data-abc="c"></label>
+        </div>
+        <div class="warn" id="abcWarn" role="status"></div>
+        <div class="abcnt" id="abcCnt"></div>
+        <div class="abcres" id="abcRes"></div>
+        <h3 data-t="abcConfTitle"></h3>
+        <p class="hint" style="margin-top:0" data-t="abcConfHint"></p>
+        <div id="abcConf" style="margin-top:8px"></div>
+      </div>
     </section>
 
     <details class="settings" id="settings">
@@ -551,7 +587,7 @@ body.op .syncnote{padding:5px 8px;font-size:8.5px}
 "use strict";
 /* ---------- i18n ---------- */
 const T={
-pl:{chartPage:"Wykres",prLayout:"Układ",lyOne:"Jedna strona A4 – skrót (bez opisów cykli i objaśnień)",lyFull:"Pełny raport – kilka stron",print:"Drukuj / PDF",prTitle:"Drukuj analizę do PDF",prName:"Nazwa analizy",prNamePh:"np. EURUSD D1 – październik",prNotes:"Notatki (opcjonalnie)",prSections:"Sekcje w raporcie",prGo:"Drukuj / zapisz PDF",prCancel:"Anuluj",prHint:"W oknie drukowania wybierz jako drukarkę „Zapisz jako PDF”. Na telefonie: Udostępnij → Drukuj → zapisz PDF.",prGenerated:"Wygenerowano",prNone:"Zaznacz co najmniej jedną sekcję.",back:"Powrót do dashboardu",syncTitle:"Synchronizacja cykli",syncLead:"Wpisz do pięciu wcześniejszych dni zmiany, także sprzed wielu lat. Przyszłe daty cykli, które pokrywają się między liniami, zostaną wyróżnione na czerwono.",horizon:"Horyzont",mo:"{n} mies.",extraN:"Dodatkowe liczby",tol:"Tolerancja",tol0:"ten sam dzień",tol1:"±1 dzień handlowy",tolN:"±{n} dni handlowe",mainLine:"Główna data",mainHint:"z pola powyżej",line:"Linia {n}",labelPh:"opis, np. dołek USDJPY",clear:"Wyczyść",confTitle:"Nadchodzące zbieżności",confNeed:"Wpisz co najmniej jedną dodatkową datę zmiany, aby szukać zbieżności cykli.",confNone:"Brak zbieżności w wybranym horyzoncie. Dodaj kolejne daty zmian, wydłuż horyzont albo zwiększ tolerancję.",strength:"Siła",cycles:"Cykle",confMark:"zbieżność",noFuture:"brak przyszłych cykli w horyzoncie – dla starej daty dopisz własne liczby powyżej",title:"Kalkulator Ichimoku",subtitle:"Obserwacja zasięgu ceny i teoria czasu Goichi Hosody. Wpisz punkty fali lub daty, a cele i dni zmiany policzą się same.",
+pl:{prLayout:"Układ",lyOne:"Jedna strona A4 – skrót (bez opisów cykli i objaśnień)",lyFull:"Pełny raport – kilka stron",print:"Drukuj / PDF",prTitle:"Drukuj analizę do PDF",prName:"Nazwa analizy",prNamePh:"np. EURUSD D1 – październik",prNotes:"Notatki (opcjonalnie)",prSections:"Sekcje w raporcie",prGo:"Drukuj / zapisz PDF",prCancel:"Anuluj",prHint:"W oknie drukowania wybierz jako drukarkę „Zapisz jako PDF”. Na telefonie: Udostępnij → Drukuj → zapisz PDF.",prGenerated:"Wygenerowano",prNone:"Zaznacz co najmniej jedną sekcję.",back:"Powrót do dashboardu",syncTitle:"Synchronizacja cykli",syncLead:"Wpisz do pięciu wcześniejszych dni zmiany, także sprzed wielu lat. Przyszłe daty cykli, które pokrywają się między liniami, zostaną wyróżnione na czerwono.",horizon:"Horyzont",mo:"{n} mies.",extraN:"Dodatkowe liczby",tol:"Tolerancja",tol0:"ten sam dzień",tol1:"±1 dzień handlowy",tolN:"±{n} dni handlowe",mainLine:"Główna data",mainHint:"z pola powyżej",line:"Linia {n}",labelPh:"opis, np. dołek USDJPY",clear:"Wyczyść",confTitle:"Nadchodzące zbieżności",confNeed:"Wpisz co najmniej jedną dodatkową datę zmiany, aby szukać zbieżności cykli.",confNone:"Brak zbieżności w wybranym horyzoncie. Dodaj kolejne daty zmian, wydłuż horyzont albo zwiększ tolerancję.",strength:"Siła",cycles:"Cykle",confMark:"zbieżność",noFuture:"brak przyszłych cykli w horyzoncie – dla starej daty dopisz własne liczby powyżej",title:"Kalkulator Ichimoku",subtitle:"Obserwacja zasięgu ceny i teoria czasu Goichi Hosody. Wpisz punkty fali lub daty, a cele i dni zmiany policzą się same.",
 gPrice:"Cena",gTime:"Czas",tTargets:"Cele cenowe",tWidth:"Zasięg fal",tCycles:"Cykle czasowe",tTaito:"Liczby równe",
 targetsLead:"Wpisz trzy punkty fali. Kalkulator wyznacza cele V, N, E i NT, wartości pośrednie i wielokrotności.",
 dirUp:"Fala wzrostowa",dirDown:"Fala spadkowa",
@@ -575,12 +611,12 @@ c17b:"Zastój w środku ruchu; fala ostatnich kupujących; fala silnego zaintere
 c26b:"Rynek wzrostowy",c33r:"Pierwsza faza rynku spadkowego",c129:"Często przesuwane na 129/172",c200:"Zakres 200–257",
 taitoLead:"Taitō sūchi: ruch trwa tyle samo dni handlowych co poprzedni. Ta sama liczba dni odłożona od punktu zmiany lub od punktu hengi wskazuje kolejny dzień zmiany.",
 taitoBasic:"Podstawowe",taitoHengi:"Hengi (przesunięte)",tdStart:"Data startu",tdChange:"Dzień zmiany",tdHengi:"Punkt hengi",
-tdNext:"Następny dzień zmiany",tdNextHengi:"Dzień zmiany od punktu hengi",countIs:"{n} dni handlowych",
+tdNext:"Następny dzień zmiany",tdNextHengi:"Dzień zmiany od punktu hengi",countIs:"{n} dni handlowych",abcTitle:"Fala N: dni zmiany z punktów A, B, C",abcLead:"Wpisz daty trzech punktów fali N. Kalkulator wyznacza trzy symetrie czasowe (liczby równe) dla punktu D i szuka ich zbieżności z liczbami podstawowymi Hosody liczonymi od A, B i C.",abcA:"początek impulsu",abcB:"koniec impulsu",abcC:"koniec korekty",abcOrder:"Daty muszą iść po kolei: A < B < C.",tm:"czas",abcCD:"Druga fala trwa tyle co pierwsza",abcBD:"Korekta i druga fala razem trwają tyle co AB",abcAC:"Realizacja powtarza całe przygotowanie A–C",abcStale:"nieaktualna – wypada w C lub wcześniej (korekta BC nie krótsza niż AB)",abcConfTitle:"Kumulacja: liczby równe i podstawowe od A, B, C",abcConfHint:"Tylko daty po punkcie C. Tolerancja, horyzont i dodatkowe liczby – jak w synchronizacji cykli (zakładka Cykle czasowe).",abcNone:"Brak zbieżności po punkcie C w wybranym horyzoncie. Zwiększ tolerancję lub horyzont w synchronizacji cykli.",
 setTitle:"Dni wolne, sposób liczenia i udostępnianie",holStd:"Wolne 1 stycznia i 25 grudnia (rynek międzybankowy, jak w arkuszu)",
 day1:"Dzień punktu zwrotnego liczony jako dzień 1 (jak w arkuszu)",holExtra:"Dodatkowe dni wolne – jedna data w wierszu (RRRR-MM-DD)",
 share:"Kopiuj link z danymi",reset:"Przywróć przykład",copied:"Link skopiowany – wklej go np. na webinarze",copyFail:"Nie udało się skopiować. Link jest w pasku adresu.",
 footer:"Kalkulator na podstawie arkusza obliczeń Ichimoku (fxtechnical.net).",disclaimer:"Narzędzie edukacyjne. Obliczenia nie są rekomendacją inwestycyjną."},
-it:{chartPage:"Grafico",prLayout:"Impaginazione",lyOne:"Una pagina A4 – sintesi (senza descrizioni dei cicli e spiegazioni)",lyFull:"Report completo – più pagine",print:"Stampa / PDF",prTitle:"Stampa l'analisi in PDF",prName:"Nome dell'analisi",prNamePh:"es. EURUSD D1 – ottobre",prNotes:"Note (facoltative)",prSections:"Sezioni del report",prGo:"Stampa / salva PDF",prCancel:"Annulla",prHint:"Nella finestra di stampa scegli come stampante «Salva come PDF». Sul telefono: Condividi → Stampa → salva PDF.",prGenerated:"Generato il",prNone:"Seleziona almeno una sezione.",back:"Torna alla dashboard",syncTitle:"Sincronizzazione dei cicli",syncLead:"Inserisci fino a cinque giorni di cambiamento passati, anche di molti anni fa. Le date future dei cicli che coincidono tra le linee vengono evidenziate in rosso.",horizon:"Orizzonte",mo:"{n} mesi",extraN:"Numeri aggiuntivi",tol:"Tolleranza",tol0:"stesso giorno",tol1:"±1 giorno lavorativo",tolN:"±{n} giorni lavorativi",mainLine:"Data principale",mainHint:"dal campo sopra",line:"Linea {n}",labelPh:"nota, es. minimo USDJPY",clear:"Cancella",confTitle:"Prossime convergenze",confNeed:"Inserisci almeno una data di cambiamento aggiuntiva per cercare le convergenze dei cicli.",confNone:"Nessuna convergenza nell'orizzonte scelto. Aggiungi altre date, allunga l'orizzonte o aumenta la tolleranza.",strength:"Forza",cycles:"Cicli",confMark:"convergenza",noFuture:"nessun ciclo futuro nell'orizzonte – per una data vecchia aggiungi numeri propri sopra",title:"Calcolatore Ichimoku",subtitle:"Teoria dell'ampiezza dei prezzi e del tempo di Goichi Hosoda. Inserisci i punti dell'onda o le date: obiettivi e giorni di cambiamento si calcolano da soli.",
+it:{prLayout:"Impaginazione",lyOne:"Una pagina A4 – sintesi (senza descrizioni dei cicli e spiegazioni)",lyFull:"Report completo – più pagine",print:"Stampa / PDF",prTitle:"Stampa l'analisi in PDF",prName:"Nome dell'analisi",prNamePh:"es. EURUSD D1 – ottobre",prNotes:"Note (facoltative)",prSections:"Sezioni del report",prGo:"Stampa / salva PDF",prCancel:"Annulla",prHint:"Nella finestra di stampa scegli come stampante «Salva come PDF». Sul telefono: Condividi → Stampa → salva PDF.",prGenerated:"Generato il",prNone:"Seleziona almeno una sezione.",back:"Torna alla dashboard",syncTitle:"Sincronizzazione dei cicli",syncLead:"Inserisci fino a cinque giorni di cambiamento passati, anche di molti anni fa. Le date future dei cicli che coincidono tra le linee vengono evidenziate in rosso.",horizon:"Orizzonte",mo:"{n} mesi",extraN:"Numeri aggiuntivi",tol:"Tolleranza",tol0:"stesso giorno",tol1:"±1 giorno lavorativo",tolN:"±{n} giorni lavorativi",mainLine:"Data principale",mainHint:"dal campo sopra",line:"Linea {n}",labelPh:"nota, es. minimo USDJPY",clear:"Cancella",confTitle:"Prossime convergenze",confNeed:"Inserisci almeno una data di cambiamento aggiuntiva per cercare le convergenze dei cicli.",confNone:"Nessuna convergenza nell'orizzonte scelto. Aggiungi altre date, allunga l'orizzonte o aumenta la tolleranza.",strength:"Forza",cycles:"Cicli",confMark:"convergenza",noFuture:"nessun ciclo futuro nell'orizzonte – per una data vecchia aggiungi numeri propri sopra",title:"Calcolatore Ichimoku",subtitle:"Teoria dell'ampiezza dei prezzi e del tempo di Goichi Hosoda. Inserisci i punti dell'onda o le date: obiettivi e giorni di cambiamento si calcolano da soli.",
 gPrice:"Prezzo",gTime:"Tempo",tTargets:"Obiettivi di prezzo",tWidth:"Ampiezza onde",tCycles:"Cicli temporali",tTaito:"Numeri equivalenti",
 targetsLead:"Inserisci i tre punti dell'onda. Il calcolatore trova gli obiettivi V, N, E e NT, i valori medi e i multipli.",
 dirUp:"Onda rialzista",dirDown:"Onda ribassista",
@@ -604,12 +640,12 @@ c17b:"Debolezza a metà; onda degli ultimi compratori; onda di forte interesse; 
 c26b:"Mercato rialzista",c33r:"La prima fase del mercato ribassista",c129:"Spesso spostato a 129/172",c200:"Intervallo 200–257",
 taitoLead:"Taitō sūchi: un movimento dura gli stessi giorni lavorativi del precedente. Lo stesso numero di giorni dal punto di cambiamento o dal punto hengi indica il prossimo giorno di cambiamento.",
 taitoBasic:"Base",taitoHengi:"Hengi (traslato)",tdStart:"Data ordine",tdChange:"Giorno di cambiamento",tdHengi:"Punto hengi",
-tdNext:"Prossimo giorno di cambiamento",tdNextHengi:"Giorno di cambiamento dal punto hengi",countIs:"{n} giorni lavorativi",
+tdNext:"Prossimo giorno di cambiamento",tdNextHengi:"Giorno di cambiamento dal punto hengi",countIs:"{n} giorni lavorativi",abcTitle:"Onda N: giorni di cambiamento dai punti A, B, C",abcLead:"Inserisci le date dei tre punti dell'onda N. Il calcolatore trova le tre simmetrie temporali (numeri equivalenti) per il punto D e cerca le loro convergenze con i numeri di base di Hosoda contati da A, B e C.",abcA:"inizio impulso",abcB:"fine impulso",abcC:"fine correzione",abcOrder:"Le date devono essere in ordine: A < B < C.",tm:"tempo",abcCD:"La seconda onda dura quanto la prima",abcBD:"Correzione e seconda onda insieme durano quanto AB",abcAC:"La realizzazione ripete l'intera preparazione A–C",abcStale:"non valida – cade su C o prima (correzione BC non più breve di AB)",abcConfTitle:"Cumulo: numeri equivalenti e di base da A, B, C",abcConfHint:"Solo date dopo il punto C. Tolleranza, orizzonte e numeri aggiuntivi come nella sincronizzazione dei cicli (scheda Cicli temporali).",abcNone:"Nessuna convergenza dopo il punto C nell'orizzonte scelto. Aumenta la tolleranza o l'orizzonte nella sincronizzazione dei cicli.",
 setTitle:"Festività, modo di conteggio e condivisione",holStd:"Festivi 1 gennaio e 25 dicembre (mercato interbancario, come nel foglio)",
 day1:"Il giorno del punto di inversione conta come giorno 1 (come nel foglio)",holExtra:"Altri giorni festivi – una data per riga (AAAA-MM-GG)",
 share:"Copia link con i dati",reset:"Ripristina esempio",copied:"Link copiato",copyFail:"Copia non riuscita. Il link è nella barra degli indirizzi.",
 footer:"Calcolatore basato sul foglio di calcolo Ichimoku (fxtechnical.net).",disclaimer:"Strumento didattico. I calcoli non sono una raccomandazione d'investimento."},
-en:{chartPage:"Chart",prLayout:"Layout",lyOne:"One A4 page – summary (no cycle descriptions or explanations)",lyFull:"Full report – several pages",print:"Print / PDF",prTitle:"Print the analysis to PDF",prName:"Analysis name",prNamePh:"e.g. EURUSD D1 – October",prNotes:"Notes (optional)",prSections:"Sections in the report",prGo:"Print / save PDF",prCancel:"Cancel",prHint:"In the print window choose “Save as PDF” as the printer. On a phone: Share → Print → save PDF.",prGenerated:"Generated",prNone:"Select at least one section.",back:"Back to dashboard",syncTitle:"Cycle synchronisation",syncLead:"Enter up to five past change days, even ones from years ago. Future cycle dates that coincide across lines are highlighted in red.",horizon:"Horizon",mo:"{n} months",extraN:"Extra numbers",tol:"Tolerance",tol0:"same day",tol1:"±1 trading day",tolN:"±{n} trading days",mainLine:"Main date",mainHint:"from the field above",line:"Line {n}",labelPh:"note, e.g. USDJPY low",clear:"Clear",confTitle:"Upcoming confluences",confNeed:"Enter at least one more change date to look for cycle confluences.",confNone:"No confluences in the chosen horizon. Add more dates, extend the horizon or raise the tolerance.",strength:"Strength",cycles:"Cycles",confMark:"confluence",noFuture:"no future cycles in the horizon – for an old date add your own numbers above",title:"Ichimoku Calculator",subtitle:"Goichi Hosoda's price-range observation and time theory. Enter wave points or dates and the targets and change days calculate themselves.",
+en:{prLayout:"Layout",lyOne:"One A4 page – summary (no cycle descriptions or explanations)",lyFull:"Full report – several pages",print:"Print / PDF",prTitle:"Print the analysis to PDF",prName:"Analysis name",prNamePh:"e.g. EURUSD D1 – October",prNotes:"Notes (optional)",prSections:"Sections in the report",prGo:"Print / save PDF",prCancel:"Cancel",prHint:"In the print window choose “Save as PDF” as the printer. On a phone: Share → Print → save PDF.",prGenerated:"Generated",prNone:"Select at least one section.",back:"Back to dashboard",syncTitle:"Cycle synchronisation",syncLead:"Enter up to five past change days, even ones from years ago. Future cycle dates that coincide across lines are highlighted in red.",horizon:"Horizon",mo:"{n} months",extraN:"Extra numbers",tol:"Tolerance",tol0:"same day",tol1:"±1 trading day",tolN:"±{n} trading days",mainLine:"Main date",mainHint:"from the field above",line:"Line {n}",labelPh:"note, e.g. USDJPY low",clear:"Clear",confTitle:"Upcoming confluences",confNeed:"Enter at least one more change date to look for cycle confluences.",confNone:"No confluences in the chosen horizon. Add more dates, extend the horizon or raise the tolerance.",strength:"Strength",cycles:"Cycles",confMark:"confluence",noFuture:"no future cycles in the horizon – for an old date add your own numbers above",title:"Ichimoku Calculator",subtitle:"Goichi Hosoda's price-range observation and time theory. Enter wave points or dates and the targets and change days calculate themselves.",
 gPrice:"Price",gTime:"Time",tTargets:"Price targets",tWidth:"Wave range",tCycles:"Time cycles",tTaito:"Equal counts",
 targetsLead:"Enter the three wave points. The calculator finds the V, N, E and NT targets, the midpoints and the multiples.",
 dirUp:"Up wave",dirDown:"Down wave",
@@ -633,7 +669,7 @@ c17b:"Mid-move lull; wave of the last buyers; wave of strong interest; bottoming
 c26b:"Bull market",c33r:"First phase of a bear market",c129:"Often shifted to 129/172",c200:"Range 200–257",
 taitoLead:"Taitō sūchi: a move lasts as many trading days as the previous one. The same count laid from the change day, or from a hengi point, gives the next change day.",
 taitoBasic:"Basic",taitoHengi:"Hengi (shifted)",tdStart:"Start date",tdChange:"Change day",tdHengi:"Hengi point",
-tdNext:"Next change day",tdNextHengi:"Change day from the hengi point",countIs:"{n} trading days",
+tdNext:"Next change day",tdNextHengi:"Change day from the hengi point",countIs:"{n} trading days",abcTitle:"N wave: change days from points A, B, C",abcLead:"Enter the dates of the three N-wave points. The calculator finds the three time symmetries (equal counts) for point D and looks for their confluences with Hosoda's basic numbers counted from A, B and C.",abcA:"impulse start",abcB:"impulse end",abcC:"correction end",abcOrder:"Dates must be in order: A < B < C.",tm:"time",abcCD:"Second wave lasts as long as the first",abcBD:"Correction and second wave together last as long as AB",abcAC:"Realisation repeats the whole A–C build-up",abcStale:"not valid – falls on or before C (correction BC not shorter than AB)",abcConfTitle:"Clustering: equal counts and basic numbers from A, B, C",abcConfHint:"Only dates after point C. Tolerance, horizon and extra numbers as in cycle synchronisation (Time cycles tab).",abcNone:"No confluences after point C in the chosen horizon. Raise the tolerance or horizon in cycle synchronisation.",
 setTitle:"Holidays, counting and sharing",holStd:"Closed on 1 January and 25 December (interbank market, as in the sheet)",
 day1:"Turning-point day counts as day 1 (as in the sheet)",holExtra:"Extra holidays – one date per line (YYYY-MM-DD)",
 share:"Copy link with data",reset:"Restore example",copied:"Link copied",copyFail:"Copy failed. The link is in the address bar.",
@@ -652,13 +688,13 @@ function defaults(){
     up:{A:"1.27901",B:"1.32804",C:"1.30361"},down:{A:"149.5",B:"146",C:"147.39"},sel:"V",mult:false,
     legs:[["120.76","124.13"],["124.13","122.22"],["119.46","122.12"],["124.13","122.22"]],
     cyc:iso(todayDN()),custom:"",
-    tb:{s:"2015-08-24",c:"2015-10-23"},th:{s:"2013-05-22",c:"2013-06-13",h:"2013-07-08"},
+    tb:{s:"2015-08-24",c:"2015-10-23"},th:{s:"2013-05-22",c:"2013-06-13",h:"2013-07-08"},abc:{a:"2026-08-03",b:"2026-08-25",c:"2026-09-16"},
     holStd:true,holExtra:"",day1:true,
     sync:{rows:[0,1,2,3,4].map(()=>({d:"",l:""})),months:12,tol:1,extra:""},
     pr:{name:"",notes:"",layout:"one",sec:{targets:true,width:true,cycles:true,sync:true,taito:true}}};
 }
 let S=defaults();
-function fixState(){const dp=defaults().pr;S.pr=Object.assign({},dp,S.pr||{});S.pr.sec=Object.assign({},dp.sec,S.pr.sec||{});const d=defaults().sync;S.sync=Object.assign({},d,S.sync||{});if(!Array.isArray(S.sync.rows)||S.sync.rows.length!==5)S.sync.rows=d.rows}
+function fixState(){S.abc=Object.assign({},defaults().abc,S.abc||{});const dp=defaults().pr;S.pr=Object.assign({},dp,S.pr||{});S.pr.sec=Object.assign({},dp.sec,S.pr.sec||{});const d=defaults().sync;S.sync=Object.assign({},d,S.sync||{});if(!Array.isArray(S.sync.rows)||S.sync.rows.length!==5)S.sync.rows=d.rows}
 function load(){
   try{const h=location.hash.match(/s=([^&]+)/);if(h){const o=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(h[1])))));S=Object.assign(defaults(),o);return}}catch(e){}
   try{const v=localStorage.getItem("ichimokuCalc.v1");if(v)S=Object.assign(defaults(),JSON.parse(v))}catch(e){}
@@ -865,6 +901,40 @@ function renderTaito(){
   };
   one(S.tb.s,S.tb.c,S.tb.c,"tbOut","tbWhen","tbCount");
   one(S.th.s,S.th.c,S.th.h,"thOut","thWhen","thCount");
+  renderAbc();
+}
+function renderAbc(){
+  ["a","b","c"].forEach(k=>{const el=$("abc"+k.toUpperCase());if(document.activeElement!==el)el.value=S.abc[k]});
+  const a=parseISO(S.abc.a),b=parseISO(S.abc.b),c=parseISO(S.abc.c);
+  const w=$("abcWarn"),clear=()=>{$("abcCnt").innerHTML="";$("abcRes").innerHTML="";$("abcConf").innerHTML=""};
+  if(a==null||b==null||c==null){w.classList.remove("on");clear();return}
+  if(!(a<b&&b<c)){w.textContent=t("abcOrder");w.classList.add("on");clear();return}
+  w.classList.remove("on");
+  const nAB=networkdays(a,b),nBC=networkdays(b,c),nAC=networkdays(a,c);
+  const dsp=n=>S.day1?n:n-1;
+  $("abcCnt").innerHTML=[["AB",nAB],["BC",nBC],["AC",nAC]].map(([l,n])=>`<div class="mid">${l}<strong class="num">${t("countIs",{n:dsp(n)})}</strong></div>`).join("");
+  const tm=t("tm");
+  const T3=[{k:"CD = AB",f:"abcCD",x:`C + ${tm}(AB)`,d:workday(c,nAB-1)},{k:"BD = AB",f:"abcBD",x:`B + ${tm}(AB)`,d:workday(b,nAB-1)},{k:"CD = AC",f:"abcAC",x:`C + ${tm}(AC)`,d:workday(c,nAC-1)}];
+  T3.forEach(o=>o.stale=o.d<=c);
+  // events after C
+  const end=Math.max(todayDN(),c)+Math.round(S.sync.months*30.44);
+  const nums=[...new Set(CYC.map(x=>x[0]).concat(syncExtra()))].sort((x,y)=>x-y);
+  const ev=[];
+  [["A",a],["B",b],["C",c]].forEach(([src,d0])=>nums.forEach(n=>{const d=cycDate(d0,n);if(d>c&&d<=end)ev.push({d,src,lab:src+" · <b>"+n+"</b>"})}));
+  T3.forEach(o=>{if(!o.stale&&o.d<=end)ev.push({d:o.d,src:o.k,lab:"<b>"+o.k+"</b>",tt:1})});
+  ev.sort((x,y)=>x.d-y.d||(y.tt||0)-(x.tt||0));
+  const conf=[];let i=0;
+  while(i<ev.length){let j=i;while(j+1<ev.length&&bizBetween(ev[i].d,ev[j+1].d)<=S.sync.tol)j++;
+    const g=ev.slice(i,j+1),src=new Set(g.map(e=>e.src));
+    if(src.size>=2){conf.push({from:g[0].d,to:g[g.length-1].d,ev:g,n:src.size,tt:g.some(e=>e.tt)});g.forEach(e=>e.hit=src.size)}
+    i=j+1}
+  $("abcRes").innerHTML=T3.map(o=>{const e=ev.find(e=>e.tt&&e.src===o.k);const hit=e&&e.hit?`<span class="cmark">${t("confMark")} ×${e.hit}</span>`:"";
+    return `<div class="abr${o.stale?" stale":""}"><span class="k">${o.k}</span><span class="f"><b>${t(o.f)}</b>${o.x}${o.stale?`<span class="st">${t("abcStale")}</span>`:""}</span><span class="v num">${fdate(o.d)}${hit}<span class="when">${rel(o.d)}</span></span></div>`}).join("");
+  if(!conf.length){$("abcConf").innerHTML=`<div class="syncnote">${t("abcNone")}</div>`;return}
+  let h=`<div class="scroll"><table class="conf"><thead><tr><th>${t("cDate")}</th><th class="n">${t("strength")}</th><th>${t("cycles")}</th></tr></thead><tbody>`;
+  conf.forEach(cf=>{const dt=cf.from===cf.to?fdate(cf.from):`${fdate(cf.from)} – ${fdate(cf.to)}`;
+    h+=`<tr class="${cf.tt?"first":""}"><td class="num" style="white-space:nowrap"><b>${dt}</b><span class="when">${rel(cf.from)}</span></td><td class="n"><span class="pow">×${cf.n}</span></td><td>${cf.ev.map(e=>`<span class="chip${e.tt?" tt":""}" title="${fdate(e.d)}">${e.lab}</span>`).join("")}</td></tr>`});
+  $("abcConf").innerHTML=h+"</tbody></table></div>";
 }
 
 /* ---------- settings ---------- */
@@ -945,10 +1015,11 @@ document.addEventListener("input",e=>{
   else if(el.dataset.sync!=null){S.sync.rows[+el.dataset.sync][el.dataset.f]=el.value;renderCycles();save()}
   else if(el.id==="prName"){S.pr.name=el.value;save()}
   else if(el.id==="prNotes"){S.pr.notes=el.value;save()}
-  else if(el.id==="syncExtra"){S.sync.extra=el.value;renderCycles();save()}
+  else if(el.id==="syncExtra"){S.sync.extra=el.value;renderCycles();renderAbc();save()}
   else if(el.id==="cycStart"){S.cyc=el.value;renderCycles();save()}
   else if(el.id==="cycCustom"){S.custom=el.value.replace(/\D/g,"");renderCycles();save()}
   else if(["tbS","tbC"].includes(el.id)){S.tb[el.id==="tbS"?"s":"c"]=el.value;renderTaito();save()}
+  else if(el.dataset.abc){S.abc[el.dataset.abc]=el.value;renderAbc();save()}
   else if(["thS","thC","thH"].includes(el.id)){S.th[{thS:"s",thC:"c",thH:"h"}[el.id]]=el.value;renderTaito();save()}
   else if(el.id==="holExtra"){S.holExtra=el.value;HOL=holSet();renderCycles();renderTaito();save()}
 });
@@ -958,8 +1029,8 @@ document.addEventListener("change",e=>{
   else if(el.id==="day1"){S.day1=el.checked;renderAll()}
   else if(el.name==="prLayout"){S.pr.layout=el.value;save()}
   else if(el.dataset.sec){S.pr.sec[el.dataset.sec]=el.checked;save()}
-  else if(el.id==="syncMonths"){S.sync.months=+el.value;renderCycles();save()}
-  else if(el.id==="syncTol"){S.sync.tol=+el.value;renderCycles();save()}
+  else if(el.id==="syncMonths"){S.sync.months=+el.value;renderCycles();renderAbc();save()}
+  else if(el.id==="syncTol"){S.sync.tol=+el.value;renderCycles();renderAbc();save()}
   else if(el.id==="multChart"){S.mult=el.checked;renderTargets();save()}
 });
 // keyboard: arrow keys between tabs
@@ -967,8 +1038,6 @@ document.querySelector("nav.tabs").addEventListener("keydown",e=>{if(!["ArrowRig
 
 try{const th=localStorage.getItem("ichimokuCalc.theme");if(th)document.documentElement.dataset.theme=th}catch(e){}
 load();fixState();renderAll();
-// A/B/C przeniesione ze strony Wykres Ichimoku (inna karta) – odśwież od razu
-window.addEventListener("storage",e=>{if(e.key!=="ichimokuCalc.v1"||!e.newValue)return;try{S=Object.assign(defaults(),JSON.parse(e.newValue));fixState();if(location.hash)history.replaceState(null,"",location.href.split("#")[0]);renderAll()}catch(_){}});
 })();
 </script>
 </body>
