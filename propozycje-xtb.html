@@ -25,16 +25,16 @@
 
         /* Top Bar */
         .top-bar {
-            background:#2d3238; border-radius:12px; padding:15px 30px; margin-bottom:20px;
-            box-shadow:0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(212,175,55,0.15);
-            border:1px solid rgba(212,175,55,0.2);
+            background:radial-gradient(ellipse at 50% 35%, #1a56d6 0%, #0d3a9e 50%, #08236b 100%); border-radius:12px; padding:15px 30px; margin-bottom:20px;
+            box-shadow:0 6px 24px rgba(8,35,107,0.35);
+            border:1px solid rgba(255,255,255,0.08);
             display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;
         }
         .logo-container img { height:200px; width:auto; }
-        .contact-info { text-align:right; color:rgba(255,255,255,0.6); }
+        .contact-info { text-align:right; color:rgba(255,255,255,0.75); }
         .contact-info .name { font-weight:700; font-size:1.1em; color:#d4af37; margin-bottom:3px; letter-spacing:0.05em; }
-        .contact-info .email { font-size:0.9em; color:rgba(255,255,255,0.45); }
-        .contact-info .email a { color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.2s; }
+        .contact-info .email { font-size:0.9em; color:rgba(226,232,240,0.8); }
+        .contact-info .email a { color:rgba(226,232,240,0.8); text-decoration:none; transition:color 0.2s; }
         .contact-info .email a:hover { color:#d4af37; }
 
         /* Back link */
@@ -66,16 +66,16 @@
 
         /* ── ZAKŁADKI ── */
         .tabs {
-            display:flex; gap:8px; background:#2d3238; padding:6px; border-radius:12px;
-            margin-bottom:26px; border:1px solid rgba(212,175,55,0.2);
+            display:flex; gap:10px; background:#fff; padding:12px; border-radius:12px;
+            margin-bottom:26px; box-shadow:0 2px 12px rgba(0,0,0,0.06);
         }
         .tab-btn {
             flex:1; border:0; cursor:pointer; padding:13px 16px; border-radius:8px;
-            font:inherit; font-weight:700; font-size:1em; color:rgba(255,255,255,0.65);
-            background:transparent; transition:background .2s, color .2s;
+            font:inherit; font-weight:700; font-size:1em; color:#4a5568;
+            background:#e2e8f0; transition:background .2s, color .2s, box-shadow .2s;
         }
-        .tab-btn:hover { color:#fff; }
-        .tab-btn.active { background:#d4af37; color:#2d3238; }
+        .tab-btn:hover { background:#cbd5e0; color:#2d3748; }
+        .tab-btn.active { background:#3182ce; color:#fff; box-shadow:0 4px 12px rgba(49,130,206,0.35); }
         .tab-btn small { display:block; font-weight:500; font-size:.78em; opacity:.8; margin-top:2px; }
         .panel { display:none; }
         .panel.active { display:block; }
@@ -130,16 +130,16 @@
         .s5 { --c:#be123c; --cl:#ffe4e6; }
 
         .intro {
-            background:#2d3238; color:#e2e8f0; border-radius:14px; padding:28px 30px; margin-bottom:22px;
-            border:1px solid rgba(212,175,55,0.25); display:grid; grid-template-columns:1.4fr 1fr; gap:28px;
+            background:radial-gradient(ellipse at 50% 35%, #1a56d6 0%, #0d3a9e 50%, #08236b 100%); color:#e2e8f0; border-radius:14px; padding:28px 30px; margin-bottom:22px;
+            box-shadow:0 6px 24px rgba(8,35,107,0.3); display:grid; grid-template-columns:1.4fr 1fr; gap:28px;
         }
         .intro h2 { color:#d4af37; font-size:1.6em; margin-bottom:10px; }
-        .intro p { line-height:1.7; color:rgba(255,255,255,0.75); font-size:.97em; }
+        .intro p { line-height:1.7; color:rgba(255,255,255,0.88); font-size:.97em; }
         .intro .rules { list-style:none; margin-top:14px; display:grid; gap:7px; }
         .intro .rules li { font-size:.9em; color:rgba(255,255,255,0.8); padding-left:22px; position:relative; }
         .intro .rules li::before { content:"✓"; position:absolute; left:0; color:#d4af37; font-weight:800; }
 
-        .progress-card { background:rgba(255,255,255,0.05); border-radius:12px; padding:18px 20px; border:1px solid rgba(255,255,255,0.08); }
+        .progress-card { background:rgba(255,255,255,0.08); border-radius:12px; padding:18px 20px; border:1px solid rgba(255,255,255,0.08); }
         .progress-card .big { font-size:2.4em; font-weight:800; color:#fff; line-height:1; }
         .progress-card .big span { font-size:.45em; color:rgba(255,255,255,0.5); font-weight:600; }
         .bar { height:10px; background:rgba(255,255,255,0.1); border-radius:10px; overflow:hidden; margin:12px 0 14px; }
@@ -147,7 +147,7 @@
         .progress-card label { display:block; font-size:.8em; color:rgba(255,255,255,0.55); margin:10px 0 4px; font-weight:600; }
         .progress-card input[type=date] {
             width:100%; padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.15);
-            background:#23272c; color:#fff; font:inherit; color-scheme:dark;
+            background:rgba(4,20,64,0.55); color:#fff; font:inherit; color-scheme:dark;
         }
         .chk-line { display:flex; align-items:center; gap:8px; font-size:.85em; color:rgba(255,255,255,0.75); margin-top:10px; cursor:pointer; }
         .chk-line input { accent-color:#d4af37; width:16px; height:16px; }
@@ -264,11 +264,11 @@
         .bridge::before { content:"⤵"; font-style:normal; font-size:1.6em; color:#a0aec0; flex-shrink:0; }
 
         .final {
-            background:linear-gradient(135deg,#2d3238,#3b4148); color:#e2e8f0; border-radius:14px; padding:26px 30px;
-            margin-top:24px; border:1px solid rgba(212,175,55,0.3); text-align:center;
+            background:radial-gradient(ellipse at 50% 35%, #1a56d6 0%, #0d3a9e 50%, #08236b 100%); color:#e2e8f0; border-radius:14px; padding:26px 30px;
+            margin-top:24px; box-shadow:0 6px 24px rgba(8,35,107,0.3); text-align:center;
         }
         .final h3 { color:#d4af37; font-size:1.35em; margin-bottom:8px; }
-        .final p { max-width:760px; margin:0 auto; line-height:1.7; color:rgba(255,255,255,0.78); }
+        .final p { max-width:760px; margin:0 auto; line-height:1.7; color:rgba(255,255,255,0.88); }
 
         .footer-note { text-align:center; color:#94a3b8; font-size:.85em; margin:30px 0 10px; }
 
