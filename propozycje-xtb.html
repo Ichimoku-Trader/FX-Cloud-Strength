@@ -12,9 +12,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Propozycje XTB - Ichimoku Trader</title>
+    <meta name="description" content="Ścieżka nauki 30 dni: od mentalności inwestora, przez Price Action, wolumen i system Ichimoku, po makro, IKE/IKZE i bezpieczeństwo konta – z materiałami XTB.">
     <link rel="icon" href="data:,">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
         body {
             font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background:#f5f7fa; padding:20px; min-height:100vh; color:#2d3748;
@@ -62,6 +64,22 @@
         .disclaimer-text { color:#78350f; line-height:1.7; font-size:0.93em; font-weight:500; }
         .disclaimer-text strong { color:#92400e; font-weight:700; }
 
+        /* ── ZAKŁADKI ── */
+        .tabs {
+            display:flex; gap:8px; background:#2d3238; padding:6px; border-radius:12px;
+            margin-bottom:26px; border:1px solid rgba(212,175,55,0.2);
+        }
+        .tab-btn {
+            flex:1; border:0; cursor:pointer; padding:13px 16px; border-radius:8px;
+            font:inherit; font-weight:700; font-size:1em; color:rgba(255,255,255,0.65);
+            background:transparent; transition:background .2s, color .2s;
+        }
+        .tab-btn:hover { color:#fff; }
+        .tab-btn.active { background:#d4af37; color:#2d3238; }
+        .tab-btn small { display:block; font-weight:500; font-size:.78em; opacity:.8; margin-top:2px; }
+        .panel { display:none; }
+        .panel.active { display:block; }
+
         /* ── MOZAIKA (masonry) ── */
         .mosaic { column-count:3; column-gap:18px; }
         @media (max-width:1024px) { .mosaic { column-count:2; } }
@@ -76,8 +94,6 @@
         .tile img { display:block; width:100%; height:auto; transition:transform .4s ease; }
         .tile:hover { transform:translateY(-4px); box-shadow:0 14px 30px rgba(0,0,0,0.16); }
         .tile.has-link:hover img { transform:scale(1.045); }
-
-        /* CTA pill (tylko dla kafelków z linkiem) */
         .tile .cta {
             position:absolute; bottom:12px; right:12px; opacity:0; transform:translateY(8px);
             background:rgba(15,15,17,0.88); color:#fff; font-size:.8em; font-weight:700;
@@ -86,8 +102,6 @@
         }
         .tile.has-link:hover .cta { opacity:1; transform:translateY(0); }
         .tile.has-link { cursor:pointer; }
-
-        /* Badge dla kafelków BEZ linku */
         .tile .addlink {
             position:absolute; top:10px; right:10px; display:none;
             background:rgba(37,99,235,0.92); color:#fff; font-size:.72em; font-weight:700;
@@ -100,8 +114,6 @@
             opacity:0; transition:opacity .25s ease;
         }
         .tile.no-link:hover::after { opacity:1; }
-
-        /* Wyróżniony kafelek (Twój kurs) */
         .tile.featured { box-shadow:0 4px 18px rgba(212,175,55,0.35); outline:2px solid #d4af37; }
         .tile .ribbon {
             position:absolute; top:12px; left:12px; z-index:2;
@@ -110,13 +122,184 @@
             box-shadow:0 2px 8px rgba(0,0,0,0.2);
         }
 
+        /* ══════════════ ŚCIEŻKA NAUKI ══════════════ */
+        .s1 { --c:#0f766e; --cl:#ccfbf1; }
+        .s2 { --c:#2563eb; --cl:#dbeafe; }
+        .s3 { --c:#b8860b; --cl:#fdf3d0; }
+        .s4 { --c:#7c3aed; --cl:#ede9fe; }
+        .s5 { --c:#be123c; --cl:#ffe4e6; }
+
+        .intro {
+            background:#2d3238; color:#e2e8f0; border-radius:14px; padding:28px 30px; margin-bottom:22px;
+            border:1px solid rgba(212,175,55,0.25); display:grid; grid-template-columns:1.4fr 1fr; gap:28px;
+        }
+        .intro h2 { color:#d4af37; font-size:1.6em; margin-bottom:10px; }
+        .intro p { line-height:1.7; color:rgba(255,255,255,0.75); font-size:.97em; }
+        .intro .rules { list-style:none; margin-top:14px; display:grid; gap:7px; }
+        .intro .rules li { font-size:.9em; color:rgba(255,255,255,0.8); padding-left:22px; position:relative; }
+        .intro .rules li::before { content:"✓"; position:absolute; left:0; color:#d4af37; font-weight:800; }
+
+        .progress-card { background:rgba(255,255,255,0.05); border-radius:12px; padding:18px 20px; border:1px solid rgba(255,255,255,0.08); }
+        .progress-card .big { font-size:2.4em; font-weight:800; color:#fff; line-height:1; }
+        .progress-card .big span { font-size:.45em; color:rgba(255,255,255,0.5); font-weight:600; }
+        .bar { height:10px; background:rgba(255,255,255,0.1); border-radius:10px; overflow:hidden; margin:12px 0 14px; }
+        .bar i { display:block; height:100%; width:0; background:linear-gradient(90deg,#d4af37,#f3d36b); border-radius:10px; transition:width .5s ease; }
+        .progress-card label { display:block; font-size:.8em; color:rgba(255,255,255,0.55); margin:10px 0 4px; font-weight:600; }
+        .progress-card input[type=date] {
+            width:100%; padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.15);
+            background:#23272c; color:#fff; font:inherit; color-scheme:dark;
+        }
+        .chk-line { display:flex; align-items:center; gap:8px; font-size:.85em; color:rgba(255,255,255,0.75); margin-top:10px; cursor:pointer; }
+        .chk-line input { accent-color:#d4af37; width:16px; height:16px; }
+        .btn-row { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+        .btn {
+            border:0; cursor:pointer; font:inherit; font-weight:700; font-size:.88em; border-radius:8px;
+            padding:9px 14px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+        }
+        .btn-gold { background:#d4af37; color:#2d3238; }
+        .btn-gold:hover { background:#e6c24d; }
+        .btn-ghost { background:transparent; color:rgba(255,255,255,0.55); border:1px solid rgba(255,255,255,0.15); }
+        .btn-ghost:hover { color:#fff; }
+
+        /* Mapa drogowa */
+        .roadmap {
+            display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin:0 0 30px; position:relative;
+            background:#fff; border-radius:14px; padding:22px 14px 18px; box-shadow:0 2px 12px rgba(0,0,0,0.06);
+        }
+        .roadmap::before {
+            content:""; position:absolute; top:46px; left:10%; right:10%; height:3px; background:#e2e8f0; z-index:0;
+        }
+        .rm-step { text-align:center; text-decoration:none; color:#2d3748; position:relative; z-index:1; padding:0 6px; }
+        .rm-dot {
+            width:48px; height:48px; margin:0 auto 10px; border-radius:50%; display:grid; place-items:center;
+            background:#fff; border:3px solid var(--c); color:var(--c); font-weight:800; font-size:1.15em;
+            transition:transform .2s, background .3s, color .3s;
+            background-image:conic-gradient(var(--cl) var(--p,0%), #fff 0);
+        }
+        .rm-step:hover .rm-dot { transform:scale(1.08); }
+        .rm-step.done .rm-dot { background:var(--c); color:#fff; }
+        .rm-title { font-weight:700; font-size:.88em; line-height:1.3; }
+        .rm-days { font-size:.75em; color:#718096; margin-top:3px; }
+
+        /* Etap */
+        .stage { margin-bottom:16px; scroll-margin-top:16px; }
+        .stage-head {
+            background:#fff; border-radius:14px 14px 0 0; padding:22px 26px; border-top:5px solid var(--c);
+            display:flex; gap:20px; align-items:flex-start; box-shadow:0 2px 12px rgba(0,0,0,0.06);
+        }
+        .stage-num {
+            flex-shrink:0; width:58px; height:58px; border-radius:14px; background:var(--c); color:#fff;
+            display:grid; place-items:center; font-size:1.6em; font-weight:800;
+        }
+        .stage-head .meta { font-size:.78em; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--c); }
+        .stage-head h3 { font-size:1.45em; margin:3px 0 8px; }
+        .stage-head .comment { color:#4a5568; line-height:1.65; font-size:.95em; }
+        .stage-head .sp { margin-left:auto; text-align:right; flex-shrink:0; min-width:90px; }
+        .stage-head .sp b { font-size:1.4em; color:var(--c); }
+        .stage-head .sp small { display:block; color:#718096; font-size:.75em; }
+
+        .stage-body { background:#fbfcfd; border-radius:0 0 14px 14px; padding:6px 26px 24px; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
+
+        details.know { background:#fff; border:1px solid #e2e8f0; border-left:4px solid var(--c); border-radius:10px; margin:16px 0 20px; }
+        details.know summary {
+            cursor:pointer; padding:13px 18px; font-weight:700; color:var(--c); list-style:none; display:flex; align-items:center; gap:8px;
+        }
+        details.know summary::-webkit-details-marker { display:none; }
+        details.know summary::after { content:"▾"; margin-left:auto; transition:transform .2s; }
+        details.know[open] summary::after { transform:rotate(180deg); }
+        .know-inner { padding:2px 20px 20px; line-height:1.65; font-size:.93em; color:#2d3748; }
+        .know-inner h4 { font-size:1em; margin:14px 0 8px; color:#1a202c; }
+        .know-inner p { margin-bottom:8px; }
+        .pillars { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+        .pillar { background:var(--cl); border-radius:10px; padding:13px 15px; }
+        .pillar b { display:block; margin-bottom:4px; }
+        .pillar em { display:block; margin-top:6px; font-size:.92em; color:#4a5568; }
+        table.kt { width:100%; border-collapse:collapse; font-size:.92em; margin:6px 0 4px; }
+        table.kt th { background:var(--c); color:#fff; text-align:left; padding:9px 12px; font-weight:700; }
+        table.kt td { padding:9px 12px; border-bottom:1px solid #e2e8f0; vertical-align:top; }
+        table.kt tr:nth-child(even) td { background:#f7fafc; }
+        .checklist { list-style:none; display:grid; gap:7px; }
+        .checklist li { padding-left:28px; position:relative; }
+        .checklist li::before { content:"☐"; position:absolute; left:4px; color:var(--c); font-size:1.1em; }
+        .callout { background:#fff7ed; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:8px; margin-top:10px; font-size:.95em; }
+
+        /* Dni */
+        .days { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+        .day {
+            background:#fff; border-radius:12px; border:1px solid #e2e8f0; display:flex; overflow:hidden;
+            transition:box-shadow .2s, border-color .2s, opacity .3s;
+        }
+        .day:hover { box-shadow:0 8px 22px rgba(0,0,0,0.08); }
+        .day.today { border-color:var(--c); box-shadow:0 0 0 3px var(--cl); }
+        .day.done { opacity:.62; }
+        .day.done .d-title { text-decoration:line-through; text-decoration-color:var(--c); }
+        .d-side {
+            width:72px; flex-shrink:0; background:var(--cl); display:flex; flex-direction:column; align-items:center;
+            justify-content:flex-start; padding:14px 4px; text-align:center; gap:2px;
+        }
+        .d-side .lbl { font-size:.65em; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--c); }
+        .d-side .n { font-size:1.9em; font-weight:800; color:var(--c); line-height:1; }
+        .d-side .date { font-size:.68em; color:#4a5568; margin-top:6px; font-weight:600; line-height:1.3; }
+        .d-side input { margin-top:auto; width:20px; height:20px; accent-color:var(--c); cursor:pointer; }
+        .d-main { padding:14px 16px; flex:1; min-width:0; display:flex; flex-direction:column; gap:9px; }
+        .d-top { display:flex; gap:12px; align-items:flex-start; }
+        .d-thumb { width:84px; height:56px; border-radius:8px; object-fit:cover; flex-shrink:0; background:#edf2f7; display:block; }
+        .d-title { font-weight:700; font-size:1.02em; line-height:1.3; }
+        .d-time { font-size:.75em; color:#718096; margin-top:3px; }
+        .d-desc { font-size:.88em; color:#4a5568; line-height:1.55; }
+        .d-task { font-size:.86em; background:#f7fafc; border-radius:8px; padding:8px 11px; line-height:1.5; border:1px dashed #cbd5e0; }
+        .d-task b { color:var(--c); }
+        .d-mat {
+            align-self:flex-start; font-size:.8em; font-weight:700; text-decoration:none; color:var(--c);
+            border:1.5px solid var(--c); border-radius:20px; padding:5px 12px; transition:background .2s, color .2s;
+        }
+        .d-mat:hover { background:var(--c); color:#fff; }
+        .d-mat.own { background:#d4af37; border-color:#d4af37; color:#2d3238; }
+        .day.review .d-side { background:repeating-linear-gradient(135deg,var(--cl),var(--cl) 8px,#fff 8px,#fff 14px); }
+
+        .bridge {
+            display:flex; align-items:center; gap:14px; margin:0 0 16px; padding:14px 22px;
+            color:#4a5568; font-size:.9em; line-height:1.55; font-style:italic;
+        }
+        .bridge::before { content:"⤵"; font-style:normal; font-size:1.6em; color:#a0aec0; flex-shrink:0; }
+
+        .final {
+            background:linear-gradient(135deg,#2d3238,#3b4148); color:#e2e8f0; border-radius:14px; padding:26px 30px;
+            margin-top:24px; border:1px solid rgba(212,175,55,0.3); text-align:center;
+        }
+        .final h3 { color:#d4af37; font-size:1.35em; margin-bottom:8px; }
+        .final p { max-width:760px; margin:0 auto; line-height:1.7; color:rgba(255,255,255,0.78); }
+
         .footer-note { text-align:center; color:#94a3b8; font-size:.85em; margin:30px 0 10px; }
 
+        @media (max-width:900px) {
+            .intro { grid-template-columns:1fr; }
+            .days { grid-template-columns:1fr; }
+            .pillars { grid-template-columns:1fr; }
+        }
         @media (max-width:768px) {
+            body { padding:12px; }
             .top-bar { flex-direction:column; text-align:center; }
             .contact-info { text-align:center; }
             .logo-container img { height:120px; }
             .header h1 { font-size:1.8em; }
+            .roadmap { grid-template-columns:1fr; gap:10px; padding:16px; }
+            .roadmap::before { display:none; }
+            .rm-step { display:flex; align-items:center; gap:12px; text-align:left; }
+            .rm-dot { margin:0; width:40px; height:40px; flex-shrink:0; }
+            .stage-head { flex-wrap:wrap; padding:18px; gap:14px; }
+            .stage-head .sp { margin-left:0; text-align:left; }
+            .stage-body { padding:4px 14px 18px; }
+            .intro { padding:22px 18px; }
+            table.kt { font-size:.84em; }
+            .know-inner { padding:2px 14px 16px; overflow-x:auto; }
+            .tab-btn { padding:10px 8px; font-size:.92em; }
+        }
+        @media print {
+            .tabs, .back-link, .btn-row, .progress-card label, .progress-card input, .chk-line, #panel-oferty { display:none !important; }
+            .panel { display:block !important; }
+            details.know { break-inside:avoid; }
+            .day { break-inside:avoid; }
         }
     </style>
 </head>
@@ -152,15 +335,234 @@
             </div>
         </div>
 
+        <!-- Zakładki -->
+        <div class="tabs" role="tablist">
+            <button class="tab-btn active" data-tab="plan" role="tab">🗓️ Ścieżka nauki – 30 dni<small>5 etapów · zadania · postęp</small></button>
+            <button class="tab-btn" data-tab="oferty" role="tab">🖼️ Wszystkie propozycje<small id="tabCount">mozaika banerów</small></button>
+        </div>
+
+        <!-- ═══════════════ PANEL 1: ŚCIEŻKA NAUKI ═══════════════ -->
+        <section class="panel active" id="panel-plan">
+
+            <div class="intro">
+                <div>
+                    <h2>5-etapowy program nauki tradingu i inwestowania</h2>
+                    <p>Od nawyków i właściwej mentalności, przez czytanie wykresu, ceny i wolumenu, kompletny system Ichimoku i instrumenty CFD, aż po makroekonomię, optymalizację podatkową (IKE/IKZE) i ochronę kapitału. Każdy dzień to <strong style="color:#fff">jeden materiał XTB + jedno zadanie praktyczne</strong>, ok. 30–45 minut.</p>
+                    <ul class="rules">
+                        <li>Przechodź etapy po kolei – nie przeskakuj modułów.</li>
+                        <li>Dni z paskami to powtórki: nic nowego, tylko utrwalenie.</li>
+                        <li>Ćwiczenia wykonuj na rachunku demo, zanim zaryzykujesz realny kapitał.</li>
+                        <li>Zarządzanie ryzykiem jest ważniejsze niż sygnał wejścia.</li>
+                    </ul>
+                </div>
+                <div class="progress-card">
+                    <div class="big" id="pDone">0<span> / 30 dni</span></div>
+                    <div class="bar"><i id="pBar"></i></div>
+                    <div style="font-size:.88em;color:rgba(255,255,255,.7)" id="pNext">Zacznij od Dnia 1.</div>
+                    <label for="startDate">Data startu (opcjonalnie – pokaże daty przy dniach)</label>
+                    <input type="date" id="startDate">
+                    <label class="chk-line"><input type="checkbox" id="weekdays"> Ucz się tylko w dni robocze (pon–pt)</label>
+                    <div class="btn-row">
+                        <a class="btn btn-gold" id="goNext" href="#day-1">▶ Przejdź do bieżącego dnia</a>
+                        <button class="btn btn-ghost" id="resetBtn" type="button">Wyzeruj postęp</button>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="roadmap" id="roadmap">
+                <a class="rm-step s1" href="#etap-1"><div class="rm-dot">1</div><div><div class="rm-title">Fundamenty i mentalność</div><div class="rm-days">Dni 1–7</div></div></a>
+                <a class="rm-step s2" href="#etap-2"><div class="rm-dot">2</div><div><div class="rm-title">Cena i wolumen</div><div class="rm-days">Dni 8–14</div></div></a>
+                <a class="rm-step s3" href="#etap-3"><div class="rm-dot">3</div><div><div class="rm-title">System Ichimoku i CFD</div><div class="rm-days">Dni 15–22</div></div></a>
+                <a class="rm-step s4" href="#etap-4"><div class="rm-dot">4</div><div><div class="rm-title">Makro, surowce, IPO</div><div class="rm-days">Dni 23–26</div></div></a>
+                <a class="rm-step s5" href="#etap-5"><div class="rm-dot">5</div><div><div class="rm-title">Podatki i bezpieczeństwo</div><div class="rm-days">Dni 27–30</div></div></a>
+            </nav>
+
+            <!-- ─── ETAP 1 ─── -->
+            <article class="stage s1" id="etap-1" data-stage="1">
+                <header class="stage-head">
+                    <div class="stage-num">1</div>
+                    <div>
+                        <div class="meta">Etap 1 · Dni 1–7</div>
+                        <h3>Podstawy inwestowania i kultura finansowa</h3>
+                        <p class="comment">Pierwszym zadaniem nie jest szukanie zysków, lecz przebudowa nawyków finansowych i mentalności. Bez solidnych fundamentów psychologicznych i zrozumienia podstawowych klas aktywów nawet najlepsza strategia techniczna zawiedzie.</p>
+                    </div>
+                    <div class="sp"><b class="sp-val">0/7</b><small>ukończone</small></div>
+                </header>
+                <div class="stage-body">
+                    <details class="know">
+                        <summary>📖 Wiedza etapu: 4 filary kultury inwestycyjnej + klasy aktywów</summary>
+                        <div class="know-inner">
+                            <div class="pillars">
+                                <div class="pillar"><b>1. Pracujący kapitał</b>Pieniądze, które leżą bez oprocentowania, z roku na rok tracą na wartości przez inflację. Każda odłożona złotówka dostaje zadanie: ma zarabiać.<em>Efekt: znika lęk przed pierwszą wpłatą, a kapitał staje się narzędziem budowania niezależności.</em></div>
+                                <div class="pillar"><b>2. Systematyczność i dyscyplina</b>Inwestowanie to powtarzalny proces, a nie jednorazowa spekulacja. Stała rutyna wpłat i przeglądów portfela eliminuje impulsywne decyzje.<em>Efekt: nie kupujesz na górkach pod wpływem hałasu i nie panikujesz w korektach.</em></div>
+                                <div class="pillar"><b>3. Cierpliwość zamiast pychy</b>Wnioski z materiału XTB o inwestujących kobietach: mniej nadmiernego handlu (overtrading), konsekwentne zarządzanie ryzykiem i dłuższy horyzont.<em>Efekt: opanowanie emocji daje trwałą przewagę nad chaotyczną spekulacją.</em></div>
+                                <div class="pillar"><b>4. Własność i sukcesja</b>Podarowanie akcji uczy myślenia jak współwłaściciel biznesu, również najmłodszych.<em>Efekt: przesuwasz środek ciężkości z konsumpcji na posiadanie realnych aktywów.</em></div>
+                            </div>
+                            <h4>Dwie różne ścieżki na start</h4>
+                            <table class="kt">
+                                <tr><th>Materiał</th><th>Profil ryzyka i wartość</th></tr>
+                                <tr><td><b>Inwestowanie pasywne krok po kroku</b><br><small>T. Turski</small></td><td><b>Niskie/średnie ryzyko.</b> Portfel oparty na tanich funduszach i ETF-ach. Stabilny majątek przy minimalnym nakładzie czasu, dla oszczędności długoterminowych.</td></tr>
+                                <tr><td><b>E-book: Kryptowaluty dla początkujących</b><br><small>XTB</small></td><td><b>Wysokie ryzyko (aktywa spot).</b> Technologia blockchain, mechanika aktywów cyfrowych i radzenie sobie z ekstremalną zmiennością – bez dźwigni.</td></tr>
+                            </table>
+                        </div>
+                    </details>
+                    <div class="days" data-days="1"></div>
+                </div>
+            </article>
+            <p class="bridge">Opanowane fundamenty mentalne i zrozumienie aktywów pasywnych oraz cyfrowych to grunt pod naukę czytania czystego wykresu i mechaniki rynku – niezbędnych do precyzyjnego otwierania pozycji.</p>
+
+            <!-- ─── ETAP 2 ─── -->
+            <article class="stage s2" id="etap-2" data-stage="2">
+                <header class="stage-head">
+                    <div class="stage-num">2</div>
+                    <div>
+                        <div class="meta">Etap 2 · Dni 8–14</div>
+                        <h3>Analiza techniczna: Price Action, wolumen, Smart Money</h3>
+                        <p class="comment">Bezpośrednia interakcja z rynkiem. Nie dokładamy dziesiątek wskaźników – uczymy się odczytywać intencje uczestników rynku z ceny i wolumenu.</p>
+                    </div>
+                    <div class="sp"><b class="sp-val">0/7</b><small>ukończone</small></div>
+                </header>
+                <div class="stage-body">
+                    <details class="know">
+                        <summary>📖 Wiedza etapu: struktura ceny + siła wolumenu</summary>
+                        <div class="know-inner">
+                            <h4>Price Action (M. Tuszkiewicz) – trzy umiejętności</h4>
+                            <table class="kt">
+                                <tr><th>Umiejętność</th><th>Na czym polega</th><th>Praktyczny cel</th></tr>
+                                <tr><td><b>Struktura trendu</b></td><td>Wyższe szczyty i wyższe dołki = trend wzrostowy; niższe szczyty i niższe dołki = spadkowy.</td><td>Grasz tylko w kierunku dominującego prądu.</td></tr>
+                                <tr><td><b>Wsparcia i opory</b></td><td>Obszary, w których w przeszłości gwałtownie zmieniła się równowaga popytu i podaży.</td><td>Precyzyjne miejsca na Stop Loss i Take Profit.</td></tr>
+                                <tr><td><b>Układy świecowe</b></td><td>Formacje odwrócenia i kontynuacji na świecach japońskich.</td><td>Szybko widzisz, kiedy rynek traci impet.</td></tr>
+                            </table>
+                            <h4>Wolumen (M. Siudek) i Smart Money (R. Glinicki)</h4>
+                            <p><b>Cena pokazuje kierunek, wolumen – prawdziwą siłę i kapitał</b> stojący za ruchem.</p>
+                            <p><b>Akumulacja i dystrybucja:</b> duży kapitał nie ukryje swoich pozycji – zostawia ślad w postaci rosnącego wolumenu przy nieproporcjonalnie małym ruchu ceny.</p>
+                            <p><b>Stopping volume:</b> świece z bardzo wysokim wolumenem na ekstremach cenowych sygnalizują przejmowanie aktywów przez „silne ręce”.</p>
+                            <div class="callout">Zastosowanie: przestajesz wpadać w fałszywe wybicia i dołączasz do ruchu dopiero, gdy wolumen potwierdzi test rynku i obecność dużych graczy.</div>
+                        </div>
+                    </details>
+                    <div class="days" data-days="2"></div>
+                </div>
+            </article>
+            <p class="bridge">Czytanie czystej ceny i potwierdzanie ruchów wolumenem to bezpośredni fundament pod kompletny, wieloelementowy system transakcyjny z kolejnego etapu.</p>
+
+            <!-- ─── ETAP 3 ─── -->
+            <article class="stage s3" id="etap-3" data-stage="3">
+                <header class="stage-head">
+                    <div class="stage-num">3</div>
+                    <div>
+                        <div class="meta">Etap 3 · Dni 15–22 · ★ moduł flagowy</div>
+                        <h3>Pełny system transakcyjny: Ichimoku Kinko Hyo + CFD</h3>
+                        <p class="comment">Łączymy zdobytą wiedzę w spójny system. Ichimoku ocenia trend, wsparcia i opory, impet oraz równowagę czasową na jednym wykresie – kurs „Strategia Ichimoku krok po kroku” Grzegorza Moskwy prowadzi przez niego linia po linii.</p>
+                    </div>
+                    <div class="sp"><b class="sp-val">0/8</b><small>ukończone</small></div>
+                </header>
+                <div class="stage-body">
+                    <details class="know" open>
+                        <summary>📖 Wiedza etapu: 5 linii Ichimoku i mechanika CFD</summary>
+                        <div class="know-inner">
+                            <table class="kt">
+                                <tr><th>Składnik</th><th>Jak powstaje</th><th>Rola w systemie</th></tr>
+                                <tr><td><b>Tenkan-sen</b></td><td>Środek zakresu (max + min) / 2 z 9 okresów – krótkoterminowy impet.</td><td>Lokalny pęd, sygnał przecięcia z Kijun-sen.</td></tr>
+                                <tr><td><b>Kijun-sen</b></td><td>Środek zakresu z 26 okresów – linia bazowa, poziom równowagi ceny.</td><td>Kierunek średnioterminowy, dynamiczny poziom Stop Loss.</td></tr>
+                                <tr><td><b>Chikou Span</b></td><td>Cena zamknięcia przesunięta o 26 okresów wstecz.</td><td>Filtr fałszywych sygnałów: wejście tylko przy „wolnej przestrzeni”, gdy linia nie napotyka historycznych świec.</td></tr>
+                                <tr><td><b>Kumo (Senkou A i B)</b></td><td>A = (Tenkan + Kijun) / 2, B = środek zakresu z 52 okresów; obie przesunięte o 26 okresów w przód.</td><td>Dominujący trend (cena nad Chmurą = wzrostowy), grubość wsparcia/oporu, przyszłe strefy równowagi.</td></tr>
+                                <tr><td><b>Sygnały i prowadzenie pozycji</b></td><td>Wszystkie 5 linii jako jeden algorytm decyzyjny.</td><td>Wejście po zamknięciu świecy poza Chmurą (Kumo breakout) i proste zasady wyjścia.</td></tr>
+                            </table>
+                            <h4>CFD na kryptowaluty (materiał „Inwestuj w 35+ Krypto CFD”)</h4>
+                            <p><b>CFD ≠ posiadanie aktywa.</b> W przeciwieństwie do kryptowalut spot z Etapu 1, handlujesz tylko wyceną instrumentu – bez portfeli sprzętowych i kluczy prywatnych.</p>
+                            <p><b>Dźwignia i depozyt:</b> otwierasz większą pozycję, angażując tylko część kapitału jako depozyt zabezpieczający.</p>
+                            <p><b>Long i short:</b> możesz zarabiać zarówno na wzrostach, jak i na spadkach ceny.</p>
+                            <div class="callout"><b>Uwaga:</b> dźwignia zwielokrotnia zyski <u>i straty</u>. Każda pozycja na CFD wymaga zlecenia Stop Loss – bez wyjątków.</div>
+                        </div>
+                    </details>
+                    <div class="days" data-days="3"></div>
+                </div>
+            </article>
+            <p class="bridge">Wykres nie działa w próżni. Żeby sygnały techniczne były skuteczne i nie wpadały w pułapki kluczowych publikacji, trzeba opanować analizę otoczenia globalnego.</p>
+
+            <!-- ─── ETAP 4 ─── -->
+            <article class="stage s4" id="etap-4" data-stage="4">
+                <header class="stage-head">
+                    <div class="stage-num">4</div>
+                    <div>
+                        <div class="meta">Etap 4 · Dni 23–26</div>
+                        <h3>Makroekonomia, surowce i debiuty giełdowe</h3>
+                        <p class="comment">Sygnały techniczne z Etapu 3 są najskuteczniejsze, gdy płyną z makroekonomicznym wiatrem. Uczymy się czytać globalne przepływy kapitału i chłodno oceniać IPO.</p>
+                    </div>
+                    <div class="sp"><b class="sp-val">0/4</b><small>ukończone</small></div>
+                </header>
+                <div class="stage-body">
+                    <details class="know">
+                        <summary>📖 Wiedza etapu: cykle, ropa i checklista IPO</summary>
+                        <div class="know-inner">
+                            <table class="kt">
+                                <tr><th>Obszar</th><th>Zastosowanie w portfelu</th></tr>
+                                <tr><td><b>Megatrendy i cykle</b><br><small>Prognozy rynkowe 2026</small></td><td>Zmiany stóp procentowych i rotacja sektorowa – wyprzedzanie ruchów kapitału instytucjonalnego.</td></tr>
+                                <tr><td><b>Rynek ropy</b><br><small>Raport „Koniec taniej ropy?”</small></td><td>Czynniki podażowe (OPEC+, wydobycie) i popytowe (globalny przemysł) przy handlu surowcami.</td></tr>
+                            </table>
+                            <h4>Checklista przed debiutem giełdowym (studium: SpaceX)</h4>
+                            <ul class="checklist">
+                                <li><b>Model biznesowy i fosa:</b> czy spółka ma przewagę technologiczną lub bazę klientów trudną do skopiowania?</li>
+                                <li><b>Wycena:</b> czy wskaźniki z oferty (C/Z, C/WK) nie są zawyżone względem dojrzałych konkurentów?</li>
+                                <li><b>Przeznaczenie środków:</b> rozwój i inwestycje – czy spłata długów i wyjście obecnych właścicieli?</li>
+                                <li><b>Sentyment i płynność:</b> redukcja zapisów dla inwestorów indywidualnych, zaangażowanie dużych funduszy.</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <div class="days" data-days="4"></div>
+                </div>
+            </article>
+            <p class="bridge">Zyski z analizy technicznej i makro to połowa sukcesu. Druga połowa to uszczelnienie systemu – ochrona kapitału przed podatkami, inflacją i zagrożeniami operacyjnymi.</p>
+
+            <!-- ─── ETAP 5 ─── -->
+            <article class="stage s5" id="etap-5" data-stage="5">
+                <header class="stage-head">
+                    <div class="stage-num">5</div>
+                    <div>
+                        <div class="meta">Etap 5 · Dni 27–30</div>
+                        <h3>Optymalizacja podatkowa, emerytalna i bezpieczeństwo</h3>
+                        <p class="comment">Z inwestora operacyjnego stajesz się menedżerem majątku. Każda złotówka zaoszczędzona na podatkach i opłatach pracuje na procent składany tak samo jak zyskowna transakcja.</p>
+                    </div>
+                    <div class="sp"><b class="sp-val">0/4</b><small>ukończone</small></div>
+                </header>
+                <div class="stage-body">
+                    <details class="know">
+                        <summary>📖 Wiedza etapu: IKE vs IKZE, płynność, protokół bezpieczeństwa</summary>
+                        <div class="know-inner">
+                            <table class="kt">
+                                <tr><th>Parametr</th><th>IKE</th><th>IKZE</th></tr>
+                                <tr><td><b>Główna korzyść</b></td><td>Brak 19% podatku od zysków kapitałowych (podatku Belki) przy wypłacie po 60. roku życia (lub po 55. przy nabyciu praw emerytalnych).</td><td>Odliczenie wpłat od podstawy opodatkowania w rocznym PIT – zwrot podatku co roku. Przy wypłacie po 65. roku życia zryczałtowany podatek 10%.</td></tr>
+                                <tr><td><b>Warunki w XTB</b></td><td colspan="2">0% prowizji przy obrocie do 100 000 EUR miesięcznie, powyżej 0,2% (min. 10 EUR) – sprawdź aktualną tabelę opłat XTB.</td></tr>
+                                <tr><td><b>Dla kogo</b></td><td>Długoterminowy wzrost portfela akcji i ETF bez corocznego podatku.</td><td>Osoby z wyższym podatkiem, które chcą bieżącej tarczy podatkowej i reinwestować zwrot z PIT.</td></tr>
+                            </table>
+                            <h4>Płynność – Karta XTB</h4>
+                            <p>Rachunek jako centrum płynności: dostęp do środków z konta i 1% cashbacku od płatności kartą, co obniża koszty prowadzenia portfela.</p>
+                            <h4>Protokół bezpieczeństwa</h4>
+                            <div class="callout">Nieautoryzowana próba logowania, nieznane zlecenie, podejrzenie phishingu → <b>natychmiast zablokuj konto w aplikacji</b>, potem skontaktuj się z działem bezpieczeństwa brokera.</div>
+                        </div>
+                    </details>
+                    <div class="days" data-days="5"></div>
+                </div>
+            </article>
+
+            <div class="final">
+                <h3>🏁 Po 30 dniach</h3>
+                <p>Chaotyczne próby zamieniasz w uporządkowany proces: mentalność i portfel pasywny → cena i wolumen → system Ichimoku i CFD → kontekst makro → ochrona kapitału. Sukces na rynku to efekt dyscypliny, powtarzalności i ciągłej nauki – a zarządzanie ryzykiem pozostaje Twoim priorytetem numer jeden.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════ PANEL 2: MOZAIKA ═══════════════ -->
+        <section class="panel" id="panel-oferty">
         <!-- ═══════════════════════════════════════════════════════════════════
              MOZAIKA BANERÓW XTB
              Aby PODPIĄĆ LINK do kafelka: w danym <a class="tile" ...> wpisz adres
              w atrybucie  data-href="TU_WKLEJ_LINK_AFILIACYJNY_XTB"
-             Przykład:  data-href="https://link-pso.xtb.com/pso/XXXXX"
              • Kafelek z linkiem -> klikalny, otwiera się w nowej karcie.
              • Kafelek bez linku -> pokazuje niebieski znacznik „➕ dodaj link”.
              Aby dodać NOWY baner: skopiuj dowolny blok <a class="tile">…</a>,
              podmień src (nazwa pliku obrazka), alt/title (opis) i data-href.
+             Ścieżka nauki pobiera linki i tytuły STĄD (po nazwie pliku obrazka),
+             więc zmiana linku w mozaice automatycznie zmienia go też w planie.
              ═══════════════════════════════════════════════════════════════════ -->
         <div class="mosaic">
      <a class="tile featured" data-href="https://geolink.xtb.com/03S60" title="Strategia Ichimoku krok po kroku – G. Moskwa" target="_blank" rel="noopener">
@@ -168,7 +570,6 @@
   <img src="30500-0baee252-e5be-4365-9244-ce8caac78d1f.png" alt="Strategia Ichimoku krok po kroku – G. Moskwa" loading="lazy">
   <span class="cta">Otwórz ↗</span>
 </a>
-   ```html
 <a class="tile" data-href="https://geolink.xtb.com/tOpvr" title="Tu pracują Twoje pieniądze" target="_blank" rel="noopener">
   <img src="23812-5f6e36c5-24f9-4e9a-a4c0-841954150e6d.png" alt="Tu pracują Twoje pieniądze" loading="lazy">
   <span class="cta">Otwórz ↗</span>
@@ -271,17 +672,19 @@
   <img src="39687-3c637c83-275b-4a74-ab5b-d97a84f60b5a.png" alt="Karta XTB – 1% cashbacku" loading="lazy">
   <span class="cta">Otwórz ↗</span>
 </a>    
-```
 
         </div>
+
+        </section>
 
         <div class="footer-note">© Ichimoku Trader · Grzegorz Moskwa — partner XTB</div>
 
     </div>
 
     <script>
-        // Wiąże data-href z kafelkami i oznacza te bez linku.
-        document.querySelectorAll('.tile').forEach(function(t) {
+    (function () {
+        // ── Kafelki mozaiki: link z data-href ──
+        document.querySelectorAll('.tile').forEach(function (t) {
             var url = (t.getAttribute('data-href') || '').trim();
             if (url) {
                 t.classList.add('has-link');
@@ -290,12 +693,244 @@
                 t.setAttribute('rel', 'noopener sponsored');
             } else {
                 t.classList.add('no-link');
-                t.addEventListener('click', function(e) { e.preventDefault(); });
+                t.addEventListener('click', function (e) { e.preventDefault(); });
             }
         });
-        // Licznik ofert
         var n = document.querySelectorAll('.tile').length;
         document.getElementById('offerCount').textContent = n + ' propozycji';
+        document.getElementById('tabCount').textContent = n + ' banerów';
+
+        // ── Zakładki ──
+        function showTab(name) {
+            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === name); });
+            document.querySelectorAll('.panel').forEach(function (p) { p.classList.toggle('active', p.id === 'panel-' + name); });
+        }
+        document.querySelectorAll('.tab-btn').forEach(function (b) {
+            b.addEventListener('click', function () {
+                showTab(b.dataset.tab);
+                try { history.replaceState(null, '', b.dataset.tab === 'oferty' ? '#oferty' : '#plan'); } catch (e) {}
+            });
+        });
+        if (location.hash === '#oferty') showTab('oferty');
+
+        // ── Plan 30 dni ──
+        // m = początek nazwy pliku banera z mozaiki (z niego bierzemy link i tytuł)
+        // m: 'own:URL|Etykieta' = własny link (np. FX Cloud Strength)
+        var DAYS = [
+            // Etap 1
+            { s:1, t:'Pieniądz, który pracuje', m:'23812', min:30,
+              d:'Dlaczego oszczędności bez oprocentowania tracą wartość i jak zmienić myślenie o kapitale.',
+              z:'Policz, ile realnie tracisz w ciągu roku na inflacji, trzymając oszczędności na nieoprocentowanym koncie.' },
+            { s:1, t:'Od wyrobnika do architekta majątku', m:'33831', min:30,
+              d:'Zarabianie to jedno – pozwolić pieniądzom pracować to drugie.',
+              z:'Spisz miesięczny budżet i ustal stałą kwotę (np. 10% dochodu), która co miesiąc trafia na inwestycje.' },
+            { s:1, t:'Systematyczność i rutyna', m:'39952', min:30,
+              d:'Inwestowanie jako powtarzalny proces: stałe wpłaty i przeglądy portfela.',
+              z:'Wybierz stały dzień w miesiącu na wpłatę i przegląd portfela – wpisz go do kalendarza jako cykliczne wydarzenie.' },
+            { s:1, t:'Cierpliwość wygrywa z pychą', m:'37232', min:30,
+              d:'Czego uczą dane o inwestujących kobietach: mniej overtradingu, więcej dyscypliny, dłuższy horyzont.',
+              z:'Wypisz 3 swoje emocjonalne pułapki (np. FOMO, zemsta na rynku, overtrading) i do każdej jedną regułę, która ją blokuje.' },
+            { s:1, t:'Inwestowanie pasywne', m:'31448', min:45,
+              d:'Portfel z tanich funduszy i ETF-ów – stabilny majątek przy minimalnym nakładzie czasu.',
+              z:'Zaprojektuj modelowy portfel z 2–3 ETF-ów (np. akcje świat / obligacje) i zapisz proporcje oraz powód wyboru.' },
+            { s:1, t:'Kryptowaluty spot – wysokie ryzyko', m:'33213', min:45,
+              d:'Blockchain, mechanika aktywów cyfrowych i ekstremalna zmienność bez dźwigni.',
+              z:'Wyjaśnij własnymi słowami: czym jest blockchain, portfel i klucz prywatny. Ustal maksymalny % portfela na krypto.' },
+            { s:1, t:'Powtórka: własność zamiast konsumpcji', m:'35732', min:30, r:true,
+              d:'Podsumowanie etapu + idea podarowania akcji jako lekcji własności.',
+              z:'Wypisz 3 spółki, których produktów używasz na co dzień. Czy chciałbyś być ich współwłaścicielem? Dlaczego?' },
+            // Etap 2
+            { s:2, t:'Struktura trendu', m:'30543', min:45,
+              d:'Wyższe szczyty i dołki vs niższe szczyty i dołki – definicja kierunku rynku.',
+              z:'Na wykresie D1 EURUSD z ostatnich 3 miesięcy oznacz kolejne szczyty i dołki. Jaki to trend?' },
+            { s:2, t:'Wsparcia i opory', m:'30543', min:45,
+              d:'Strefy, w których zmieniała się równowaga popytu i podaży.',
+              z:'Wyznacz 3 kluczowe strefy na tym samym wykresie i zaplanuj, gdzie postawiłbyś Stop Loss i Take Profit.' },
+            { s:2, t:'Formacje świecowe', m:'30543', min:45,
+              d:'Wzorce odwrócenia i kontynuacji na świecach japońskich.',
+              z:'Znajdź 5 formacji świecowych (np. pin bar, objęcie) przy strefach z wczoraj. Ile zadziałało?' },
+            { s:2, t:'Wolumen – siła za ruchem', m:'30458', min:45,
+              d:'Cena mówi „dokąd”, wolumen mówi „z jaką siłą”.',
+              z:'Porównaj wolumen na jednym prawdziwym i jednym fałszywym wybiciu. Czym się różniły?' },
+            { s:2, t:'Stopping volume i testy', m:'30458', min:45,
+              d:'Świece z ultra-wysokim wolumenem na ekstremach – przejmowanie aktywów przez silne ręce.',
+              z:'Znajdź na wykresie dowolnej spółki świecę z ekstremalnym wolumenem na dołku. Co działo się potem?' },
+            { s:2, t:'Smart Money: akumulacja i dystrybucja', m:'28214', min:45,
+              d:'Ślady kapitału instytucjonalnego: rosnący wolumen przy małym ruchu ceny.',
+              z:'Oznacz na wykresie fazę akumulacji i fazę dystrybucji. Gdzie było najlepsze miejsce na wejście?' },
+            { s:2, t:'Powtórka: dziennik setupów', m:null, min:40, r:true,
+              d:'Łączysz cenę, strefy i wolumen w jedną decyzję.',
+              z:'Opisz 3 hipotetyczne setupy (wejście, SL, TP, potwierdzenie wolumenem). Zapisz je – wrócisz do nich w Etapie 3.' },
+            // Etap 3
+            { s:3, t:'Wprowadzenie do Ichimoku Kinko Hyo', m:'30500', min:45,
+              d:'Jeden wykres, pięć linii: trend, wsparcia/opory, impet i czas.',
+              z:'Dodaj Ichimoku (9, 26, 52) na platformie i nazwij każdą z 5 linii na wykresie D1.' },
+            { s:3, t:'Tenkan-sen i Kijun-sen', m:'30500', min:45,
+              d:'Linie równowagi: krótkoterminowy impet i poziom bazowy ceny.',
+              z:'Znajdź 5 ostatnich przecięć Tenkan/Kijun na jednej parze. Które dały ruch, a które były szumem?' },
+            { s:3, t:'Chikou Span – filtr sygnałów', m:'30500', min:40,
+              d:'Cena zamknięcia przesunięta o 26 okresów wstecz i zasada „wolnej przestrzeni”.',
+              z:'Wróć do przecięć z wczoraj: przy których Chikou miał wolną przestrzeń? Czy to poprawia wynik?' },
+            { s:3, t:'Kumo – Chmura i przyszłość', m:'30500', min:45,
+              d:'Senkou Span A i B: dominujący trend i grubość wsparcia/oporu.',
+              z:'Na 3 parach określ: cena nad / pod / w Chmurze? Jak gruba jest Chmura 26 świec do przodu?' },
+            { s:3, t:'Kumo breakout – punkt wejścia', m:'30500', min:45,
+              d:'Wejście po zamknięciu świecy poza Chmurą – wszystkie linie jako jeden algorytm.',
+              z:'Znajdź 3 historyczne wybicia z Chmury i sprawdź każde wszystkimi 5 liniami. Które spełniły wszystkie warunki?' },
+            { s:3, t:'Prowadzenie i zamykanie pozycji', m:'30500', min:45,
+              d:'Kijun-sen jako dynamiczny Stop Loss i proste zasady wyjścia.',
+              z:'Dla wybić z wczoraj zaplanuj SL na Kijun-sen i zasadę wyjścia. Policz stosunek zysku do ryzyka.' },
+            { s:3, t:'CFD: dźwignia, depozyt, long i short', m:'37127', min:40,
+              d:'Czym CFD różni się od posiadania kryptowaluty i jak działa depozyt zabezpieczający.',
+              z:'Policz: pozycja 1000 zł z dźwignią 1:2 i ruch ceny o 5% przeciwko Tobie. Ile tracisz w zł i w % depozytu?' },
+            { s:3, t:'Powtórka: 3 transakcje na demo', m:null, min:45, r:true,
+              d:'System Ichimoku w praktyce – bez ryzyka realnego kapitału.',
+              z:'Otwórz 3 transakcje na rachunku demo zgodnie z systemem: przed wejściem zapisz plan, SL i powód. Porównaj z setupami z Dnia 14.' },
+            // Etap 4
+            { s:4, t:'Megatrendy i prognozy 2026', m:'35665', min:45,
+              d:'Stopy procentowe, rotacja sektorowa i kierunek kapitału instytucjonalnego.',
+              z:'Wypisz 3 sektory, które według raportu mogą zyskiwać, i sprawdź ich wykres D1 w Ichimoku.' },
+            { s:4, t:'Ropa: podaż, popyt, geopolityka', m:'37897', min:40,
+              d:'OPEC+, wydobycie i globalny przemysł jako siły rynku surowców.',
+              z:'Spisz 3 czynniki podażowe i 3 popytowe dla ropy. Który z nich dominuje teraz?' },
+            { s:4, t:'Kalendarz makro + siła walut', m:'own:index.html|FX Cloud Strength ↗', min:40,
+              d:'Sygnał techniczny zgodny z „wiatrem makro” ma większą skuteczność.',
+              z:'Zaznacz na ten tydzień publikacje NFP, CPI i decyzje banków centralnych. Porównaj siłę walut na FX Cloud Strength ze swoimi transakcjami z Dnia 22.' },
+            { s:4, t:'Debiut giełdowy pod lupą', m:'38405', min:45,
+              d:'Studium SpaceX i 4-punktowa checklista przed każdym IPO.',
+              z:'Przejdź checklistę IPO (w „Wiedzy etapu”) dla jednej spółki wchodzącej lub niedawno weszłej na giełdę.' },
+            // Etap 5
+            { s:5, t:'IKE – zyski bez podatku Belki', m:'24368', m2:'36054', min:40,
+              d:'Jak działa IKE, limity wpłat i 0% prowizji w XTB.',
+              z:'Policz, ile podatku Belki zaoszczędzisz przez 20 lat przy wpłacie 500 zł miesięcznie i 6% rocznie (pomocny dowolny kalkulator procentu składanego).' },
+            { s:5, t:'IKZE – ulga podatkowa co roku', m:'31764', min:35,
+              d:'Odliczenie wpłat od podstawy opodatkowania i reinwestowanie zwrotu z PIT.',
+              z:'Sprawdź swój próg podatkowy i policz zwrot z PIT przy wpłacie 1000 zł na IKZE. IKE, IKZE czy oba?' },
+            { s:5, t:'Płynność – Karta XTB', m:'39071', min:25,
+              d:'Rachunek inwestycyjny jako centrum płynności i 1% cashbacku.',
+              z:'Policz, ile cashbacku dałyby Twoje miesięczne wydatki kartą w skali roku – i gdzie byś go zainwestował.' },
+            { s:5, t:'Bezpieczeństwo konta + finał', m:'37527', min:35, r:true,
+              d:'Protokół reakcji na podejrzany ruch i podsumowanie całej ścieżki.',
+              z:'Włącz uwierzytelnianie dwuskładnikowe, zapisz procedurę blokady konta i sprawdź, gdzie w aplikacji jest przycisk blokady. Na koniec przejrzyj swoje notatki z 30 dni.' }
+        ];
+
+        function tileFor(prefix) {
+            if (!prefix) return null;
+            var img = document.querySelector('#panel-oferty img[src^="' + prefix + '"]');
+            if (!img) return null;
+            var a = img.closest('.tile');
+            return { src: img.getAttribute('src'), title: a.getAttribute('title') || img.alt, href: (a.getAttribute('data-href') || '').trim() };
+        }
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+
+        var KEY = 'xtb-plan-v1';
+        var state = { done: {}, start: '', wd: false };
+        try { var raw = localStorage.getItem(KEY); if (raw) state = Object.assign(state, JSON.parse(raw)); } catch (e) {}
+        function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+        function matLink(m) {
+            if (!m) return '';
+            if (m.indexOf('own:') === 0) {
+                var p = m.slice(4).split('|');
+                return '<a class="d-mat own" href="' + esc(p[0]) + '">' + esc(p[1]) + '</a>';
+            }
+            var t = tileFor(m);
+            if (!t || !t.href) return '';
+            return '<a class="d-mat" href="' + esc(t.href) + '" target="_blank" rel="noopener sponsored" title="' + esc(t.title) + '">📘 ' + esc(t.title) + ' ↗</a>';
+        }
+
+        DAYS.forEach(function (d, i) {
+            var num = i + 1;
+            var t = tileFor(d.m && d.m.indexOf('own:') !== 0 ? d.m : null);
+            var thumb = t ? '<img class="d-thumb" src="' + esc(t.src) + '" alt="" loading="lazy">' : '';
+            var mats = matLink(d.m) + (d.m2 ? matLink(d.m2) : '');
+            var el = document.createElement('div');
+            el.className = 'day' + (d.r ? ' review' : '');
+            el.id = 'day-' + num;
+            el.innerHTML =
+                '<div class="d-side"><span class="lbl">Dzień</span><span class="n">' + num + '</span><span class="date"></span>' +
+                '<input type="checkbox" aria-label="Dzień ' + num + ' zrobiony"></div>' +
+                '<div class="d-main">' +
+                    '<div class="d-top">' + thumb + '<div><div class="d-title">' + (d.r ? '🔁 ' : '') + esc(d.t) + '</div>' +
+                    '<div class="d-time">⏱ ok. ' + d.min + ' min' + (d.r ? ' · powtórka' : '') + '</div></div></div>' +
+                    '<div class="d-desc">' + esc(d.d) + '</div>' +
+                    '<div class="d-task"><b>✍️ Zadanie:</b> ' + esc(d.z) + '</div>' +
+                    (mats ? '<div style="display:flex;gap:6px;flex-wrap:wrap">' + mats + '</div>' : '') +
+                '</div>';
+            var cb = el.querySelector('input');
+            cb.checked = !!state.done[num];
+            cb.addEventListener('change', function () {
+                if (cb.checked) state.done[num] = 1; else delete state.done[num];
+                save(); refresh();
+            });
+            document.querySelector('.days[data-days="' + d.s + '"]').appendChild(el);
+        });
+
+        var MONTHS = ['sty','lut','mar','kwi','maj','cze','lip','sie','wrz','paź','lis','gru'];
+        var WDAYS = ['nd','pon','wt','śr','czw','pt','sob'];
+        function datesFor() {
+            if (!state.start) return null;
+            var p = state.start.split('-');
+            var cur = new Date(+p[0], +p[1] - 1, +p[2]);
+            var out = [];
+            while (out.length < DAYS.length) {
+                var w = cur.getDay();
+                if (!state.wd || (w !== 0 && w !== 6)) out.push(new Date(cur));
+                cur.setDate(cur.getDate() + 1);
+            }
+            return out;
+        }
+
+        function refresh() {
+            var total = DAYS.length, done = 0, next = 0;
+            var dates = datesFor();
+            var today = new Date(); today.setHours(0,0,0,0);
+            DAYS.forEach(function (d, i) {
+                var num = i + 1, el = document.getElementById('day-' + num);
+                var isDone = !!state.done[num];
+                if (isDone) done++; else if (!next) next = num;
+                el.classList.toggle('done', isDone);
+                var ds = el.querySelector('.date');
+                ds.textContent = dates ? WDAYS[dates[i].getDay()] + ' ' + dates[i].getDate() + ' ' + MONTHS[dates[i].getMonth()] : '';
+                el.classList.remove('today');
+            });
+            if (next) document.getElementById('day-' + next).classList.add('today');
+
+            document.getElementById('pDone').innerHTML = done + '<span> / ' + total + ' dni</span>';
+            document.getElementById('pBar').style.width = (done / total * 100) + '%';
+            var nx = document.getElementById('pNext'), go = document.getElementById('goNext');
+            if (!next) { nx.textContent = '🏆 Ścieżka ukończona – gratulacje!'; go.setAttribute('href', '#etap-5'); }
+            else {
+                var info = 'Następny: Dzień ' + next + ' – ' + DAYS[next - 1].t;
+                if (dates) {
+                    var dd = dates[next - 1];
+                    if (dd < today) info += ' (zaległość wg planu)';
+                    else if (dd.getTime() === today.getTime()) info += ' (dziś)';
+                }
+                nx.textContent = info;
+                go.setAttribute('href', '#day-' + next);
+            }
+
+            [1,2,3,4,5].forEach(function (s) {
+                var all = DAYS.filter(function (d) { return d.s === s; }).length;
+                var dn = DAYS.filter(function (d, i) { return d.s === s && state.done[i + 1]; }).length;
+                document.querySelector('#etap-' + s + ' .sp-val').textContent = dn + '/' + all;
+                var step = document.querySelector('.rm-step.s' + s);
+                step.querySelector('.rm-dot').style.setProperty('--p', (dn / all * 100) + '%');
+                step.classList.toggle('done', dn === all);
+            });
+        }
+
+        var sd = document.getElementById('startDate'), wd = document.getElementById('weekdays');
+        sd.value = state.start || '';
+        wd.checked = !!state.wd;
+        sd.addEventListener('change', function () { state.start = sd.value; save(); refresh(); });
+        wd.addEventListener('change', function () { state.wd = wd.checked; save(); refresh(); });
+        document.getElementById('resetBtn').addEventListener('click', function () {
+            state.done = {}; save(); refresh();
+        });
+        refresh();
+    })();
     </script>
 </body>
 </html>
